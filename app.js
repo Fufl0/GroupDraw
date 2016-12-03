@@ -30,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 const routers = require('./routes/routers');
 app.use('/', routers.root);
 app.use('/rooms', routers.rooms);
+//Create user
+app.post('/welcome', routers.welcome);
 
 
 module.exports = app;
