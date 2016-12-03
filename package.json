@@ -1,0 +1,35 @@
+{
+  "name": "GroupDraw",
+  "version": "0.0.0",
+  "description": "GroupDraw project for Web Atelier 2016",
+  "main": "app.js",
+  "scripts": {
+    "start": "DEBUG='GroupDraw' node ./bin/www",
+    "start:dev": "DEBUG='GroupDraw' nodemon ./bin/www"
+  },
+  "keywords": [
+    "Node.js",
+    "AJAX",
+    "WebSockets"
+  ],
+  "author": "Lorenzo Spoleti, Thomas Del Prete, Francesco Sani, Susanna Ardigo, Massimo Morgani",
+  "license": "MIT",
+  "dependencies": {
+    "adaro": "^1.0.4",
+    "bcrypt": "^0.8.7",
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "debug": "^2.2.0",
+    "express": "^4.14.0",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.6.4",
+    "morgan": "^1.7.0",
+    "supertest": "^2.0.0",
+    "socket.io": "^1.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
+    "should": "^11.1.1"
+  }
+}

@@ -1,0 +1,5 @@
+<li class="room-item">
+  <div class="room-name">{name}</div>
+  <a class="room-link" href="{links[0].href}">Join</a>
+  <i data-id="{_id}" class="delete">&times;</i>
+</li>

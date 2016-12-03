@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GroupDraw - Rooms</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+   <h1>GroupDraw</h1>
+
+   <div style="display: flex;">
+   <div style="flex:1;">
+     <h4>Rooms</h4>
+     <ul id="roomList">
+      {>roomitems/}
+     </ul>
+   </div>
+   <div>
+     <h4>Create a room</h4>
+      <form id="leForm" action="/rooms">
+        <input type="text" id="roomNameInput" name="roomName" placeholder="Room name">
+        <input type="submit" id="submitBtn" value="Create">
+      </form>
+   </div>
+
+
+   <script src="/js/dust-core.min.js"></script>
+
+   <script src="/views/roomitems.js"></script>
+
+   <script src="/views/roomitem.js"></script>
+
+   <!-- script with page logic -->
+   <script src="/js/rooms.js"></script>
+</body>
+</html>
