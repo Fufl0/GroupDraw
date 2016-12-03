@@ -7,6 +7,7 @@
 </head>
 <body>
    <h1>GroupDraw</h1>
+   <h2>Welcome to GroupDraw.</h2>
 
    <div style="display: flex;">
    <div style="flex:1;">
@@ -23,14 +24,13 @@
       </form>
    </div>
 
+   </div>
 
+   
    <script src="/js/dust-core.min.js"></script>
-
    <script src="/views/roomitems.js"></script>
-
    <script src="/views/roomitem.js"></script>
 
-   <!-- script with page logic -->
    <script src="/js/rooms.js"></script>
 </body>
 </html>
