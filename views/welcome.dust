@@ -17,14 +17,49 @@
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper amber darken-2">
-            <a href="#" class="brand-logo center">GroupDraw</a>
-        </div>
-    </nav>
+  <nav>
+      <div class="nav-wrapper amber darken-2">
+          <a href="#" class="brand-logo center">GroupDraw</a>
+      </div>
+  </nav>
 
-<h2>Welcome</h2>
 
+
+
+  <div class="container">
+      <div class="row">
+          <div class="col s6 offset-s3">
+              <h4 class="center">Log In</h4>
+
+              <form id="loginForm">
+                  <div class="row">
+                      <div class="input-field col s12">
+                          <input placeholder="" id="username" type="text" class="validate">
+                          <label for="username">Username</label>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="input-field col s12">
+                          <input placeholder="" id="password" type="password" class="validate">
+                          <label for="password">Password</label>
+                      </div>
+                  </div>
+
+              </form>
+          </div>
+          <div class="row">
+              <div class="col s6 offset-s3">
+                  <a href="register"><h5 class="center"> Register</h5></a>
+              </div>
+      </div>
+      <div class="row">
+          <div class="col s6 offset-s3">
+              <a href="#"><p class="center">enter as guest</p></a>
+          </div>
+  </div>
+
+
+  </div>
 
 
 

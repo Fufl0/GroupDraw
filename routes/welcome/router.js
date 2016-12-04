@@ -13,9 +13,10 @@ router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
     res.status(200)
-    res.write('Prego, Lorenzo :)')
-    res.end()
+    res.render('welcome')
 });
+
+
 
 //register user
 //TODO
