@@ -1,4 +1,4 @@
-/** @module welcome/router */
+/** @module register/router */
 'use strict';
 
 const express = require('express');
@@ -13,8 +13,21 @@ router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
     res.status(200)
-    res.render('welcome')
+    res.render('register')
 });
+
+
+
+//register user
+//TODO
+module.exports.postUser = function postUser(req, res) {
+  models.User.create(req.body, (err, users) => {
+    if (err) res.status(500).end();
+    else res.status(201).json(users).end();
+  });
+}
+
+
 
 /** router for /users */
 module.exports = router;

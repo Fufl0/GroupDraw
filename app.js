@@ -30,9 +30,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 const routers = require('./routes/routers');
 app.use('/', routers.root);
 app.use('/rooms', routers.rooms);
-//Welcome view + create user (register)
+//Welcome view
 app.use('/welcome', routers.welcome);
 app.post('/welcome', routers.welcome);
+//Register view
+app.use('/register', routers.register);
 //Users view (contacts page)
 app.use('/users', routers.users);
 
