@@ -1,8 +1,8 @@
-/** @module models/Contact
-* The Contact Model
+/** @module models/User
+* The User Model
 * Schema:
 * _id            ObjectId           Unique identifier of the user
-* username       String             Full name of the user
+* username       String             Full name of the user ('user + random number' if it is a guest)
 * password       String             User's password (if there is no password, the user is a guest)
 * //picture        buffer in string   User's image
 * picture        String             Path to user's image
@@ -18,7 +18,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 /** @constructor
 * @param {Object} definition
 */
-const ContactSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, default: 'user' + Math.floor((Math.random() * 1000) + 1) },
   password: { type: String, required: false },
   //picture: { data: Buffer, contentType: String, required: true },
@@ -28,4 +28,4 @@ const ContactSchema = new mongoose.Schema({
 });
 
 //register model
-mongoose.model('Contact', ContactSchema);
+mongoose.model('User', UserSchema);

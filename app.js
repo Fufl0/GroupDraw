@@ -32,6 +32,8 @@ app.use('/', routers.root);
 app.use('/rooms', routers.rooms);
 //Create user
 app.post('/welcome', routers.welcome);
+//Users view (contacts page)
+app.use('/users', routers.users);
 
 
 module.exports = app;
