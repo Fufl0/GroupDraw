@@ -1,4 +1,4 @@
-/** @module routes/routers 
+/** @module routes/routers
  * Exposes all routers
  */
 'use strict';
@@ -28,7 +28,7 @@ try {
     console.log('Error while loading routers');
     console.log(err.stack);
     //We don't know what happened, export empty object
-    routers = {}
+    routers = {};
 } finally {
     module.exports = routers;
 }
