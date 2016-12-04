@@ -1,6 +1,7 @@
-{! DO NOT MODIFY THIS FILE !}
 <li class="room-item">
-  <div class="room-title">{name}</div> 
-  <a class="room-link" href="{links[0].href}">Join</a>
-  <i data-id="{_id}" class="delete">&times;</i>
+      <div class="card-panel white" style="position: relative;">
+        <h5 class="room-title">{name}</h5>
+        <a class="btn light-blue waves-effect waves-light bottomright room-link" href="{links[0].href}">Join</a>
+        <i class="topright material-icons delete" data-id="{_id}" class="delete">clear</i>
+      </div>
 </li>

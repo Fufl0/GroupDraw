@@ -1,0 +1,29 @@
+.room-item{
+  width: 80%;
+}
+
+@media (min-width: 768px)  {
+  .room-item{
+    width: 50%;
+  }
+}
+
+.topright {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.bottomright {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+
+textarea:focus {
+  border-bottom: 1px solid orange;
+  -webkit-box-shadow: 0 1px 0 0 orange;
+  -moz-box-shadow: 0 1px 0 0 orange;
+  box-shadow: 0 1px 0 0 orange;
+}
