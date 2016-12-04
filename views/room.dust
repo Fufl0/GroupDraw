@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>GroupDraw - Rooms</title>
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper amber darken-2">
+            <a href="#" class="brand-logo center">GroupDraw</a>
+        </div>
+    </nav>
+    <nav>
+        <div class="nav-wrapper amber darken-2">
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="active"><a href="">Rooms</a></li>
+                    <li><a href="gallery">Gallery</a></li>
+                    <li><a href="contacts">Contacts</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-nav">
+                    <li class="active"><a href="">Rooms</a></li>
+                    <li><a href="gallery">Gallery</a></li>
+                    <li><a href="contacts">Contacts</a></li>
+                </ul>
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+
+    <div id="tools" class="z-depth-5">
+
+        <h4>Colors</h4>
+
+        <div id="palette">
+            <div class="p-color white" data-color="rgb(255, 255, 255)"></div>
+            <div class="p-color black" data-color="rgb(0, 0, 0)"></div>
+            <div class="p-color dark-gray" data-color="rgb(87, 87, 87)"></div>
+            <div class="p-color light-gray" data-color="rgb(160, 160, 160)"></div>
+            <div class="p-color red" data-color="rgb(173, 35, 35)"></div>
+            <div class="p-color orange" data-color="rgb(255, 146, 51)"></div>
+            <div class="p-color yellow" data-color="rgb(255, 238, 51)"></div>
+            <div class="p-color blue" data-color="rgb(42, 75, 215)"></div>
+            <div class="p-color cyan" data-color="rgb(41, 208, 208)"></div>
+            <div class="p-color light-blue" data-color="rgb(157, 175, 255)"></div>
+            <div class="p-color green" data-color="rgb(29, 105, 20)"></div>
+            <div class="p-color green-alive" data-color="rgb(50, 200, 80)"></div>
+            <div class="p-color light-green" data-color="rgb(129, 197, 122)"></div>
+            <div class="p-color brown" data-color="rgb(129, 74, 25)"></div>
+            <div class="p-color purple" data-color="rgb(129, 38, 192)"></div>
+            <div class="p-color pink" data-color="rgb(255, 100, 255)"></div>
+            <div class="p-color pink-shock" data-color="rgb(255, 30, 200)"></div>
+            <div class="p-color tan" data-color="rgb(233, 222, 187)"></div>
+        </div>
+
+        <div id="rgbPicker">
+            <form id="rgbPickerForm">
+                <div class="input-field">
+                    <input placeholder="" id="rgb" type="text" class="validate">
+                    <label for="rgb">Rgb</label>
+                </div>
+            </form>
+            <button id="rgbPickerButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">send</i></button>
+        </div>
+
+        <div class="divider"></div>
+        <div id="buttons">
+            <a id="undoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">undo</i></a>
+            <a id="redoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">redo</i></a>
+            <button id="clearButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">delete</i></button></div>
+        <div class="divider"></div>
+
+
+    </div>
+
+    </div>
+
+
+    <canvas id="canvas"></canvas>
+
+    </div>
+
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+
+
+
+</body>
+
+</html>
