@@ -1,0 +1,4 @@
+{! WORK IN PROGRESS !}
+<li class="user-item">
+      <p> {image-link} <br/> {mood} <br/> {status}
+</li>

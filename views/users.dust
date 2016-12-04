@@ -28,13 +28,13 @@
                 <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="">Rooms</a></li>
-                    <li class="active"><a href="gallery">Gallery</a></li>
-                    <li><a href="users">Users</a></li>
+                    <li><a href="gallery">Gallery</a></li>
+                    <li class="active"><a href="users">Users</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-nav">
-                    <li><a href="">Rooms</a></li>
-                    <li class="active"><a href="gallery">Gallery</a></li>
-                    <li><a href="contacts">Users</a></li>
+                    <li ><a href="">Rooms</a></li>
+                    <li><a href="gallery">Gallery</a></li>
+                    <li class="active"><a href="contacts">Users</a></li>
                 </ul>
 
             </ul>
@@ -43,9 +43,15 @@
 
 
 
-    <div id="galleryContainer" class="container">
-      {>galleryitems/}
-    </div>
+            <h4>Users</h4>
+            <ul id="userList" class="collection">
+                {>useritems/}
+            </ul>
+
+          
+
+
+
 
 
     <script src="/js/dust-core.min.js"></script>
