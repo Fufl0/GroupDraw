@@ -6,12 +6,12 @@
 const mongoose = require('mongoose');
 
 require('./Rooms');
-require('./Contact');
+require('./User');
 
 module.exports = {
     'Rooms': mongoose.model('Rooms')
 }
 
 module.exports = {
-  'Contact' : mongoose.model('Contact'),
+  'User' : mongoose.model('User'),
 }
