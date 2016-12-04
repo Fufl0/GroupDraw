@@ -34,7 +34,7 @@
                 <ul class="side-nav" id="mobile-nav">
                     <li class="active"><a href="">Rooms</a></li>
                     <li><a href="gallery">Gallery</a></li>
-                    <li><a href="contacts">Contacts</a></li>
+                    <li ><a href="contacts">Users</a></li>
                 </ul>
 
             </ul>
