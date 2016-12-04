@@ -11,6 +11,11 @@ const Rooms = mongoose.model('User');
 //supported methods
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
+router.get('/', function(req, res, next) {
+    res.status(200)
+    res.write('Prego, Lorenzo :)')
+    res.end()
+});
 
 //register user
 //TODO
