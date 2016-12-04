@@ -17,29 +17,11 @@
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper amber darken-2">
-            <a href="#" class="brand-logo center">GroupDraw</a>
-        </div>
-    </nav>
-    <nav>
-        <div class="nav-wrapper amber darken-2">
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li class="active"><a href="">Rooms</a></li>
-                    <li><a href="gallery">Gallery</a></li>
-                    <li><a href="contacts">Contacts</a></li>
-                </ul>
-                <ul class="side-nav" id="mobile-nav">
-                    <li class="active"><a href="">Rooms</a></li>
-                    <li><a href="gallery">Gallery</a></li>
-                    <li><a href="contacts">Contacts</a></li>
-                </ul>
-
-            </ul>
-        </div>
-    </nav>
+  <nav>
+      <div class="nav-wrapper amber darken-2">
+          <a href="rooms" class="brand-logo center">GroupDraw</a>
+      </div>
+  </nav>
 
 
 

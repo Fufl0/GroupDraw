@@ -36,8 +36,8 @@ textarea:focus {
   padding: 20px;
   width: 200px;
   position: absolute;
-  height: calc(100% - 128px);
-  top:128px;
+  height: calc(100% - 64px);
+  top:64px;
   bottom:0;
   background-color: #777;
   float: left;
@@ -84,8 +84,8 @@ textarea:focus {
 
 #canvas{
   position: absolute;
-  height: calc(100% - 128px);
-  top: 128px;
+  height: calc(100% - 64px);
+  top: 64px;
   bottom:0;
   left: 200px;
   width: calc(100% - 200px);
