@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>GroupDraw - Rooms</title>
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper amber darken-2">
+            <a href="#" class="brand-logo center">GroupDraw</a>
+        </div>
+    </nav>
+    <nav>
+        <div class="nav-wrapper amber darken-2">
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="">Rooms</a></li>
+                    <li class="active"><a href="gallery">Gallery</a></li>
+                    <li><a href="users">Users</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-nav">
+                    <li class="active"><a href="">Rooms</a></li>
+                    <li><a href="gallery">Gallery</a></li>
+                    <li><a href="contacts">Contacts</a></li>
+                </ul>
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div id="galleryContainer" class="container">
+      {>galleryitems/}
+    </div>
+
+
+    <script src="/js/dust-core.min.js"></script>
+    <!-- TODO: check if needed -->
+    <!-- <script src="/views/roomitems.js"></script>
+    <script src="/views/roomitem.js"></script> -->
+
+    <script src="/js/gallery.js"></script>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/init.js"></script>
+
+</body>
+
+</html>

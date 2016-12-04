@@ -1,0 +1,7 @@
+<figure>
+    <img src="{image-link" alt="">
+    <figcaption>
+        Author: {author} <br/>
+        Titolo: {title}
+    </figcaption>
+</figure>

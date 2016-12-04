@@ -120,3 +120,44 @@ textarea:focus {
 .no-margin{
   margin: 0;
 }
+
+
+/*Gallery Screen*/
+#galleryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* or space-around */
+  padding: 20px;
+}
+
+
+
+#galleryContainer figure {
+  margin: 0;
+  overflow: hidden;
+  display: inline-block;
+  margin-bottom: 8px;
+  width: calc(50% - 4px);
+  text-decoration: none;
+  color: black;
+}
+
+
+@media screen and (min-width: 50em) {
+  #galleryContainer figure {
+    width: calc(25% - 6px);
+  }
+}
+
+
+#galleryContainer figcaption {
+  margin-top: 10px;
+}
+
+#galleryContainer img {
+  border: none;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  background: #ccc;
+}
