@@ -32,9 +32,10 @@ app.use('/', routers.root);
 app.use('/rooms', routers.rooms);
 //Welcome view
 app.use('/welcome', routers.welcome);
-app.post('/welcome', routers.welcome);
+//app.post('/welcome', routers.welcome);
 //Register view
 app.use('/register', routers.register);
+app.post('/register', routers.register.postUser);
 //Users view (contacts page)
 app.use('/users', routers.users);
 // app.use('/room', routers.room); // to view the room page

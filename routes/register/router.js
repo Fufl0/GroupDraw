@@ -16,18 +16,13 @@ router.get('/', function(req, res, next) {
     res.render('register')
 });
 
-
-
 //register user
-//TODO
-module.exports.postUser = function postUser(req, res) {
+router.postUser = function postUser(req, res) {
   models.User.create(req.body, (err, users) => {
     if (err) res.status(500).end();
     else res.status(201).json(users).end();
   });
 }
-
-
 
 /** router for /users */
 module.exports = router;
