@@ -1,4 +1,8 @@
-{! WORK IN PROGRESS !}
-<li class="user-item">
-      <p> {image-link} <br/> {mood} <br/> {status}
+<li class="user-item ">
+    <img src="{picture}" alt="" class="circle">
+    <div class="userContent">
+      <h4 class="title">{username}</h4>
+      <p>{mood} <br> {status}
+      </p>
+    </div>
 </li>

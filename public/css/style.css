@@ -21,12 +21,12 @@
 }
 
 /*  TODO: */
-textarea:focus {
+/*textarea:focus {
   border-bottom: 1px solid orange;
   -webkit-box-shadow: 0 1px 0 0 orange;
   -moz-box-shadow: 0 1px 0 0 orange;
   box-shadow: 0 1px 0 0 orange;
-}
+}*/
 
 
 
@@ -105,11 +105,11 @@ textarea:focus {
   float: right;
 }
 
-#buttons > button{
+#buttons button{
   margin:10px;
 }
 
-#buttons > a{
+#buttons a{
   margin:10px;
 }
 
@@ -160,4 +160,50 @@ textarea:focus {
   height: auto;
   display: block;
   background: #ccc;
+}
+
+
+
+#userList{
+
+}
+
+
+.user-item {
+  height: 140px;
+    /*margin: 10px;*/
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #eee;
+}
+
+#userList img{
+    margin: 10px;
+    height: 120px;
+    float: left;
+}
+
+.userContent {
+  margin-left: 160px;
+}
+
+#loginContainer{
+  margin-top: 100px;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: #eee;
+}
+
+#loginContainer form{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginContainer button{
+  margin-right: 10px;
 }

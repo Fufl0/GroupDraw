@@ -38,7 +38,6 @@ app.use('/register', routers.register);
 app.post('/register', routers.register.postUser);
 //Users view (contacts page)
 app.use('/users', routers.users);
-// app.use('/room', routers.room); // to view the room page
 app.use('/gallery', routers.gallery);
 
 
