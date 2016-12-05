@@ -1,7 +1,9 @@
-<figure>
-    <img src="{img}" alt="">
-    <figcaption>
-        Author: {author} <br/>
-        Titolo: {title}
-    </figcaption>
-</figure>
+<li class="gallery-item">
+  <figure>
+    <img src="{img.data}" alt="">
+      <figcaption>
+          Author: {author} <br/>
+          Title: {title}
+      </figcaption>
+  </figure>
+</li>

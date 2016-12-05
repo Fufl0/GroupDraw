@@ -18,16 +18,17 @@ router.get('/', function(req, res, next) {
 		if(err) {
 			res.sendStatus(404);
 		}
-		else {
-			let array = []
-			for (let element of found){
-				let galleryImage = element.toObject();
-				array.push(galleryImage);
+		else{
+			let array = [];
+			for (let element of found) {
+				let galleryItem = element.toObject();
+				galleryItem.links = [{href : "/gallery/"+element._id}];
+				array.push(galleryItem);
 			}
-			let t = { galleryitems: array };
-			res.render("galleryitems", t);
+			let t = { galleryitems: found };
+			res.render("gallery", t);
 		}
-	})
+	});
 });
 
 

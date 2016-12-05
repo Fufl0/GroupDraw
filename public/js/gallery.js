@@ -1,103 +1,153 @@
-// TODO is this function used?
-// http://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript
-function randomString(length, chars) {
-    var result = '';
-    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-    return result;
+function doJSONRequest(method, url, headers, data, callback){
+
+  if(arguments.length != 5) {
+    throw new Error('Illegal argument count');
+  }
+
+  doRequestChecks(method, true, data);
+
+  //create an ajax request
+  const r = new XMLHttpRequest();
+
+  //open a connection to the server using method method on the url API
+  r.open(method, url, true);
+
+  //set the headers
+  doRequestSetHeaders(r, method, headers);
+
+  //wait for the response from the server
+  r.onreadystatechange = function () {
+    //correctly handle the errors based on the HTTP status returned by the called API
+    if (r.readyState != 4 || (r.status != 200 && r.status != 201 && r.status != 204)){
+      return;
+    } else {
+      if(isJSON(r.responseText))
+      callback(JSON.parse(r.responseText));
+      else
+      callback();
+    }
+  };
+
+  //set the data
+  let dataToSend = null;
+  if (!("undefined" == typeof data)
+  && !(data === null))
+  dataToSend = JSON.stringify(data);
+
+  //send the request to the server
+  r.send(dataToSend);
+
+
 }
 
-/**
- * from https://gist.github.com/monsur/706839
- * XmlHttpRequest's getAllResponseHeaders() method returns a string of response
- * headers according to the format described here:
- * http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders-method
- * This method parses that string into a user-friendly key/value pair object.
- */
-function parseResponseHeaders(headerStr) {
-  var headers = {};
-  if (!headerStr) {
-    return headers;
+
+function canJSON(value) {
+  try {
+    const jsonString = JSON.stringify(value);
+    if (!("undefined" == typeof jsonString)
+    && !(jsonString === null)
+    && !(jsonString == typeof String))
+    return true;
+    else
+    return false;
+  } catch (ex) {
+    return false;
   }
-  var headerPairs = headerStr.split('\u000d\u000a');
-  for (var i = 0; i < headerPairs.length; i++) {
-    var headerPair = headerPairs[i];
-    // Can't use split() here because it does the wrong thing
-    // if the header value has the string ": " in it.
-    var index = headerPair.indexOf('\u003a\u0020');
-    if (index > 0) {
-      var key = headerPair.substring(0, index);
-      var val = headerPair.substring(index + 2);
-      headers[key] = val;
+}
+
+function isJSON(jsonString){
+
+  try {
+    const o = JSON.parse(jsonString);
+
+    if (o && typeof o === "object" && o !== null) {
+      return true;
     }
   }
-  return headers;
+  catch (e) {}
+
+  return false;
 }
 
-/**
-* Performs an XMLHttpRequest in a more developer friendly way
-*/
-function request(url, opts, cb){
-  if(typeof opts == 'function'){
-    cb = opts;
+function doRequestSetHeaders(r, method, headers){
+
+  //set the default JSON header according to the method parameter
+  r.setRequestHeader("Accept", "application/json");
+
+  if(method === "POST" || method === "PUT"){
+    r.setRequestHeader("Content-Type", "application/json");
   }
-  const defaultOptions = {
-    method: 'GET',
-    headers: {},
-    body: null
-  };
 
+  //set the additional headers
+  if (!("undefined" == typeof headers)
+  && !(headers === null)){
 
-  const options = Object.assign({}, defaultOptions, opts)
-  var xhr = new XMLHttpRequest();
-  xhr.open(options.method, url);
+    for(header in headers){
+      //console.log("Set: " + header + ': '+ headers[header]);
+      r.setRequestHeader(header,headers[header]);
+    }
 
-  // set headers
-  Object.keys(options.headers).forEach( k => {
-    xhr.setRequestHeader(k, options.headers[k]);
-  })
-
-  xhr.responseType = 'json';
-
-  xhr.onload = function() {
-    console.log()
-    cb(null, {
-      status: xhr.status,
-      body: xhr.response,
-      headers: parseResponseHeaders(xhr.getAllResponseHeaders())
-    });
-  };
-
-  xhr.onerror = function() {
-    cb(err)
-  };
-
-  xhr.send(options.body);
+  }
 }
 
-function refreshGalleryImages(){
-  request('/gallery', {
-    headers: {
-    'Accept': 'application/json'
-    }
-  }, function(err, res){
-    if(err) throw err;
+function doRequestChecks(method, isAsynchronous, data){
 
-    dust.render('galleryitems', { gallery: res.body }, function(err, out){
-      if(err) throw err;
-      document.getElementById('galleryContainer').innerHTML = out;
-    });
+  //verify the request method
+  if(method!="GET" && method!="POST" && method!="PUT" && method!="DELETE") {
+    throw new Error('Illegal method: ' + method + ". It should be one of: GET, POST, PUT, DELETE.");
+  }
+
+  //verify the data parameter
+  if (!("undefined" == typeof data)
+  && !(data === null))
+  if(!canJSON(data)) {
+    throw new Error('Illegal data: ' + data + ". It should be an object that can be serialized as JSON.");
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function updateGallery() {
+
+  doJSONRequest("GET", '/gallery', null, null, galleryCallback);
+
+}
+
+function galleryCallback(rs) {
+
+  const data = {
+    "galleryitems" : rs
+  };
+
+  dust.render("galleryitem", data, function(err, out) {
+    const gallery = document.getElementById("galleryContainer");
+    gallery.innerHTML = out;
   });
+
 }
 
-function deleteGalleryImage(id){
-  request(`/rooms/${id}?secret=${localStorage.userId}`, {
-    method: 'DELETE',
-    headers: {
-    'Accept': 'application/json'
-    }
-  }, function(err, res){
-    if(err) throw err;
 
-    refreshGalleryImages();
-  });
+function updatePage(event) {
+  updateGallery();
 }
+
+
+
+
+window.onpopstate = updatePage;
+window.onload = updatePage;

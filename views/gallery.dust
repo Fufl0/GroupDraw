@@ -43,8 +43,16 @@
 
 
 
-    <div id="galleryContainer" class="container">
-      {>galleryitems/}
+    <div class="container">
+      <div style="display: flex;">
+          <div style="flex:1;">
+            <h4>Gallery</h4>
+              <ul id="galleryContainer">
+
+                  {>galleryitems/}
+              </ul>
+          </div>
+      </div>
     </div>
 
 
