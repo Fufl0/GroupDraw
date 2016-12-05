@@ -105,11 +105,11 @@ textarea:focus {
   float: right;
 }
 
-#buttons > button{
+#buttons button{
   margin:10px;
 }
 
-#buttons > a{
+#buttons a{
   margin:10px;
 }
 

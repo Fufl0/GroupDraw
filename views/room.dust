@@ -19,7 +19,7 @@
 <body>
   <nav>
       <div class="nav-wrapper amber darken-2">
-          <a href="rooms" class="brand-logo center">GroupDraw</a>
+          <a href="/rooms" class="brand-logo center">GroupDraw</a>
       </div>
   </nav>
 
@@ -66,13 +66,14 @@
         <div id="buttons">
             <a id="undoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">undo</i></a>
             <a id="redoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">redo</i></a>
-            <button id="clearButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">delete</i></button></div>
-        <div class="divider"></div>
+            <button id="clearButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">delete</i></button>
+            <button id="photoButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">photo_camera</i></button>
+          </div>
+
 
 
     </div>
 
-    </div>
 
 
     <canvas id="canvas"></canvas>
@@ -84,6 +85,8 @@
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="/js/materialize.js"></script>
+
+    <script src="/js/room.js"></script>
 
 
 </body>
