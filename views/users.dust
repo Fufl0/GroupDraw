@@ -43,13 +43,12 @@
 
 
 
-            <h4>Users</h4>
-            <ul id="userList" class="collection">
-                {>useritems/}
-            </ul>
-
-
-
+                <div class="container">
+                    <h4>Users</h4>
+                  <ul id="userList">
+                      {>useritems/}
+                  </ul>
+                </div>
 
 
 
