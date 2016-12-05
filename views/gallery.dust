@@ -24,7 +24,7 @@
     </nav>
     <nav>
         <div class="nav-wrapper amber darken-2">
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <ul id="nav-mobile" class="left">
                 <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="">Rooms</a></li>
