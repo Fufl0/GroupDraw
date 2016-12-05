@@ -62,13 +62,21 @@
             <button id="rgbPickerButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">send</i></button>
         </div>
 
-        <div class="divider"></div>
-        <div id="buttons">
-            <a id="undoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">undo</i></a>
-            <a id="redoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">redo</i></a>
-            <button id="clearButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">delete</i></button>
-            <button id="photoButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">photo_camera</i></button>
-          </div>
+        <div id="buttonDivider" class="divider"></div>
+
+<ul id="buttons" class="center">
+  <li>
+    <a id="undoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">undo</i></a>
+    <a id="redoButton" class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">redo</i></a>
+  </li>
+  <li>
+    <button id="clearButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">delete</i></button>
+  </li>
+  <li>
+    <button id="photoButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">photo_camera</i></button>
+  </li>
+</ul>
+
 
 
 
