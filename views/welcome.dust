@@ -28,7 +28,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col s6 offset-s3">
+            <div id="loginContainer"class="col s6 offset-s3">
                 <h4 class="center">Log In</h4>
 
                 <form id="loginForm">
@@ -41,7 +41,7 @@
                             <input placeholder="" id="password" type="password" class="validate">
                             <label for="password">Password</label>
                         </div>
-                        <button id="loginButton" class="btn waves-effect waves-light light-blue right" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+                        <button id="loginButton" class="btn  waves-effect waves light-blue right z-depth-0" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
                     </div>
 
                 </form>
