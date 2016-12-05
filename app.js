@@ -36,8 +36,9 @@ app.post('/welcome', routers.welcome.loginUser);
 //Register view
 app.use('/register', routers.register);
 app.post('/register', routers.register.postUser);
-//Users view (contacts page)
+//Users view
 app.use('/users', routers.users);
+//Gallery view
 app.use('/gallery', routers.gallery);
 
 
