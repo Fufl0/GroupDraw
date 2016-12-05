@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 //register user
 router.postUser = function postUser(req, res) {
-  models.User.create(req.body, (err, users) => {
+  User.create(req.body, (err, users) => {
     if (err) res.status(500).end();
     else res.status(201).json(users).end();
   });

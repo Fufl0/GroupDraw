@@ -32,7 +32,7 @@ app.use('/', routers.root);
 app.use('/rooms', routers.rooms);
 //Welcome view
 app.use('/welcome', routers.welcome);
-//app.post('/welcome', routers.welcome);
+app.post('/welcome', routers.welcome.loginUser);
 //Register view
 app.use('/register', routers.register);
 app.post('/register', routers.register.postUser);

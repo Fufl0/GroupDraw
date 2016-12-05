@@ -16,5 +16,14 @@ router.get('/', function(req, res, next) {
     res.render('welcome')
 });
 
+//login user
+router.loginUser = function loginUser(req, res) {
+  User.findOne({username: req.params.username, password: req.params.password}, (err, user) => {
+    if (err) res.status(500).end();
+    else if (!user) res.status(403).end();
+    else res.status(204).end();
+  });
+}
+
 /** router for /users */
 module.exports = router;
