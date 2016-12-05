@@ -1,5 +1,5 @@
 <figure>
-    <img src="{image-link}" alt="">
+    <img src="{img}" alt="">
     <figcaption>
         Author: {author} <br/>
         Titolo: {title}

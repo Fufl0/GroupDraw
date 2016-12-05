@@ -7,46 +7,33 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 require ('../../models/GalleryImage');
 const GalleryImage = mongoose.model('GalleryImage');
+const config = require('../../config');
 
 const fieldsFilter = { '__v': 0 };
 
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
-
-  GalleryImage.find({}, fieldsFilter).lean().exec(function(err, galleryImages) {
-    if (err) return next (err);
-    if(req.accepts('html')){
-      res.render('gallery', { galleryImages });
-    } else {
-      res.json(galleryImages);
-    }
-  });
+	GalleryImage.find({}, function(err, found) {
+		if(err) {
+			res.sendStatus(404);
+		}
+		else {
+			let array = []
+			for (let element of found){
+				let galleryImage = element.toObject();
+				array.push(galleryImage);
+			}
+			let t = { galleryitems: array };
+			res.render("galleryitems", t);
+		}
+	})
 });
 
 
 router.post('/', function(req, res, next) {
-    const newGalleryImage = new GalleryImage(req.body);
-    newGalleryImage.save(onModelSave(res, 201, true));
-});
-
-router.delete('/:galleryImageid', function(req, res, next) {
-  GalleryImage.findById(req.params.galleryImageid, fieldsFilter , function(err, galleryImage){
-    if (err) return next (err);
-    if (!galleryImage) {
-      res.status(404);
-      res.json({
-        statusCode: 404,
-        message: 'Not Found'
-      });
-      return;
-    }
-
-    galleryImage.remove(function(err, removed){
-      if (err) return next (err);
-      res.status(204).end();
-    })
-  });
+  const newGalleryImage = new GalleryImage(req.body);
+  newGalleryImage.save(onModelSave(res, 201, true));
 });
 
 function onModelSave(res, status, sendItAsResponse){
@@ -75,6 +62,13 @@ function onModelSave(res, status, sendItAsResponse){
       return res.status(statusCode).end();
     }
   }
+}
+
+function addLinks(galleryImage){
+  galleryImage.links = [{
+      'rel' : 'self',
+      'href' : `${config.url}/gallery/${galleryImage._id}`
+    }];
 }
 
 module.exports = router;
