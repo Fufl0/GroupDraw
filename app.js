@@ -5,6 +5,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const dustjs = require('adaro');
 const app = express();
+const session = require('express-session');
 
 // Connect to MongoDB here
 const mongoose = require('mongoose');
@@ -24,6 +25,11 @@ app.use(bodyParser.urlencoded({
 })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 app.use(express.static(path.join(__dirname, 'public')));
+//session control
+app.use(session({
+  secret: Math.random().toString(36).substr(2),
+  resave: false,
+  saveUninitialized: true}));
 
 // Initialize routers here
 
@@ -38,6 +44,8 @@ app.use('/register', routers.register);
 app.post('/register', routers.register.postUser);
 //Users view
 app.use('/users', routers.users);
+//Profile view
+app.get('/profile', routers.profile);
 //Gallery view
 app.use('/gallery', routers.gallery);
 

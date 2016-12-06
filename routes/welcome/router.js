@@ -18,12 +18,17 @@ router.get('/', function(req, res, next) {
 
 //login user
 router.loginUser = function loginUser(req, res) {
-  User.findOne({username: req.params.username, password: req.params.password}, (err, user) => {
-    if (err) res.status(500).end();
-    else if (!user) res.status(403).end();
-    else res.status(204).end();
+  User.findOne({username: req.body.username, password: req.body.password}, (err, user) => {
+    if (err) {
+      res.status(500).end();
+    } else if (!user) {
+      res.status(404).end();
+    } else {
+      req.session.user = user;
+      res.status(200).send();
+    }
   });
-}
+};
 
 /** router for /users */
 module.exports = router;
