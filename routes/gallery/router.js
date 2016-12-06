@@ -33,7 +33,9 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-  const newGalleryImage = new GalleryImage(req.body);
+  const newGalleryImage = new GalleryImage({
+    img: { data: req.body.data, contentType: req.body.contentType }
+  });
   newGalleryImage.save(onModelSave(res, 201, true));
 });
 

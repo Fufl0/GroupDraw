@@ -1,0 +1,1 @@
+(function(dust){dust.register("galleryitems",body_0);function body_0(chk,ctx){return chk.s(ctx.get(["gallery"], false),ctx,{"block":body_1},{});}body_0.__dustBody=!0;function body_1(chk,ctx){return chk.p("galleryitem",ctx,ctx,{});}body_1.__dustBody=!0;return body_0}(dust));

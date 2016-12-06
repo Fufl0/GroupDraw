@@ -57,9 +57,8 @@
 
 
     <script src="/js/dust-core.min.js"></script>
-    <!-- TODO: check if needed -->
-    <!-- <script src="/views/roomitems.js"></script>
-    <script src="/views/roomitem.js"></script> -->
+    <script src="/views/galleryitems.js"></script>
+    <script src="/views/galleryitem.js"></script>
 
     <script src="/js/gallery.js"></script>
 
