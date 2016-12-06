@@ -52,59 +52,59 @@
                 <!-- Just for testing purposes we put some placeholder images -->
                   <!-- {>galleryitems/} -->
                   <figure>
-                      <img class="materialboxed" src="http://placehold.it/300x300" alt="">
+                      <img src="data:image/png;base64,ZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFTd0FBQUNXQ0FZQUFBQmtXN1hTQUFBRVlrbEVRVlI0WHUzVUFRa0FBQXdDd2RtLzlISTgzQkxJT2R3NUFnUUlSQVFXeVNrbUFRSUV6bUI1QWdJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUFCZytVSENCRElDQmlzVEZXQ0VpQmdzUHdBQVFJWkFZT1ZxVXBRQWdRTWxoOGdRQ0FqWUxBeVZRbEtnSURCOGdNRUNHUUVERmFtS2tFSkVEQllmb0FBZ1l5QXdjcFVKU2dCQWdiTER4QWdrQkV3V0ptcUJDVkF3R0Q1QVFJRU1nSUdLMU9Wb0FRSUdDdy9RSUJBUnNCZ1phb1NsQUNCQjFZeEFKZmpKYjJqQUFBQUFFbEZUa1N1UW1DQw" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/400x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
 
@@ -112,49 +112,49 @@
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/400x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
                   <figure>
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
 
@@ -162,7 +162,7 @@
                       <img src="http://placehold.it/300x300" alt="">
                       <figcaption>
                           Author: {author} <br/>
-                          Title: {title}
+                          Titolo: {title}
                       </figcaption>
                   </figure>
               </ul>

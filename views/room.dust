@@ -77,6 +77,11 @@
   </li>
 </ul>
 
+<div id="brush-toolbar" class="toolbar">
+  <!-- Brushes buttons go here (programmatically). Each button should
+  be a <button> element -->
+</div>
+
 
 
 
@@ -94,7 +99,10 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="/js/materialize.js"></script>
 
+    <script src="/js/socket.io.js"></script>
+    <script src="/js/brushes.js"></script>
     <script src="/js/room.js"></script>
+
     <script src="/js/room2.js"></script>
 
 
