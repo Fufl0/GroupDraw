@@ -2,23 +2,6 @@
 'use strict';
 
 
-
-//list users
-// router.get('/', function(req, res, next) {
-//     res.status(200);
-
-//     Rooms.find(function(err, rooms) {
-//         if (err) return console.error(err);
-//         res.render('rooms', {
-//             rooms: rooms
-//         });
-
-//     })
-// });
-
-
-
-
 const express = require('express');
 const router = express.Router();
 const middleware = require('../middleware');
