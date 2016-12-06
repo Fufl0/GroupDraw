@@ -93,6 +93,9 @@
   /*width: 600px;
   height: 400px;*/
   background-color: #fff;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #666;
 }
 
 #rgbPicker{
