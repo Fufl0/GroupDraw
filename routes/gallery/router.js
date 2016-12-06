@@ -14,21 +14,14 @@ const fieldsFilter = { '__v': 0 };
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
-	GalleryImage.find({}, function(err, found) {
-		if(err) {
-			res.sendStatus(404);
-		}
-		else{
-			let array = [];
-			for (let element of found) {
-				let galleryItem = element.toObject();
-				galleryItem.links = [{href : "/gallery/"+element._id}];
-				array.push(galleryItem);
-			}
-			let t = { galleryitems: found };
-			res.render("gallery", t);
-		}
-	});
+	res.status(200);
+
+  GalleryImage.find(function(err, gallery) {
+      if (err) return console.error(err);
+      res.render('gallery', {
+          gallery: gallery
+      });
+    })
 });
 
 

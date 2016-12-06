@@ -58,7 +58,6 @@ function parseResponseHeaders(headerStr) {
 
 
 function takeScreenshot() {
-  const photoButton =  document.getElementById('photoButton');
   var canvas = document.getElementById('canvas');
 
   var data = canvas.toDataURL();
@@ -77,6 +76,7 @@ function takeScreenshot() {
   }, function(err, res){
     if(err) throw err;
   });
+  console.log(JSON.stringify(body));
 }
 
 
