@@ -48,8 +48,123 @@
           <div style="flex:1;">
             <h4>Gallery</h4>
               <ul id="galleryContainer">
+                <!-- TODO: uncomment -->
+                <!-- Just for testing purposes we put some placeholder images -->
+                  <!-- {>galleryitems/} -->
+                  <figure>
+                      <img class="materialboxed" src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/400x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
 
-                  {>galleryitems/}
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/400x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
+
+                  <figure>
+                      <img src="http://placehold.it/300x300" alt="">
+                      <figcaption>
+                          Author: {author} <br/>
+                          Titolo: {title}
+                      </figcaption>
+                  </figure>
               </ul>
           </div>
       </div>
@@ -57,15 +172,16 @@
 
 
     <script src="/js/dust-core.min.js"></script>
-    <script src="/views/galleryitems.js"></script>
-    <script src="/views/galleryitem.js"></script>
 
-    <script src="/js/gallery.js"></script>
+    <!-- TODO: uncomment -->
+    <!-- <script src="/views/galleryitems.js"></script>
+    <script src="/views/galleryitem.js"></script> -->
+
+    <!-- <script src="/js/gallery.js"></script> -->
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
-    <script type="text/javascript" src="/js/init.js"></script>
 
 </body>
 
