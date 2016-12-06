@@ -88,10 +88,10 @@
   bottom:0;
   left: 200px;
   /* TODO: make fullscreen*/
-    /*height: calc(100% - 64px);*/
-  /*width: calc(100% - 200px);*/
-  width: 600px;
-  height: 400px;
+    /*height: calc(100% - 64px);
+  width: calc(100% - 200px);*/
+  /*width: 600px;
+  height: 400px;*/
   background-color: #fff;
 }
 
