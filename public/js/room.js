@@ -11,6 +11,7 @@ const app = {
     strokeStyle: 'black',
     isDrawing: false,
     history: [],
+    undohistory: [],
 
     socket: io(),
     // get id fron url
@@ -60,7 +61,21 @@ const app = {
         // console.log(e.target.dataset.color);
     },
 
-    // TODO
+    undoHandler: function(e) {
+        if (!this.history.length) return;
+        this.undohistory.push(this.history.pop());
+        this.clearCanvas();
+        this.replayHistory(this.history);
+    },
+
+    redoHandler: function (e) {
+        if (!this.undohistory.length) return;
+        this.history.push(this.undohistory.pop());
+        this.clearCanvas();
+        this.replayHistory(this.history);
+    },
+
+
     rgbPickerHandler: function(e) {
         // if (!e.target.classList.contains('p-color')) return;
         // this.strokeStyle = e.target.dataset.color;
@@ -244,7 +259,7 @@ const app = {
         const rgbTextField = document.getElementById("rgb");
         rgbTextField.addEventListener("click", function() {
             // console.log("hai clickato");
-            rgbTextField.value = "";
+            rgbTextField.value = "#";
 
         });
 
@@ -255,6 +270,14 @@ const app = {
         // rgbPickerButton.addEventListener('click', function(e) {
         //    console.log("hai premuto rgbPickerButton");
         // });
+
+        // undo
+        const undoButton = document.getElementById('undoButton');
+        undoButton.addEventListener('click', this.undoHandler.bind(this));
+
+        const redoButton = document.getElementById('redoButton');
+        redoButton.addEventListener('click', this.redoHandler.bind(this));
+
 
         this.setupBrushes();
         this.selectBrush('Pen');
