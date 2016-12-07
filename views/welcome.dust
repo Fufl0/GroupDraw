@@ -34,7 +34,7 @@
                 <form id="loginForm">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input placeholder="" id="username" type="text" class="validate">
+                            <input placeholder="" id="username" type="text" class="validate" autofocus>
                             <label for="username">Username</label>
                         </div>
                         <div class="input-field col s12">

@@ -38,6 +38,9 @@
                 </ul>
 
             </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="">Logged in as: Pietro</a></li>
+            </ul>
         </div>
     </nav>
 
