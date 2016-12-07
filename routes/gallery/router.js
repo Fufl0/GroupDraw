@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 require ('../../models/GalleryImage');
 const GalleryImage = mongoose.model('GalleryImage');
+const Rooms = mongoose.model('Rooms')
 const config = require('../../config');
 const session = require('express-session');
 
@@ -34,8 +35,24 @@ router.post('/', function(req, res, next) {
 	if (!req.session.user) {
 		return res.status(401).send();
 	} else {
-    const newGalleryImage = new GalleryImage(req.body);
-	  newGalleryImage.save(onModelSave(res, 201, true));
+
+		Rooms.findOne({ _id: mongoose.Types.ObjectId(req.body.roomId) }, function(err, room) {
+
+			var createdInRoom;
+
+			if (err) return console.error(err);
+
+			const newGalleryImage = new GalleryImage({
+				img: req.body.img,
+				title: req.body.title,
+				author: req.session.user.username,
+				createdInRoom: room.name
+			});
+
+			newGalleryImage.save(onModelSave(res, 201, true));
+		});
+
+
 	}
 });
 
