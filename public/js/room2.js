@@ -56,28 +56,6 @@ function parseResponseHeaders(headerStr) {
   return headers;
 }
 
-
-function takeScreenshot(title, author, createdInRoom) {
-  var canvas = document.getElementById('canvas');
-
-  var data = canvas.toDataURL();
-  var contentType = 'image/png';
-
-
-  const body = { data, contentType };
-
-  request('/gallery', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json;charset=UTF-8'
-    },
-    body: JSON.stringify(body)
-  }, function(err, res){
-    if(err) throw err;
-  });
-}
-
 function bindSubmit() {
   let submitBtn = document.getElementById("submitBtn");
 
@@ -97,8 +75,7 @@ function bindSubmit() {
 
     const body = {  img: { data, contentType },
                     title: title,
-                    author: "todo", // TODO
-                    createdInRoom: "todo" // TODO
+                    roomId: window.location.href.split("/")[4]
                   };
 
     request('/gallery', {
@@ -127,8 +104,3 @@ $(document).ready(function(){
  };
 
  bindSubmit();
-
-
-
-// const photoButton =  document.getElementById('photoButton');
-// photoButton.addEventListener('click', takeScreenshot);
