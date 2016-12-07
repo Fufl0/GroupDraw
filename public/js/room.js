@@ -66,15 +66,19 @@ const app = {
         // this.strokeStyle = e.target.dataset.color;
         // console.log("hai premuto rgbpicker");
         let rgbInsertedColor = document.getElementById('rgb').value;
-        this.strokeStyle = this.colorHexToRgb(rgbInsertedColor);
-
-
+        // if (rgbInsertedColor.length = 7)
+            this.strokeStyle = this.colorHexToRgb(rgbInsertedColor);
     },
 
     colorHexToRgb: function(color) {
-        if (color.length != 7)
+        if (color.length != 7) {
+            console.log("Invalid color");
+            document.getElementById('rgb').value = "not valid";
             return;
+        }
 
+
+        console.log("rbgcolorpicker");
         let red = color.substr(1, 2);
         red = parseInt(red, 16);
         // console.log("red: " + red);
@@ -87,6 +91,7 @@ const app = {
         // console.log("blue: " + blue);
         return "rgb(" + red + ", " + green + ", " + blue + ")";
     },
+
 
     setupBrushes: function() {
         const brushToolbar = document.getElementById('brush-toolbar');
