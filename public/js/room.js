@@ -240,6 +240,13 @@ const app = {
         const palette = document.getElementById('palette');
         palette.addEventListener('click', this.paletteHandler.bind(this));
 
+        // document.getElementById('rgb').value = "not valid";
+        const rgbTextField = document.getElementById("rgb");
+        rgbTextField.addEventListener("click", function() {
+            // console.log("hai clickato");
+            rgbTextField.value = "";
+
+        });
 
         const rgbPickerButton = document.getElementById('rgbPickerButton');
         rgbPickerButton.addEventListener('click', this.rgbPickerHandler.bind(this));
@@ -254,6 +261,6 @@ const app = {
 
         this.setupSocket();
     }
-}
+};
 
 app.init();
