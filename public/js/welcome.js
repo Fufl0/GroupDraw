@@ -40,7 +40,7 @@ guestButton.onclick = function btnSubmitOnClick(e) {
   r.setRequestHeader('Content-Type', 'application/json');
   r.setRequestHeader('Accept', 'application/json');
   r.send(JSON.stringify(user));
-  set.setTimeout(function () {
+  setTimeout(function () {
     var r = new XMLHttpRequest();
     r.open('POST', '/welcome');
     r.setRequestHeader('Content-Type', 'application/json');
@@ -52,5 +52,5 @@ guestButton.onclick = function btnSubmitOnClick(e) {
       }
     };
     r.send(JSON.stringify(user));
-  }, 2000);
+  }, 500);
 };
