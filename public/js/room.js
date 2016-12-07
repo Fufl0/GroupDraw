@@ -58,7 +58,10 @@ const app = {
     paletteHandler: function(e) {
         if (!e.target.classList.contains('p-color')) return;
         this.strokeStyle = e.target.dataset.color;
-        // console.log(e.target.dataset.color);
+        console.log(e.target.dataset.color);
+        let rgbcolor = e.target.dataset.color.substr(4, (e.target.dataset.color.length - 5));
+        // TODO
+        document.getElementById("rgb").value = this.colorRgbToHex(rgbcolor);
     },
 
     undoHandler: function(e) {
@@ -105,6 +108,27 @@ const app = {
         blue = parseInt(blue, 16);
         // console.log("blue: " + blue);
         return "rgb(" + red + ", " + green + ", " + blue + ")";
+    },
+
+    colorRgbToHex: function(color) {
+        let rgbs = color.split(",");
+
+        let red = rgbs[0];
+        red = parseInt(red).toString(16).slice(-2);
+        if (red.length < 2) red = "0" + red;
+
+        let green = rgbs[1].substring(1);
+        console.log(green);
+        green = parseInt(green).toString(16).slice(-2);
+        if (green.length < 2) green = "0" + green;
+
+        // let blue = rgbs[2];
+        let blue = rgbs[2].substring(1);
+        console.log(blue);
+        blue = parseInt(blue).toString(16).slice(-2);
+        if (blue.length < 2) blue = "0" + blue;
+        
+        return ("#" + red + green + blue);
     },
 
 
@@ -271,7 +295,7 @@ const app = {
         //    console.log("hai premuto rgbPickerButton");
         // });
 
-        // undo
+        // undo and redo
         const undoButton = document.getElementById('undoButton');
         undoButton.addEventListener('click', this.undoHandler.bind(this));
 
