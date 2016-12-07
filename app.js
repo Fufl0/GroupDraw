@@ -21,9 +21,12 @@ app.set('view engine', 'dust');
 //configure app
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
-    extended: false
+  limit: '50mb',
+  extended: true
 })); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); // parse application/json
+app.use(bodyParser.json({
+  limit: '50mb'
+})); // parse application/json
 app.use(express.static(path.join(__dirname, 'public')));
 //session control
 app.use(session({

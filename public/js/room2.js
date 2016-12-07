@@ -76,7 +76,6 @@ function takeScreenshot() {
   }, function(err, res){
     if(err) throw err;
   });
-  console.log(JSON.stringify(body));
 }
 
 
