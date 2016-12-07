@@ -18,5 +18,11 @@ loginButton.onclick = function btnSubmitOnClick(e) {
     r.open('POST', '/welcome');
     r.setRequestHeader('Content-Type', 'application/json');
     r.setRequestHeader('Accept', 'application/json');
+    r.onreadystatechange = function onReadyStateChange() {
+      if (r.readyState !== 4) return;
+      if (r.readyState === 4 && r.status === 200) {
+        window.location = '/rooms';
+      }
+    };
     r.send(JSON.stringify(user));
 };

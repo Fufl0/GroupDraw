@@ -8,28 +8,37 @@ const ObjectId = mongoose.Types.ObjectId;
 require ('../../models/GalleryImage');
 const GalleryImage = mongoose.model('GalleryImage');
 const config = require('../../config');
+const session = require('express-session');
 
 const fieldsFilter = { '__v': 0 };
 
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
-	res.status(200);
+	if (!req.session.user) {
+		return res.status(401).send();
+	} else {
+		res.status(200);
 
-  GalleryImage.find(function(err, gallery) {
+	  GalleryImage.find(function(err, gallery) {
       if (err) return console.error(err);
       res.render('gallery', {
           gallery: gallery
       });
-    })
+	  })
+	}
 });
 
 
 router.post('/', function(req, res, next) {
-  const newGalleryImage = new GalleryImage({
-    img: { data: req.body.data, contentType: req.body.contentType }
-  });
-  newGalleryImage.save(onModelSave(res, 201, true));
+	if (!req.session.user) {
+		return res.status(401).send();
+	} else {
+		const newGalleryImage = new GalleryImage({
+	    img: { data: req.body.data, contentType: req.body.contentType }
+	  });
+	  newGalleryImage.save(onModelSave(res, 201, true));
+	}
 });
 
 function onModelSave(res, status, sendItAsResponse){
