@@ -34,9 +34,7 @@ router.post('/', function(req, res, next) {
 	if (!req.session.user) {
 		return res.status(401).send();
 	} else {
-		const newGalleryImage = new GalleryImage({
-	    img: { data: req.body.data, contentType: req.body.contentType }
-	  });
+    const newGalleryImage = new GalleryImage(req.body);
 	  newGalleryImage.save(onModelSave(res, 201, true));
 	}
 });

@@ -57,7 +57,7 @@ function parseResponseHeaders(headerStr) {
 }
 
 
-function takeScreenshot() {
+function takeScreenshot(title, author, createdInRoom) {
   var canvas = document.getElementById('canvas');
 
   var data = canvas.toDataURL();
@@ -78,7 +78,57 @@ function takeScreenshot() {
   });
 }
 
+function bindSubmit() {
+  let submitBtn = document.getElementById("submitBtn");
+
+  submitBtn.onclick = function(event) {
+
+    event.preventDefault();
+
+    var canvas = document.getElementById('canvas');
+
+    var data = canvas.toDataURL();
+    var contentType = 'image/png';
+
+    let title = document.getElementById("titleInput").value;
+    if(title == "") {
+      title = "(untitled)";
+    }
+
+    const body = {  img: { data, contentType },
+                    title: title,
+                    author: "todo", // TODO
+                    createdInRoom: "todo" // TODO
+                  };
+
+    request('/gallery', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      body: JSON.stringify(body)
+    }, function(err, res){
+      if(err) throw err;
+    });
+
+    document.getElementById("titleInput").value = "";
+
+  };
+}
+
+$(document).ready(function(){
+   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+   $('.modal').modal();
+ });
+
+ document.getElementById("photoButton").onclick=function(){
+    document.getElementById("titleInput").focus();
+ };
+
+ bindSubmit();
 
 
-const photoButton =  document.getElementById('photoButton');
-photoButton.addEventListener('click', takeScreenshot);
+
+// const photoButton =  document.getElementById('photoButton');
+// photoButton.addEventListener('click', takeScreenshot);

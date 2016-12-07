@@ -73,7 +73,20 @@
     <button id="clearButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">delete</i></button>
   </li>
   <li>
-    <button id="photoButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">photo_camera</i></button>
+    <a id="photoButton" class="btn waves-effect waves-light light-blue" href="#modal1"><i class="material-icons">photo_camera</i></a>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Save Image</h4>
+            <form class="" id="titleForm" action="/gallery">
+                <input type="text" id="titleInput" name="title" placeholder="Insert title">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="submitBtn" class="btn btn-flat waves-effect waves-light modal-action modal-close" type="submit" value="Save" name="action">
+              Save<i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
   </li>
 </ul>
 
