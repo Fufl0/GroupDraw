@@ -72,7 +72,6 @@
 
         <div style="display: flex;">
             <div style="flex:1;">
-                <h4>Rooms</h4>
                 <ul id="roomList">
                     {>roomitems/}
                 </ul>

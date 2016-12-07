@@ -44,7 +44,6 @@
 
 
     <div class="container">
-            <h4>Gallery</h4>
               <ul id="galleryContainer">
 
                   {>galleryitems/}
