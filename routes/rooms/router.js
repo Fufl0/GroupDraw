@@ -103,7 +103,7 @@ router.post("/", function (req, res, next){
 			}
 			res.status(201).json(saved);
 		})
-	}	
+	}
 });
 
 module.exports = router;
