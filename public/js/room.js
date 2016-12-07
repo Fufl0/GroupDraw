@@ -72,20 +72,20 @@ const app = {
     },
 
     colorHexToRgb: function(color) {
-        if (color.length = 6) {
-            let red = color.substr(0, 2);
-            red = parseInt(red, 16);
-            // console.log("red: " + red);
-            let green = color.substr(2, 2);
-            // console.log("b4 green: ", green);
-            green = parseInt(green, 16);
-            // console.log("green: " + green);
-            let blue = color.substr(4, 2);
-            blue = parseInt(blue, 16);
-            // console.log("blue: " + blue);
-            return "rgb(" + red + ", " + green + ", " + blue + ")";
+        if (color.length != 7)
+            return;
 
-        }
+        let red = color.substr(1, 2);
+        red = parseInt(red, 16);
+        // console.log("red: " + red);
+        let green = color.substr(3, 2);
+        // console.log("b4 green: ", green);
+        green = parseInt(green, 16);
+        // console.log("green: " + green);
+        let blue = color.substr(5, 2);
+        blue = parseInt(blue, 16);
+        // console.log("blue: " + blue);
+        return "rgb(" + red + ", " + green + ", " + blue + ")";
     },
 
     setupBrushes: function() {
