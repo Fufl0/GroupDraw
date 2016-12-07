@@ -75,10 +75,10 @@
   <li>
     <a id="photoButton" class="btn waves-effect waves-light light-blue" href="#modal1"><i class="material-icons">photo_camera</i></a>
     <div id="modal1" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="color: black;">
             <h4>Save Image</h4>
             <form class="" id="titleForm" action="/gallery">
-                <input type="text" id="titleInput" name="title" placeholder="Insert title">
+                <input type="text" id="titleInput" name="title" placeholder="Insert title" autofocus>
             </form>
         </div>
         <div class="modal-footer">
@@ -111,6 +111,7 @@
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="/js/materialize.js"></script>
+    <script src="/js/room-init.js"></script>
 
     <script src="/js/socket.io.js"></script>
     <script src="/js/brushes.js"></script>

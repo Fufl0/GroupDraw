@@ -20,6 +20,11 @@
     right: 5px;
 }
 
+
+.delete{
+  cursor: pointer;
+}
+
 /*  TODO: */
 /*textarea:focus {
   border-bottom: 1px solid orange;
@@ -88,14 +93,13 @@
   bottom:0;
   left: 200px;
   /* TODO: make fullscreen*/
-    /*height: calc(100% - 64px);
-  width: calc(100% - 200px);*/
-  /*width: 600px;
-  height: 400px;*/
+  height: calc(100% - 64px);
+  width: calc(100% - 200px);
+
   background-color: #fff;
-  border-style: solid;
+  /*border-style: solid;
   border-width: 2px;
-  border-color: #666;
+  border-color: #666;*/
 }
 
 #rgbPicker{
