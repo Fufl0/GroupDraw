@@ -17,7 +17,9 @@ loginButton.onclick = function btnSubmitOnClick(e) {
   };
   var r = new XMLHttpRequest();
   if (username.value.toLowerCase().indexOf("guest") >= 0) {
-    alert("Can't login as guest");
+    document.getElementById("usernameLabel").setAttribute("data-error", "Can't login as guest");
+    $("#username").addClass("invalid");
+    $("#username").prop("aria-invalid", "true");
   } else {
     r.open('POST', '/welcome');
     r.setRequestHeader('Content-Type', 'application/json');
@@ -26,6 +28,12 @@ loginButton.onclick = function btnSubmitOnClick(e) {
       if (r.readyState !== 4) return;
       if (r.readyState === 4 && r.status === 200) {
         window.location = '/rooms';
+      }
+      if (r.readyState === 4 && r.status === 404) {
+        document.getElementById("usernameLabel").setAttribute("data-error", "Wrong username or uncorrect password");
+        $("#username").addClass("invalid");
+        $("#password").addClass("invalid");
+        $("#username").prop("aria-invalid", "true");
       }
     };
     r.send(JSON.stringify(user));
