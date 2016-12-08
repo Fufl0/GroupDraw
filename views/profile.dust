@@ -29,18 +29,18 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="rooms">Rooms</a></li>
                     <li><a href="gallery">Gallery</a></li>
-                    <li class="active"><a href="users">Users</a></li>
+                    <li><a href="users">Users</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-nav">
-                    <li ><a href="">Rooms</a></li>
+                    <li><a href="">Rooms</a></li>
                     <li><a href="gallery">Gallery</a></li>
-                    <li class="active"><a href="contacts">Users</a></li>
+                    <li><a href="contacts">Users</a></li>
                 </ul>
 
             </ul>
             <ul class="right hide-on-med-and-down">
-                <li><a href="profile">Logged in as: Pietro</a></li>
-                <li><a href=""><i class="material-icons">exit_to_app</i></li>
+                <li class="active"><a href="profile">Logged in as: Pietro</a></li>
+                <li><a href=""><i class="material-icons">exit_to_app</i></a></li>
             </ul>
         </div>
     </nav>
@@ -48,19 +48,15 @@
 
 
                 <div class="container">
-                    <h4>Users</h4>
-                  <ul id="userList">
-                      {>useritems/}
-                  </ul>
+                    <h4>Profile</h4>
+
                 </div>
 
 
 
 
     <script src="/js/dust-core.min.js"></script>
-    <!-- TODO: check if needed -->
-    <!-- <script src="/views/roomitems.js"></script>
-    <script src="/views/roomitem.js"></script> -->
+
 
 
     <!--Import jQuery before materialize.js-->
