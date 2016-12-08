@@ -60,22 +60,33 @@ const app = {
         this.strokeStyle = e.target.dataset.color;
         console.log(e.target.dataset.color);
         let rgbcolor = e.target.dataset.color.substr(4, (e.target.dataset.color.length - 5));
-        // TODO
         document.getElementById("rgb").value = this.colorRgbToHex(rgbcolor);
     },
 
-    undoHandler: function(e) {
+    undoHandler: function(e, no) {
         if (!this.history.length) return;
         this.undohistory.push(this.history.pop());
         this.clearCanvas();
         this.replayHistory(this.history);
+        if (!no) {
+            this.socket.emit("undo", {
+                history : this.history,
+                undohistory: this.undohistory
+            })
+        }
     },
 
-    redoHandler: function (e) {
+    redoHandler: function (e, no) {
         if (!this.undohistory.length) return;
         this.history.push(this.undohistory.pop());
         this.clearCanvas();
         this.replayHistory(this.history);
+        if (!no) {
+            this.socket.emit("redo", {
+                history : this.history,
+                undohistory: this.undohistory
+            })
+        }
     },
 
 
@@ -118,13 +129,13 @@ const app = {
         if (red.length < 2) red = "0" + red;
 
         let green = rgbs[1].substring(1);
-        console.log(green);
+        // console.log(green);
         green = parseInt(green).toString(16).slice(-2);
         if (green.length < 2) green = "0" + green;
 
         // let blue = rgbs[2];
         let blue = rgbs[2].substring(1);
-        console.log(blue);
+        // console.log(blue);
         blue = parseInt(blue).toString(16).slice(-2);
         if (blue.length < 2) blue = "0" + blue;
         
@@ -228,12 +239,26 @@ const app = {
 
             room.ctx.closePath();
         });
-        room.socket.on("load-history", function(message) {
+        room.socket.on("load", function(message) {
 
             room.history = message.history;
+            room.undohistory = message.undohistory;
             room.replayHistory(room.history);
 
         });
+
+        room.socket.on("undo", function(message) {
+            room.history = message.history;
+            room.undohistory = message.undohistory;
+            room.clearCanvas();
+            room.replayHistory(room.history);
+        });
+        room.socket.on("redo", function(message) {
+            room.history = message.history;
+            room.undohistory = message.undohistory;
+            room.clearCanvas();
+            room.replayHistory(room.history);
+        })
     },
 
     init: function() {
