@@ -33,14 +33,7 @@ registerButton.onclick = function btnSubmitOnClick(e) {
           }
         };
         r.send(JSON.stringify(user));
-      } else {
-        alert("Passwords do not match!");
       }
-    } else {
-      alert("Password can't be empty!");
     }
-  } else {
-    alert("Username can't be empty/can't contain 'guest' keyword.");
   }
-
 };
