@@ -49,7 +49,12 @@
 
                 <div class="container">
                     <h4>Profile</h4>
-
+                    <img src="img/blank-user.jpg" width="300" height="300"/>
+                    <br />
+                    Username:  <input placeholder="Placeholder" id="username" type="text" class="validate">
+                    Mood:  <input placeholder="Placeholder" id="mood" type="text" class="validate">
+                    Status:  <input placeholder="Placeholder" id="status" type="text" class="validate">
+                    <a class="btn-large waves-effect waves-light red">Delete your account</a>
                 </div>
 
 
