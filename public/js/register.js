@@ -22,9 +22,17 @@ registerButton.onclick = function btnSubmitOnClick(e) {
         r.open('POST', '/register');
         r.setRequestHeader('Content-Type', 'application/json');
         r.setRequestHeader('Accept', 'application/json');
+        r.onreadystatechange = function onReadyStateChange() {
+          if (r.readyState !== 4) return;
+          if (r.readyState === 4 && r.status === 201) {
+            alert("You succesfully registered, have fun :)");
+            window.location = '/welcome';
+          }
+          if (r.readyState === 4 && r.status === 500) {
+            alert("Username already in use!");
+          }
+        };
         r.send(JSON.stringify(user));
-        alert("You succesfully registered, have fun :)");
-        window.location = '/welcome';
       } else {
         alert("Passwords do not match!");
       }

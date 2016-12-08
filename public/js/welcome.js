@@ -11,11 +11,14 @@ var guestButton = window.document.getElementById('guest');
 
 loginButton.onclick = function btnSubmitOnClick(e) {
   console.log('loginButton clicked');
-    var user = {
-      username: username.value,
-      password: password.value,
-    };
-    var r = new XMLHttpRequest();
+  var user = {
+    username: username.value,
+    password: password.value,
+  };
+  var r = new XMLHttpRequest();
+  if (username.value.toLowerCase().indexOf("guest") >= 0) {
+    alert("Can't login as guest");
+  } else {
     r.open('POST', '/welcome');
     r.setRequestHeader('Content-Type', 'application/json');
     r.setRequestHeader('Accept', 'application/json');
@@ -26,11 +29,12 @@ loginButton.onclick = function btnSubmitOnClick(e) {
       }
     };
     r.send(JSON.stringify(user));
+  }
 };
 
 guestButton.onclick = function btnSubmitOnClick(e) {
   console.log('guestButton clicked');
-  var guestname = 'user' + Math.floor((Math.random() * 10000) + 1);
+  var guestname = 'Guest' + Math.floor((Math.random() * 100000) + 1);
   var user = {
     username: guestname,
     password: ''
@@ -52,5 +56,5 @@ guestButton.onclick = function btnSubmitOnClick(e) {
       }
     };
     r.send(JSON.stringify(user));
-  }, 500);
+  }, 10);
 };
