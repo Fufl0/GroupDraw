@@ -253,3 +253,8 @@ user-select: none;
 #loginContainer button{
   margin-right: 10px;
 }
+
+/*fix for error in displaying*/
+label[data-error]:after {
+    white-space: nowrap;
+}
