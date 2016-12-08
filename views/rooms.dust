@@ -39,7 +39,8 @@
 
             </ul>
             <ul class="right hide-on-med-and-down">
-                <li><a href="">Logged in as: Pietro</a></li>
+                <li><a href="profile">Logged in as: Pietro</a></li>
+                <li><a href=""><i class="material-icons">exit_to_app</i></li>
             </ul>
         </div>
     </nav>

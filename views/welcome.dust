@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>GroupDraw - Rooms</title>
+    <title>GroupDraw - Welcome</title>
 
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,7 +28,7 @@
 
     <div class="container">
         <div class="row">
-            <div id="loginContainer"class="col s6 offset-s3">
+            <div id="loginContainer"class="col s6 offset-s3 z-depth-2">
                 <h4 class="center">Log In</h4>
 
                 <form id="loginForm">

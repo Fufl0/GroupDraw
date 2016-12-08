@@ -1,3 +1,20 @@
+/*body{
+  background-image: url("/img/pattern.svg");
+}*/
+.brand-logo{
+  transition: text-shadow 0.30s;
+}
+
+.brand-logo:hover{
+    /* glow effect on hover */
+    text-shadow: -1px 1px 20px #ffc, 1px -1px 20px #fff;
+
+    -webkit-transition: text-shadow 250ms linear 0s;
+    -moz-transition: text-shadow 250ms linear 0s;
+    -o-transition: text-shadow 250ms linear 0s;
+    transition: text-shadow 250ms linear 0s;
+}
+
 .room-item{
   width: 80%;
 }
@@ -22,6 +39,13 @@
 
 
 .delete{
+  -webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+
   cursor: pointer;
 }
 
@@ -211,6 +235,8 @@
 }
 
 #loginContainer{
+  background-color: #fff;
+
   margin-top: 100px;
 
   border-style: solid;

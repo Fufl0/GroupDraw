@@ -12,14 +12,14 @@ const session = require('express-session');
 //supported methods
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
-// router.get('/', function(req, res, next) {
-//   if(!req.session.user) {
-//     return res.status(401).send();
-//   } else {
-//     res.status(200)
-//     res.render('profile');
-//   }
-// });
+router.get('/', function(req, res, next) {
+  if(!req.session.user) {
+    return res.status(401).send();
+  } else {
+    res.status(200)
+    res.render('profile');
+  }
+});
 
 /** router for /users */
 module.exports = router;

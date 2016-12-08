@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>GroupDraw - Rooms</title>
+    <title>GroupDraw - Register</title>
 
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,7 +19,7 @@
 <body>
   <nav>
       <div class="nav-wrapper amber darken-2">
-          <a href="#" class="brand-logo center">GroupDraw</a>
+          <a href="welcome" class="brand-logo center">GroupDraw</a>
       </div>
   </nav>
 
