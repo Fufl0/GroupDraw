@@ -12,7 +12,7 @@ const User = mongoose.model('User');
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
-    res.status(200)
+    res.status(200);
     res.render('welcome')
 });
 

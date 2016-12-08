@@ -11,7 +11,7 @@ var registerButton = window.document.getElementById('registerButton');
 
 registerButton.onclick = function btnSubmitOnClick(e) {
   console.log('submitBtn clicked');
-  if (username.value !== '') {
+  if (username.value !== '' && !(username.value.toLowerCase().indexOf("guest") >= 0) ) {
     if (password.value !== '') {
       if (password.value === confirmPassword.value) {
         var user = {
@@ -40,7 +40,7 @@ registerButton.onclick = function btnSubmitOnClick(e) {
       alert("Password can't be empty!");
     }
   } else {
-    alert("Username can't be empty!");
+    alert("Username can't be empty/can't contain 'guest' keyword.");
   }
 
 };

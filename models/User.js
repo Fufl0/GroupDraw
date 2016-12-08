@@ -2,7 +2,7 @@
 * The User Model
 * Schema:
 * _id            ObjectId           Unique identifier of the user
-* username       String             Full name of the user ('user + random number' if it is a guest)
+* username       String             Full name of the user ('Guest + random number' if it is a guest)
 * password       String             User's password (if the password is an empty string, the user is a guest)
 * //picture        buffer in string   User's image
 * picture        String             Path to user's image
