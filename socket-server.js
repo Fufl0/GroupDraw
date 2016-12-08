@@ -29,6 +29,7 @@ module.exports = function(httpServer) {
         });
         socket.on("clear", function() {
             roomHistories[id] = [];
+            roomUndoHistories[id] = [];
             socket.broadcast.to(id).emit("clear");
         });
         socket.on("draw", function(message) {

@@ -51,6 +51,7 @@ const app = {
     clearHandler: function(e, no) {
         this.clearCanvas();
         this.history = [];
+        this.undohistory = [];
         if (!no)
             this.socket.emit("clear", this.id);
     },
