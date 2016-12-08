@@ -61,7 +61,7 @@
             <div class="modal-content">
                 <h4>Create a room</h4>
                 <form class="" id="roomForm" action="/rooms">
-                    <input type="text" id="roomNameInput" name="roomName" placeholder="Room name">
+                    <input type="text" id="roomNameInput" name="roomName" placeholder="Room name" autofocus>
                 </form>
             </div>
             <div class="modal-footer">

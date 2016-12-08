@@ -12,6 +12,10 @@ $(document).ready(function(){
    $('.modal').modal();
  });
 
- document.getElementById("newRoomButton").onclick=function(){
+ document.getElementById("submitBtn").onclick=function(){
     document.getElementById("roomNameInput").focus();
+ };
+
+ document.getElementById("newRoomButton").onclick=function(){
+   document.getElementById("roomNameInput").value = "";
  };
