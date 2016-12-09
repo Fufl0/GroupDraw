@@ -48,7 +48,7 @@ router.get("/", function(req, res, next){
 					room.links = [{href : "/rooms/"+element._id}]
 					array.push(room);
 				}
-				let t = {rooms: array};
+				let t = {rooms: array, user: req.session.user.username};
 				res.render("rooms", t);
 			}
 		})
