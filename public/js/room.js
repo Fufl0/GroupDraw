@@ -280,6 +280,18 @@ const app = {
             this.canvas.style.cursor = 'crosshair';
             this.ctx.beginPath();
             this.ctx.moveTo(e.offsetX, e.offsetY);
+
+            // first dot
+            if (!this.isDrawing) return;
+            const hisIdx = this.history.length - 1;
+            this.history[hisIdx].push({
+                brushName: this.currentBrushName,
+                x: e.offsetX ,
+                y: e.offsetY ,
+                strokeStyle: this.strokeStyle,
+                brushSize: this.brushSize
+            });
+            this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
         });
 
         this.canvas.addEventListener('mousemove', e => {
