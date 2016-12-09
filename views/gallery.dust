@@ -13,10 +13,14 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <link rel="stylesheet" href="/css/justifiedGallery.min.css" />
+
+        <link type="text/css" rel="stylesheet" href="/css/lightgallery.min.css" />
+
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
+<body id="galleryBody">
     <nav>
         <div class="nav-wrapper amber darken-2">
             <a href="#" class="brand-logo center">GroupDraw</a>
@@ -48,8 +52,8 @@
     <nav class="nav-extended">
       <div class="nav-wrapper amber darken-2">
         <ul class="tabs tabs-transparent">
-          <li class="tab" id="all-images"><a class="active" href="gallery">All Images</a></li>
-          <li class="tab" id="my-images"><a href="gallery?my=true">My Images</a></li>
+          <li class="tab" id="all-images"><a  target="_self" class="active" href="gallery">All Images</a></li>
+          <li class="tab" id="my-images"><a target="_self" href="gallery?my=true">My Images</a></li>
           <li>
             <select class="browser-default" id="search-by">
               <option value="" disabled selected>Search by</option>
@@ -73,13 +77,16 @@
 
 
 
-    <div class="container">
+    <!-- <div class="container">
               <ul id="galleryContainer">
 
                   {>galleryitems/}
               </ul>
-    </div>
+    </div> -->
 
+    <div id="lightgallery">
+        {>galleryitems/}
+    </div>
 
     <script src="/js/dust-core.min.js"></script>
     <script src="/views/galleryitems.js"></script>
@@ -91,6 +98,20 @@
     <script type="text/javascript" src="/js/materialize.min.js"></script>
 
     <script src="/js/gallery2.js"></script>
+
+    <script src="/js/lightgallery/lightgallery.min.js"></script>
+    <script src="/js/lightgallery/lg-fullscreen.min.js"></script>
+    <script src="/js/lightgallery/lg-thumbnail.min.js"></script>
+    <script src="/js/lightgallery/lg-video.min.js"></script>
+    <script src="/js/lightgallery/lg-autoplay.min.js"></script>
+    <script src="/js/lightgallery/lg-zoom.min.js"></script>
+
+    <script src="/js/jquery.justifiedGallery.min.js"></script>
+
+    <script src="/js/gallery-init.js"></script>
+
+
+
 
 </body>
 

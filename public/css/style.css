@@ -1,6 +1,15 @@
 /*body{
   background-image: url("/img/pattern.svg");
 }*/
+
+/*img{
+  white-space:pre
+}*/
+
+#galleryBody{
+  background-color: #444;
+}
+
 .brand-logo{
   transition: text-shadow 0.30s;
 }
@@ -171,6 +180,17 @@ user-select: none;
 
 
 /*Gallery Screen*/
+
+
+
+
+#lightgallery img{
+  background-color: #fff;
+  /*border-style: solid;
+  border-width: 1px;
+  border-color: #666;*/
+}
+
 #galleryContainer {
   display: flex;
   flex-wrap: wrap;

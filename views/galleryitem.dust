@@ -1,9 +1,3 @@
-<li class="gallery-item">
-  <figure>
-    <img src="{img.data}" alt="">
-      <figcaption>
-          Author: {author.name} <br/>
-          Title: {title}
-      </figcaption>
-  </figure>
-</li>
+<a href="{img.data}">
+      <img alt="Author: {author.name} Title: {title}" src="{img.data}" />
+  </a>
