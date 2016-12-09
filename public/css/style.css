@@ -5,6 +5,10 @@
   transition: text-shadow 0.30s;
 }
 
+#sizeSlider{
+  border: none;
+}
+
 .brand-logo:hover{
     /* glow effect on hover */
     text-shadow: -1px 1px 20px #ffc, 1px -1px 20px #fff;
