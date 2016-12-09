@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     return res.status(401).send();
   } else {
     res.status(200)
-    res.render('profile');
+    res.render('profile',{user: req.session.user.username});
   }
 });
 

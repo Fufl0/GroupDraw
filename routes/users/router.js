@@ -21,9 +21,7 @@ router.get('/', function(req, res, next) {
     res.status(200);
     User.find(function(err, users) {
       if (err) return console.error(err);
-      res.render('users', {
-          users: users
-      });
+      res.render('users', {users: users, user: req.session.user.username});
     })
 	}
 });

@@ -42,9 +42,7 @@ router.get('/', function(req, res, next) {
 
 	  GalleryImage.find(filter, function(err, gallery) {
       if (err) return console.error(err);
-      res.render('gallery', {
-          gallery: gallery
-      });
+      res.render('gallery', {gallery: gallery, user: req.session.user.username});
 	  })
 	}
 });
