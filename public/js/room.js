@@ -90,6 +90,10 @@ const app = {
         }
     },
 
+    drawSize: function (e) {
+        let newSize = document.getElementsByClassName("value")[0].innerHTML;
+    },
+
 
     rgbPickerHandler: function(e) {
         // if (!e.target.classList.contains('p-color')) return;
@@ -155,7 +159,7 @@ const app = {
                 return getRandomInt(10, 30)
             },
             randomDiscBrush.getOpacity = function() {
-                return Math.random()
+                return Math.random();
             },
 
             this.brushes.push(randomDiscBrush);
@@ -328,6 +332,9 @@ const app = {
 
         const redoButton = document.getElementById('redoButton');
         redoButton.addEventListener('click', this.redoHandler.bind(this));
+
+        const sizeSlider = document.getElementById('sizeSlider');
+        sizeSlider.addEventListener('mouseup', this.drawSize.bind(this));
 
 
         this.setupBrushes();
