@@ -23,10 +23,9 @@
   const penBrush = {
     name: 'Pen',
     draw: function(ctx, strokeStyle, x, y, r){
-      console.log(r);
-      if (!r) r = 10;
       ctx.lineJoin = ctx.lineCap = 'round';
       ctx.strokeStyle = strokeStyle;
+      ctx.lineWidth = r;
       ctx.lineTo(x, y);
       ctx.stroke();
     }
