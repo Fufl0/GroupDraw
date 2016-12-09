@@ -14,7 +14,8 @@ router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
   if(!req.session.user) {
-    return res.status(401).send();
+    res.status(302);
+    res.redirect('/welcome');
   } else {
     res.status(200)
     res.render('profile',{user: req.session.user.username});

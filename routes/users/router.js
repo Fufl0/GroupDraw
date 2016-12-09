@@ -16,7 +16,8 @@ router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 //list users
 router.get('/', function(req, res, next) {
   if (!req.session.user) {
-		return res.status(401).send();
+    res.status(302);
+    res.redirect('/welcome');
 	} else {
     res.status(200);
     User.find(function(err, users) {
