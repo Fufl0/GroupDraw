@@ -39,7 +39,7 @@
 
             </ul>
             <ul class="right hide-on-med-and-down">
-                <li class="active"><a href="profile">{user}</a></li>
+                <li class="active"><a href="profile">{user.username}</a></li>
                 <li><a href=""><i class="material-icons">exit_to_app</i></a></li>
             </ul>
         </div>
@@ -51,8 +51,8 @@
                     <h4>Profile</h4>
                     <img src="img/blank-user.jpg" width="300" height="300"/>
                     <br />
-                    Username:  <input placeholder="Placeholder" id="username" type="text" class="validate">
-                    Mood:  <input placeholder="Placeholder" id="mood" type="text" class="validate">
+                    Username:  {user.username} <br />
+                    Mood:  <input placeholder= '{user.mood}' id="mood" type="text" class="validate">
                     Status:
                     <div class="row">
                       <div class="input-field col s12">

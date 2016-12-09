@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     res.redirect('/welcome');
   } else {
     res.status(200)
-    res.render('profile',{user: req.session.user.username});
+    res.render('profile',{user: req.session.user});
   }
 });
 
