@@ -2,7 +2,7 @@
   <figure>
     <img src="{img.data}" alt="">
       <figcaption>
-          Author: {author} <br/>
+          Author: {author.name} <br/>
           Title: {title}
       </figcaption>
   </figure>

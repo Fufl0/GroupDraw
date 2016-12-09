@@ -21,7 +21,26 @@ router.get('/', function(req, res, next) {
 	} else {
 		res.status(200);
 
-	  GalleryImage.find(function(err, gallery) {
+		const filter = {};
+
+		if (req.query.my) {
+			filter.author = {};
+			filter.author.name = req.session.user.username;
+			filter.author.id = mongoose.Types.ObjectId(req.session.user._id);
+		}
+
+		if (req.query.room) {
+			filter.createdInRoom = req.query.room;
+		}
+		if (req.query.authorName) {
+			filter.author = {};
+			filter.author.name = req.query.authorName;
+		}
+		if(req.query.title) {
+			filter.title = req.query.title;
+		}
+
+	  GalleryImage.find(filter, function(err, gallery) {
       if (err) return console.error(err);
       res.render('gallery', {
           gallery: gallery
@@ -45,7 +64,7 @@ router.post('/', function(req, res, next) {
 			const newGalleryImage = new GalleryImage({
 				img: req.body.img,
 				title: req.body.title,
-				author: req.session.user.username,
+				author: { name: req.session.user.username, id: req.session.user._id },
 				createdInRoom: room.name
 			});
 

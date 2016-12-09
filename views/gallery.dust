@@ -45,6 +45,32 @@
         </div>
     </nav>
 
+    <nav class="nav-extended">
+      <div class="nav-wrapper amber darken-2">
+        <ul class="tabs tabs-transparent">
+          <li class="tab" id="all-images"><a class="active" href="gallery">All Images</a></li>
+          <li class="tab" id="my-images"><a href="gallery?my=true">My Images</a></li>
+          <li>
+            <select class="browser-default" id="search-by">
+              <option value="" disabled selected>Search by</option>
+              <option value="Title">Title</option>
+              <option value="Author">Author</option>
+              <option value="Room">Room</option>
+            </select>
+          </li>
+          <li>
+            <form id="gallerySearchForm">
+              <div class="input-field">
+                <input id="gallerySearchFormInputField" type="search" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
 
 
     <div class="container">
@@ -59,11 +85,12 @@
     <script src="/views/galleryitems.js"></script>
     <script src="/views/galleryitem.js"></script>
 
-    <script src="/js/gallery.js"></script>
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
+
+    <script src="/js/gallery2.js"></script>
 
 </body>
 
