@@ -22,7 +22,9 @@
 
   const penBrush = {
     name: 'Pen',
-    draw: function(ctx, strokeStyle, x, y){
+    draw: function(ctx, strokeStyle, x, y, r){
+      console.log(r);
+      if (!r) r = 10;
       ctx.lineJoin = ctx.lineCap = 'round';
       ctx.strokeStyle = strokeStyle;
       ctx.lineTo(x, y);
@@ -34,8 +36,8 @@
     name : 'Disc',
     getRadius: function(){ return 15; },
     getOpacity: function(){ return 1; },
-    draw : function (ctx, strokeStyle, x, y){
-
+    draw : function (ctx, strokeStyle, x, y, r){
+      if (!r) r = 10;
       //check values
       let opacity = this.getOpacity();
       opacity = within(opacity, 0, 1);

@@ -14,7 +14,7 @@ const app = {
     undohistory: [],
 
     socket: io(),
-    // get id fron url
+    // get id fronm url
     id: window.location.pathname.split('/')[2],
 
     // will be overwritten by brushes
@@ -43,7 +43,7 @@ const app = {
         this.ctx.beginPath();
         this.selectBrush(lineSegs[0].brushName);
         lineSegs.forEach(seg => {
-            this.draw(seg.strokeStyle, seg.x, seg.y);
+            this.draw(seg.strokeStyle, seg.x, seg.y, seg.brushSize);
         });
         this.ctx.closePath();
     },
@@ -90,12 +90,13 @@ const app = {
         }
     },
 
-    drawSize: function (e) {
-        let newSize = document.getElementsByClassName("value")[0].innerHTML;
+    changeBrushSize: function () {
+        // this.brushSize = document.getElementsByClassName("value")[0].innerHTML;
+        this.brushSize = document.getElementById("sizeSlider").value;
     },
 
 
-    rgbPickerHandler: function(e) {
+    rgbPickerHandler: function() {
         // if (!e.target.classList.contains('p-color')) return;
         // this.strokeStyle = e.target.dataset.color;
         // console.log("hai premuto rgbpicker");
@@ -240,7 +241,7 @@ const app = {
 
             room.selectBrush(message.stroke[0].brushName);
             for (let p of message.stroke)
-                room.draw(p.strokeStyle, p.x, p.y);
+                room.draw(p.strokeStyle, p.x, p.y, p.brushSize);
 
             room.ctx.closePath();
         });
@@ -269,6 +270,8 @@ const app = {
     init: function() {
         this.canvas = document.getElementById('canvas');
         this.ctx = canvas.getContext('2d');
+        // this.brushSize = document.getElementsByClassName("value")[0].innerHTML; // textContent
+        this.brushSize = document.getElementById("sizeSlider").value;
 
         // add drawing listeners
         this.canvas.addEventListener('mousedown', e => {
@@ -287,8 +290,9 @@ const app = {
                 x: e.offsetX ,
                 y: e.offsetY ,
                 strokeStyle: this.strokeStyle,
+                brushSize: this.brushSize
             });
-            this.draw(this.strokeStyle, e.offsetX, e.offsetY);
+            this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
         });
 
         this.canvas.addEventListener('mouseup', e => {
@@ -321,12 +325,8 @@ const app = {
         const rgbPickerButton = document.getElementById('rgbPickerButton');
         rgbPickerButton.addEventListener('click', this.rgbPickerHandler.bind(this));
 
-        // const rgbPickerButton = document.getElementById("rgbPickerButton");
-        // rgbPickerButton.addEventListener('click', function(e) {
-        //    console.log("hai premuto rgbPickerButton");
-        // });
 
-        // undo and redo
+        // undo, redo and brush size
         const undoButton = document.getElementById('undoButton');
         undoButton.addEventListener('click', this.undoHandler.bind(this));
 
@@ -334,7 +334,7 @@ const app = {
         redoButton.addEventListener('click', this.redoHandler.bind(this));
 
         const sizeSlider = document.getElementById('sizeSlider');
-        sizeSlider.addEventListener('mouseup', this.drawSize.bind(this));
+        sizeSlider.addEventListener('mouseup', this.changeBrushSize.bind(this));
 
 
         this.setupBrushes();
