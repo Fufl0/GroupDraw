@@ -83,9 +83,10 @@
                   {>galleryitems/}
               </ul>
     </div> -->
-
-    <div id="lightgallery">
-        {>galleryitems/}
+    <div class="lightgalleryContainer">
+      <div id="lightgallery">
+          {>galleryitems/}
+      </div>
     </div>
 
     <script src="/js/dust-core.min.js"></script>

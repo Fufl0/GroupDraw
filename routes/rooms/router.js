@@ -16,8 +16,7 @@ router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get("/:id", function(req, res, next){
 	if (!req.session.user) {
-		res.status(302);
-    res.redirect('/welcome');
+		return res.status(401).send();
 	} else {
 		model.findById(req.params.id, function(err, found){
 			if(err){
@@ -36,7 +35,8 @@ router.get("/:id", function(req, res, next){
 
 router.get("/", function(req, res, next){
 	if (!req.session.user) {
-		return res.status(401).send();
+		res.status(302);
+    res.redirect('/welcome');
 	} else {
 		model.find({}, function(err, found){
 			if(err){

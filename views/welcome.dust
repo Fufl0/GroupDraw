@@ -23,9 +23,6 @@
         </div>
     </nav>
 
-
-
-
     <div class="container">
         <div class="row">
             <div id="loginContainer"class="col s6 offset-s3 z-depth-2">
@@ -63,9 +60,6 @@
         </div>
 
     </div>
-
-
-
 
     <script src="/js/dust-core.min.js"></script>
 
