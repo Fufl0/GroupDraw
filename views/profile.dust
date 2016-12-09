@@ -50,9 +50,9 @@
   <div class="container">
     <h4>Profile</h4>
 
-    <form class="col s12">
+    <form id="profileForm" class="col s12">
 
-      Username: {user.username}
+      Username: <div id="username">{user.username}</div>
       <br />
 
       <img src="img/blank-user.jpg" width="200" height="200" />
@@ -111,6 +111,7 @@
 <script type="text/javascript" src="/js/materialize.min.js"></script>
 
 <script src="/js/profile-init.js"></script>
+<script src="/js/profile.js"></script>
 
 </body>
 

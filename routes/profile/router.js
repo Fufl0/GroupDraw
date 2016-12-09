@@ -22,5 +22,20 @@ router.get('/', function(req, res, next) {
   }
 });
 
+router.modifyUser = function modifyUser(req, res) {
+  if(!req.session.user) {
+    return res.status(401).send();
+  } else {
+    User.update({username: req.body.username}, {mood: req.body.mood, status: req.body.status}, function(err, updated) {
+      if (err){
+        res.sendStatus(404);
+      } else {
+        console.log(req.body);
+        res.sendStatus(201);
+      }
+    });
+  }
+};
+
 /** router for /users */
 module.exports = router;

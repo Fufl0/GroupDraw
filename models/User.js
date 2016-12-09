@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: false },
   //picture: { data: Buffer, contentType: String, required: true },
   picture:  { type: String, required: true, default: '/img/blank-user.jpg' },
-  mood:     { type: String, required: false },
+  mood:     { type: String, required: false, default: ''},
   status:   { type: String, required: true, enum: ['offline', 'online', 'away', 'busy', 'ready to draw'], default: 'offline' },
 });
 

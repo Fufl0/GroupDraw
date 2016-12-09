@@ -49,6 +49,7 @@ app.post('/register', routers.register.postUser);
 app.use('/users', routers.users);
 //Profile view
 app.use('/profile', routers.profile);
+app.post('/profile', routers.profile.modifyUser);
 //Gallery view
 app.use('/gallery', routers.gallery);
 
