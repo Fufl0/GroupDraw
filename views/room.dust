@@ -47,8 +47,8 @@
             <div class="p-color light-green" data-color="rgb(129, 197, 122)"></div>
             <div class="p-color brown" data-color="rgb(129, 74, 25)"></div>
             <div class="p-color purple" data-color="rgb(129, 38, 192)"></div>
-            <div class="p-color pink" data-color="rgb(255, 100, 255)"></div>
-            <div class="p-color pink-shock" data-color="rgb(255, 30, 200)"></div>
+            <div class="p-color pink" data-color="rgb(255, 30, 200)"></div>
+            <div class="p-color pink-shock" data-color="rgb(255, 100, 255)"></div>
             <div class="p-color tan" data-color="rgb(233, 222, 187)"></div>
         </div>
 

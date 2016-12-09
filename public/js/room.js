@@ -309,6 +309,7 @@ const app = {
         const rgbTextField = document.getElementById("rgb");
         rgbTextField.addEventListener("click", function() {
             // console.log("hai clickato");
+            if (!((rgbTextField.value.length == 7) && (rgbTextField.value[0] == "#")))
             rgbTextField.value = "#";
 
         });
