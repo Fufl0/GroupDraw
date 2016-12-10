@@ -93,6 +93,7 @@ const app = {
     changeBrushSize: function () {
         // this.brushSize = document.getElementsByClassName("value")[0].innerHTML;
         this.brushSize = document.getElementById("sizeSlider").value;
+        document.getElementById('Size-title').innerHTML = 'Size : ' + this.brushSize;
     },
 
 
@@ -154,32 +155,23 @@ const app = {
         this.brushes = window.brushes;
 
         // extend disc brush
-        const randomDiscBrush = Object.create(this.brushes[1]);
-        randomDiscBrush.name = "Random Disc";
-        randomDiscBrush.getRadius = function() {
-                return getRandomInt(10, 30)
-            },
-            randomDiscBrush.getOpacity = function() {
-                return Math.random();
-            },
-
-            this.brushes.push(randomDiscBrush);
+        // const randstabrushes.push(randomDiscBrush);
 
         // extend star brush
-        const randomStarBrush = Object.create(this.brushes[2]);
-        randomStarBrush.name = "Random Star";
-        randomStarBrush.getOptions = function() {
-            return {
-                length: 15,
-                angle: getRandomInt(0, 180),
-                width: getRandomInt(1, 10),
-                opacity: Math.random(),
-                scale: getRandomInt(1, 20) / 10,
-                color: ('rgb(' + getRandomInt(0, 255) + ',' + getRandomInt(0, 255) + ',' + getRandomInt(0, 255) + ')')
-            }
-        };
-
-        this.brushes.push(randomStarBrush);
+        // const randomStarBrush = Object.create(this.brushes[2]);
+        // randomStarBrush.name = "Random Star";
+        // randomStarBrush.getOptions = function() {
+        //     return {
+        //         length: 15,
+        //         angle: getRandomInt(0, 180),
+        //         width: getRandomInt(1, 10),
+        //         opacity: Math.random(),
+        //         scale: getRandomInt(1, 20) / 10,
+        //         color: ('rgb(' + getRandomInt(0, 255) + ',' + getRandomInt(0, 255) + ',' + getRandomInt(0, 255) + ')')
+        //     }
+        // };
+        //
+        // this.brushes.push(randomStarBrush);
 
         //add brush buttons
         this.brushes.forEach(b => {
@@ -272,6 +264,7 @@ const app = {
         this.ctx = canvas.getContext('2d');
         // this.brushSize = document.getElementsByClassName("value")[0].innerHTML; // textContent
         this.brushSize = document.getElementById("sizeSlider").value;
+        this.changeBrushSize();
 
         // add drawing listeners
         this.canvas.addEventListener('mousedown', e => {
@@ -346,6 +339,8 @@ const app = {
         redoButton.addEventListener('click', this.redoHandler.bind(this));
 
         const sizeSlider = document.getElementById('sizeSlider');
+        sizeSlider.addEventListener('mousedown', this.changeBrushSize.bind(this));
+        sizeSlider.addEventListener('mousemove', this.changeBrushSize.bind(this));
         sizeSlider.addEventListener('mouseup', this.changeBrushSize.bind(this));
 
 
