@@ -1,5 +1,5 @@
 /*body{
-  background-image: url("/img/pattern.svg");
+  background-image: url("/img/background.jpg");
 }*/
 
 /*img{
@@ -281,4 +281,22 @@ user-select: none;
 /*fix for error in displaying*/
 label[data-error]:after {
     white-space: nowrap;
+}
+
+#profileForm{
+  /*border-style: solid;
+  border-width: 1px;
+  border-color: #eee;*/
+
+  margin-top: 20px;
+
+}
+
+.profileUsername{
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+#deleteButton{
+  margin-top: 40px;
 }
