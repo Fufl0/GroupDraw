@@ -65,7 +65,7 @@
         <h4 id="Size-title">Size</h4>
         <form action="#">
             <p class="range-field">
-                <input type="range" id="sizeSlider" min="1" max="50" value="5" />
+                <input type="range" id="sizeSlider" min="1" max="50" value="10" />
             </p>
         </form>
 
@@ -97,6 +97,7 @@
             </li>
         </ul>
 
+        <h4 id="Brush-title">Brushes</h4>
         <div id="brush-toolbar" class="toolbar">
             <!-- Brushes buttons go here (programmatically). Each button should
   be a <button> element -->

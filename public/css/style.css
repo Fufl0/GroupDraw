@@ -152,6 +152,12 @@ user-select: none;
   float: right;
 }
 
+#Pen, #Square, #Circle, #Star, #Cross{
+    background-color: #00A7F7;
+    float: none;
+}
+
+
 #buttons button{
   margin:10px;
 }
