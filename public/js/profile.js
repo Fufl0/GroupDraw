@@ -8,7 +8,7 @@ form.onsubmit = function formOnSubmit(e) {
 var username = window.document.getElementById('username');
 var mood = window.document.getElementById('mood');
 var e = document.getElementById("statusSelect");
-var status = e.options[e.selectedIndex].value;
+var strUser = e.options[e.selectedIndex].value;
 var saveButton = window.document.getElementById('saveButton');
 
 saveButton.onclick = function btnSubmitOnClick(e) {
@@ -16,7 +16,7 @@ saveButton.onclick = function btnSubmitOnClick(e) {
   var user = {
     username: username.innerHTML,
     mood: mood.value,
-    status: status
+    status: strUser
     // image: img.value
   };
   var r = new XMLHttpRequest();
@@ -24,5 +24,6 @@ saveButton.onclick = function btnSubmitOnClick(e) {
   r.setRequestHeader('Content-Type', 'application/json');
   r.setRequestHeader('Accept', 'application/json');
   console.log(user);
+  console.log(String(strUser));
   r.send(JSON.stringify(user));
 };
