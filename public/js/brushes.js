@@ -102,6 +102,26 @@
         }
     };
 
+    const triangularBrush = {
+        name : "Triangle",
+        draw : function (ctx, strokeStyle, x, y, r) {
+            let l = r * Math.PI;
+
+            ctx.lineJoin = 'mitter';
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.beginPath();
+            ctx.strokeStyle = strokeStyle;
+            ctx.lineWidth = r/4;
+            ctx.lineTo(0, -l/2);
+            ctx.lineTo(-l/2, (l/2)*(Math.sqrt(3)-1));
+            ctx.lineTo(l/2, (l/2)*(Math.sqrt(3)-1));
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }
+    };
+
     const starBrush = {
         name : 'Star',
         getOptions: function (r){
@@ -143,5 +163,5 @@
         }
     };
 
-    window.brushes = [penBrush, squareBrush, circleBrush, starBrush, crossBrush];
+    window.brushes = [penBrush, circleBrush, triangularBrush, squareBrush, starBrush, crossBrush];
 })();

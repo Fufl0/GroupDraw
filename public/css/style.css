@@ -152,7 +152,7 @@ user-select: none;
   float: right;
 }
 
-#Pen, #Square, #Circle, #Star, #Cross{
+#Pen, #Square, #Circle, #Star, #Cross, #Triangle{
     /*background-color: #00A7F7;
     float: none;*/
     font-size: 0.8em;
@@ -161,7 +161,7 @@ user-select: none;
 
 .btn-small {
     height: 30px;
-    width: 60px;
+    width: 70px;
     line-height: 28px;
     padding: 0 0.5rem;
 }

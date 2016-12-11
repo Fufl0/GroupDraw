@@ -339,13 +339,6 @@ const app = {
         sizeSlider.addEventListener('mousemove', this.changeBrushSize.bind(this));
         sizeSlider.addEventListener('mouseup', this.changeBrushSize.bind(this));
 
-        // const brushesButtons = document.getElementsByClassName("toolbar");
-        // for (let b of brushesButtons) {
-        //     b.addEventListener("click", this.changeBrushName.bind(this))}
-
-
-
-
 
         this.setupBrushes();
         this.selectBrush('Pen');
