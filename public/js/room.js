@@ -242,49 +242,52 @@ const app = {
         })
     },
 
-    init: function() {
-        this.canvas = document.getElementById('canvas');
-        this.ctx = canvas.getContext('2d');
-        // this.brushSize = document.getElementsByClassName("value")[0].innerHTML; // textContent
-        this.brushSize = document.getElementById("sizeSlider").value;
-        this.changeBrushSize();
+    mouseDownFn : function (e) {
+        this.history.push([]);
+        this.isDrawing = true;
+        this.canvas.style.cursor = 'crosshair';
+        this.ctx.beginPath();
+        this.ctx.moveTo(e.offsetX, e.offsetY);
 
-
-        // add drawing listeners
-        this.canvas.addEventListener('mousedown', e => {
-            this.history.push([]);
-            this.isDrawing = true;
-            this.canvas.style.cursor = 'crosshair';
-            this.ctx.beginPath();
-            this.ctx.moveTo(e.offsetX, e.offsetY);
-
-            // first dot
-            if (!this.isDrawing) return;
-            const hisIdx = this.history.length - 1;
-            this.history[hisIdx].push({
-                brushName: this.currentBrushName,
-                x: e.offsetX ,
-                y: e.offsetY ,
-                strokeStyle: this.strokeStyle,
-                brushSize: this.brushSize
-            });
-            this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
+        // first dot
+        if (!this.isDrawing) return;
+        const hisIdx = this.history.length - 1;
+        this.history[hisIdx].push({
+            brushName: this.currentBrushName,
+            x: e.offsetX ,
+            y: e.offsetY ,
+            strokeStyle: this.strokeStyle,
+            brushSize: this.brushSize
         });
+        this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
+    },
 
-        this.canvas.addEventListener('mousemove', e => {
-            if (!this.isDrawing) return;
-            const hisIdx = this.history.length - 1;
-            this.history[hisIdx].push({
-                brushName: this.currentBrushName,
-                x: e.offsetX ,
-                y: e.offsetY ,
-                strokeStyle: this.strokeStyle,
-                brushSize: this.brushSize
-            });
-            this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
+    mouseMoveFn : function (e) {
+        if (!this.isDrawing) return;
+        const hisIdx = this.history.length - 1;
+        this.history[hisIdx].push({
+            brushName: this.currentBrushName,
+            x: e.offsetX ,
+            y: e.offsetY ,
+            strokeStyle: this.strokeStyle,
+            brushSize: this.brushSize
         });
+        this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
+    },
 
-        this.canvas.addEventListener('mouseup', e => {
+    mouseUpFn : function (e) {
+        this.ctx.closePath();
+        this.canvas.style.cursor = 'auto';
+        this.isDrawing = false;
+        this.socket.emit("draw", {
+
+            stroke: this.history[this.history.length - 1]
+
+        });
+    },
+
+    outsideCanvas : function (e) {
+        if (this.isDrawing) {
             this.ctx.closePath();
             this.canvas.style.cursor = 'auto';
             this.isDrawing = false;
@@ -293,7 +296,28 @@ const app = {
                 stroke: this.history[this.history.length - 1]
 
             });
-        });
+        }
+    },
+
+
+    init: function() {
+        this.canvas = document.getElementById('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        // this.brushSize = document.getElementsByClassName("value")[0].innerHTML; // textContent
+        this.brushSize = document.getElementById("sizeSlider").value;
+        this.changeBrushSize();
+
+
+        // add drawing listeners
+        this.canvas.addEventListener('mousedown', this.mouseDownFn.bind(this));
+        this.canvas.addEventListener('mousemove', this.mouseMoveFn.bind(this));
+        this.canvas.addEventListener('mouseup', this.mouseUpFn.bind(this));
+
+        const topBanner = document.getElementsByClassName("nav-wrapper amber darken-2")[0];
+        topBanner.addEventListener("mousemove", this.outsideCanvas.bind(this));
+
+        const leftToolbar = document.getElementById("tools");
+        leftToolbar.addEventListener("mousemove", this.outsideCanvas.bind(this));
 
         const btn = document.getElementById('clearButton');
         btn.addEventListener('click', this.clearHandler.bind(this));
