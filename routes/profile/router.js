@@ -26,7 +26,12 @@ router.modifyUser = function modifyUser(req, res) {
   if(!req.session.user) {
     return res.status(401).send();
   } else {
-    User.update({username: req.body.username}, {mood: req.body.mood, status: req.body.status}, function(err, updated) {
+    User.update({username: req.body.username},
+                {mood: req.body.mood,
+                  status: req.body.status,
+                  //picture: req.body.img
+                },
+                function(err, updated) {
       if (err){
         res.sendStatus(404);
       } else {
