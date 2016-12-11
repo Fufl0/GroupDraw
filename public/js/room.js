@@ -276,17 +276,6 @@ const app = {
     },
 
     mouseUpFn : function (e) {
-        this.ctx.closePath();
-        this.canvas.style.cursor = 'auto';
-        this.isDrawing = false;
-        this.socket.emit("draw", {
-
-            stroke: this.history[this.history.length - 1]
-
-        });
-    },
-
-    outsideCanvas : function (e) {
         if (this.isDrawing) {
             this.ctx.closePath();
             this.canvas.style.cursor = 'auto';
@@ -298,7 +287,6 @@ const app = {
             });
         }
     },
-
 
     init: function() {
         this.canvas = document.getElementById('canvas');
@@ -314,10 +302,10 @@ const app = {
         this.canvas.addEventListener('mouseup', this.mouseUpFn.bind(this));
 
         const topBanner = document.getElementsByClassName("nav-wrapper amber darken-2")[0];
-        topBanner.addEventListener("mousemove", this.outsideCanvas.bind(this));
+        topBanner.addEventListener("mousemove", this.mouseUpFn.bind(this));
 
         const leftToolbar = document.getElementById("tools");
-        leftToolbar.addEventListener("mousemove", this.outsideCanvas.bind(this));
+        leftToolbar.addEventListener("mousemove", this.mouseUpFn.bind(this));
 
         const btn = document.getElementById('clearButton');
         btn.addEventListener('click', this.clearHandler.bind(this));
