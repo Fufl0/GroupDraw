@@ -146,7 +146,7 @@ const app = {
         // console.log(blue);
         blue = parseInt(blue).toString(16).slice(-2);
         if (blue.length < 2) blue = "0" + blue;
-        
+
         return ("#" + red + green + blue);
     },
 
@@ -160,6 +160,7 @@ const app = {
             const btn = document.createElement('BUTTON');
             btn.id = b.name;
             btn.textContent = b.name;
+            btn.className = "btn btn-small waves-effect waves-light light-blue";
             btn.addEventListener('click', this.brushHandler.bind(this));
             brushToolbar.appendChild(btn)
         });

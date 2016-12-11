@@ -153,17 +153,26 @@ user-select: none;
 }
 
 #Pen, #Square, #Circle, #Star, #Cross{
-    background-color: #00A7F7;
-    float: none;
+    /*background-color: #00A7F7;
+    float: none;*/
+    font-size: 0.8em;
+    margin: 2px;
+}
+
+.btn-small {
+    height: 30px;
+    width: 60px;
+    line-height: 28px;
+    padding: 0 0.5rem;
 }
 
 
 #buttons button{
-  margin:10px;
+  margin:5px;
 }
 
 #buttons a{
-  margin:10px;
+  margin:5px;
 }
 
 #buttonDivider{
