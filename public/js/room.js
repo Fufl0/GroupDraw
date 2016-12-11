@@ -97,6 +97,7 @@ const app = {
     },
 
 
+
     rgbPickerHandler: function() {
         // if (!e.target.classList.contains('p-color')) return;
         // this.strokeStyle = e.target.dataset.color;
@@ -153,25 +154,6 @@ const app = {
     setupBrushes: function() {
         const brushToolbar = document.getElementById('brush-toolbar');
         this.brushes = window.brushes;
-
-        // extend disc brush
-        // const randstabrushes.push(randomDiscBrush);
-
-        // extend star brush
-        // const randomStarBrush = Object.create(this.brushes[2]);
-        // randomStarBrush.name = "Random Star";
-        // randomStarBrush.getOptions = function() {
-        //     return {
-        //         length: 15,
-        //         angle: getRandomInt(0, 180),
-        //         width: getRandomInt(1, 10),
-        //         opacity: Math.random(),
-        //         scale: getRandomInt(1, 20) / 10,
-        //         color: ('rgb(' + getRandomInt(0, 255) + ',' + getRandomInt(0, 255) + ',' + getRandomInt(0, 255) + ')')
-        //     }
-        // };
-        //
-        // this.brushes.push(randomStarBrush);
 
         //add brush buttons
         this.brushes.forEach(b => {
@@ -266,6 +248,7 @@ const app = {
         this.brushSize = document.getElementById("sizeSlider").value;
         this.changeBrushSize();
 
+
         // add drawing listeners
         this.canvas.addEventListener('mousedown', e => {
             this.history.push([]);
@@ -342,6 +325,13 @@ const app = {
         sizeSlider.addEventListener('mousedown', this.changeBrushSize.bind(this));
         sizeSlider.addEventListener('mousemove', this.changeBrushSize.bind(this));
         sizeSlider.addEventListener('mouseup', this.changeBrushSize.bind(this));
+
+        // const brushesButtons = document.getElementsByClassName("toolbar");
+        // for (let b of brushesButtons) {
+        //     b.addEventListener("click", this.changeBrushName.bind(this))}
+
+
+
 
 
         this.setupBrushes();
