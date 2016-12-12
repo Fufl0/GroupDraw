@@ -210,15 +210,21 @@ const app = {
             room.clearHandler(null, true);
         });
         room.socket.on("draw", function(message) {
+            let beforeDrawBrush = room.currentBrushName;
+            // console.log("before: ", beforeDrawBrush);
             room.history.push(message.stroke);
 
             room.ctx.beginPath();
-
             room.selectBrush(message.stroke[0].brushName);
             for (let p of message.stroke)
                 room.draw(p.strokeStyle, p.x, p.y, p.brushSize);
 
             room.ctx.closePath();
+            room.selectBrush(beforeDrawBrush);
+            // console.log("end: ", room.currentBrushName);
+            // console.log(room);
+
+
         });
         room.socket.on("load", function(message) {
 
