@@ -22,6 +22,7 @@ const app = {
 
     clearCanvas: function() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.colorWholeCanvas("rgb(255, 255, 255)");
     },
 
     /**
@@ -56,14 +57,6 @@ const app = {
             this.socket.emit("clear", this.id);
     },
 
-    paletteHandler: function(e) {
-        if (!e.target.classList.contains('p-color')) return;
-        this.strokeStyle = e.target.dataset.color;
-        console.log(e.target.dataset.color);
-        let rgbcolor = e.target.dataset.color.substr(4, (e.target.dataset.color.length - 5));
-        document.getElementById("rgb").value = this.colorRgbToHex(rgbcolor);
-    },
-
     undoHandler: function(e, no) {
         if (!this.history.length) return;
         this.undohistory.push(this.history.pop());
@@ -90,12 +83,49 @@ const app = {
         }
     },
 
+    fillCanvas : function (e, no) {
+        // console.log("hai premuto fill");
+        this.clearCanvas();
+        this.history = [];
+        this.undohistory = [];
+        this.clearCanvas();
+        this.replayHistory(this.history);
+        this.colorWholeCanvas(this.strokeStyle);
+        if (!no) {
+            this.socket.emit("fill", {
+                strokeStyle : this.strokeStyle,
+                undohistory : this.undohistory
+            })
+        }
+    },
+
+    colorWholeCanvas : function (color) {
+        if (!color) color = this.strokeStyle;
+        console.log(color);
+        this.ctx.lineJoin = this.ctx.lineCap = 'miter';
+        this.ctx.strokeStyle = color;
+        this.ctx.lineWidth = 100;
+        this.ctx.fillStyle = color;
+        this.ctx.rect(0, 0, this.canvas.getAttribute("width"), this.canvas.getAttribute("height"));
+        this.ctx.fill();
+        this.ctx.stroke();
+    },
+
+
+
+    paletteHandler: function(e) {
+        if (!e.target.classList.contains('p-color')) return;
+        this.strokeStyle = e.target.dataset.color;
+        // console.log(e.target.dataset.color);
+        let rgbcolor = e.target.dataset.color.substr(4, (e.target.dataset.color.length - 5));
+        document.getElementById("rgb").value = this.colorRgbToHex(rgbcolor);
+    },
+
     changeBrushSize: function () {
         // this.brushSize = document.getElementsByClassName("value")[0].innerHTML;
         this.brushSize = document.getElementById("sizeSlider").value;
         document.getElementById('Size-title').innerHTML = 'Size : ' + this.brushSize;
     },
-
 
 
     rgbPickerHandler: function() {
@@ -114,8 +144,7 @@ const app = {
             return;
         }
 
-
-        console.log("rbgcolorpicker");
+        // console.log("rbgcolorpicker");
         let red = color.substr(1, 2);
         red = parseInt(red, 16);
         // console.log("red: " + red);
@@ -195,9 +224,14 @@ const app = {
         this.selectBrush(e.currentTarget.id);
     },
 
+
+
+
     setStatus: function(status) {
         this.statusEl.innerHTML = status;
     },
+
+
 
     setupSocket: function() {
 
@@ -227,9 +261,9 @@ const app = {
 
         });
         room.socket.on("load", function(message) {
-
             room.history = message.history;
             room.undohistory = message.undohistory;
+            room.colorWholeCanvas("rgb(255, 255, 255)");
             room.replayHistory(room.history);
 
         });
@@ -240,11 +274,21 @@ const app = {
             room.clearCanvas();
             room.replayHistory(room.history);
         });
+
         room.socket.on("redo", function(message) {
             room.history = message.history;
             room.undohistory = message.undohistory;
             room.clearCanvas();
             room.replayHistory(room.history);
+        });
+
+        room.socket.on("fill", function (message) {
+            room.clearCanvas();
+            room.history = [];
+            room.undohistory = message.undohistory;
+            room.clearCanvas();
+            room.replayHistory(room.history);
+            room.colorWholeCanvas(message.strokeStyle);
         })
     },
 
@@ -313,8 +357,7 @@ const app = {
         const leftToolbar = document.getElementById("tools");
         leftToolbar.addEventListener("mousemove", this.mouseUpFn.bind(this));
 
-        const btn = document.getElementById('clearButton');
-        btn.addEventListener('click', this.clearHandler.bind(this));
+
 
         // no need to keep a reference after we add the listener
         const palette = document.getElementById('palette');
@@ -326,12 +369,15 @@ const app = {
             // console.log("hai clickato");
             if (!((rgbTextField.value.length == 7) && (rgbTextField.value[0] == "#")))
             rgbTextField.value = "#";
-
         });
 
         const rgbPickerButton = document.getElementById('rgbPickerButton');
         rgbPickerButton.addEventListener('click', this.rgbPickerHandler.bind(this));
 
+        const sizeSlider = document.getElementById('sizeSlider');
+        sizeSlider.addEventListener('mousedown', this.changeBrushSize.bind(this));
+        sizeSlider.addEventListener('mousemove', this.changeBrushSize.bind(this));
+        sizeSlider.addEventListener('mouseup', this.changeBrushSize.bind(this));
 
         // undo, redo and brush size
         const undoButton = document.getElementById('undoButton');
@@ -340,10 +386,11 @@ const app = {
         const redoButton = document.getElementById('redoButton');
         redoButton.addEventListener('click', this.redoHandler.bind(this));
 
-        const sizeSlider = document.getElementById('sizeSlider');
-        sizeSlider.addEventListener('mousedown', this.changeBrushSize.bind(this));
-        sizeSlider.addEventListener('mousemove', this.changeBrushSize.bind(this));
-        sizeSlider.addEventListener('mouseup', this.changeBrushSize.bind(this));
+        const clearButton = document.getElementById('clearButton');
+        clearButton.addEventListener('click', this.clearHandler.bind(this));
+
+        const fillButton = document.getElementById('fillButton');
+        fillButton.addEventListener('mouseup', this.fillCanvas.bind(this));
 
 
         this.setupBrushes();

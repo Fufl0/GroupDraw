@@ -132,5 +132,19 @@
         }
     };
 
+    const FillCanvas = {
+        name : 'FillCanvas',
+        draw : function (ctx, strokeStyle, w, h) {
+            ctx.lineJoin = ctx.lineCap = 'miter';
+            ctx.strokeStyle = strokeStyle;
+            ctx.lineWidth = 1;
+            ctx.fillStyle = strokeStyle;
+            ctx.rect(0, 0, w, h);
+            ctx.fill ();
+            ctx.stroke();
+        }
+    };
+
     window.brushes = [penBrush, circleBrush, triangularBrush, squareBrush, starBrush, crossBrush];
+    window.fillCanvas = [FillCanvas];
 })();
