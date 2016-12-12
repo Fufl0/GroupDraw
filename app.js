@@ -50,6 +50,7 @@ app.use('/users', routers.users);
 //Profile view
 app.use('/profile', routers.profile);
 app.post('/profile', routers.profile.modifyUser);
+app.delete('/profile', routers.profile.deleteUser);
 //Gallery view
 app.use('/gallery', routers.gallery);
 

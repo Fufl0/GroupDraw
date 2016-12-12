@@ -45,5 +45,14 @@ router.modifyUser = function modifyUser(req, res) {
   }
 };
 
+router.deleteUser = function modifyUser(req, res) {
+  if(!req.session.user) {
+    return res.status(401).send();
+  } else {
+    req.session.destroy();
+    User.find({ username: req.body.username }).remove().exec();
+  }
+};
+
 /** router for /users */
 module.exports = router;

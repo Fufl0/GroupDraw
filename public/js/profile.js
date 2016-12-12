@@ -33,3 +33,26 @@ saveButton.onclick = function btnSubmitOnClick(e) {
   // r.write(formData);
   //r.end()
 };
+
+//DELETE USER
+
+var deleteButton = window.document.getElementById('deleteButton');
+
+deleteButton.onclick = function btnSubmitOnClick(e) {
+
+  var username = window.document.getElementById('username');
+  console.log('deleteBtn clicked');
+  alert('Deleting Accout');
+
+  var user = {
+    username: username.innerHTML
+  };
+
+  var r = new XMLHttpRequest();
+  r.open('DELETE', '/profile');
+  r.setRequestHeader('Content-Type', 'application/json');
+  r.setRequestHeader('Accept', 'application/json');
+  r.send(JSON.stringify(user));
+
+  window.location = '/welcome';
+}
