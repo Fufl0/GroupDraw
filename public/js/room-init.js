@@ -8,4 +8,6 @@ $(document).ready(function(){
   // alert(x + ' × ' + y);
   g.width = x;
   g.height = y;
+
+  $('.modal').modal();
  });

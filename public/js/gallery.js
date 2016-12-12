@@ -40,7 +40,7 @@ function updateGallery() {
 
     dust.render('galleryitem', { gallery: res.body }, function(err, out){
       if(err) throw err;
-      document.getElementById('galleryContainer').innerHTML = out;
+      document.getElementById('lightgallery').innerHTML = out;
     });
   });
 }
@@ -60,7 +60,7 @@ function getMyImages() {
 
     dust.render('galleryitems', { gallery: res.body }, function(err, out){
       if(err) throw err;
-      document.getElementById('galleryContainer').innerHTML = out;
+      document.getElementById('lightgallery').innerHTML = out;
     });
   });
 }
@@ -87,6 +87,8 @@ function filterGallery() {
   if (window.myImages) {
     myImages += 'my=true&'
   }
+  console.log(myImages);
+  console.log(query);
   request('/gallery?' + myImages + query, {
     headers: {
       'Accept': 'application/json'
@@ -96,10 +98,68 @@ function filterGallery() {
 
     dust.render('galleryitems', { gallery: res.body }, function(err, out){
       if(err) throw err;
-      document.getElementById('galleryContainer').innerHTML = out;
+      document.getElementById('lightgallery').innerHTML = out;
     });
   });
 }
+
+function sortGallery() {
+  // TODO
+  var value = document.getElementById('sort-by').value;
+
+  var sortCriteria = 'dateCreated'
+  var sortBy = 'sortBy='
+
+  if (value == 'Room') {
+    sortCriteria = 'createdInRoom';
+  }
+  if (value == 'Title') {
+    sortCriteria = 'title';
+  }
+  if (value == 'Author') {
+    sortCriteria = 'author';
+  }
+
+  sortBy += sortCriteria;
+
+  window.localStorage.setItem("sortCriteria", sortCriteria);
+  window.sortCriteria = window.localStorage.getItem("sortCriteria");
+
+  var filter = document.getElementById('search-by').value;
+  var searchField = document.getElementById('gallerySearchFormInputField').value;
+  var myImages = '';
+  var query = '';
+
+  if (filter == "Room") {
+    query += 'room=' + searchField + '&';
+  }
+  if (filter == "Author") {
+    window.localStorage.setItem("myImages", false);
+    window.myImages = window.localStorage.getItem("myImages");
+    query += 'authorName=' + searchField + '&';
+  }
+  if (filter == "Title") {
+    query += 'title=' + searchField + '&';
+  }
+
+  if (window.myImages) {
+    myImages += 'my=true&'
+  }
+
+  request('/gallery?' + myImages + query + sortBy, {
+    headers: {
+      'Accept': 'application/json'
+    }
+  }, function(err, res) {
+    if(err) throw err;
+
+    dust.render('galleryitems', { gallery: res.body }, function(err, out){
+      if(err) throw err;
+      document.getElementById('lightgallery').innerHTML = out;
+    });
+  });
+}
+
 
 
 function request(url, opts, cb){
@@ -111,7 +171,6 @@ function request(url, opts, cb){
     headers: {},
     body: null
   };
-
 
   const options = Object.assign({}, defaultOptions, opts)
   var xhr = new XMLHttpRequest();
@@ -125,7 +184,6 @@ function request(url, opts, cb){
   xhr.responseType = 'json';
 
   xhr.onload = function() {
-    console.log(xhr.getAllResponseHeaders())
     cb(null, {
       status: xhr.status,
       body: xhr.response,
@@ -148,4 +206,8 @@ window.onload = function() {
   document.getElementById("my-images").addEventListener('click', getMyImages);
   document.getElementById("all-images").addEventListener('click', updateGallery);
   document.getElementById("gallerySearchForm").onsubmit = filterGallery;
+  document.getElementById("sort-by").onchange = sortGallery;
+
+  window.localStorage.setItem("sortCriteria", 'dateCreated');
+  window.sortCriteria = window.localStorage.getItem("sortCriteria");
 };

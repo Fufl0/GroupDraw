@@ -94,12 +94,8 @@ function bindSubmit() {
   };
 }
 
-$(document).ready(function(){
-   // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-   $('.modal').modal();
- });
 
- document.getElementById("photoButton").onclick=function(){
+ document.getElementById("photoButton").onclick = function(){
     document.getElementById("titleInput").focus();
  };
 

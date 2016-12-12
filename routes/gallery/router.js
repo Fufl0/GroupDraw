@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 require ('../../models/GalleryImage');
 const GalleryImage = mongoose.model('GalleryImage');
-const Rooms = mongoose.model('Rooms')
+const Rooms = mongoose.model('Rooms');
+const User = mongoose.model('User');
 const config = require('../../config');
 const session = require('express-session');
 
@@ -22,8 +23,13 @@ router.get('/', function(req, res, next) {
 	} else {
 		res.status(200);
 
-		const filter = {};
+		const sortBy = {};
+		if (req.query.sortBy) {
+			sortBy.sort = {};
+			sortBy.sort[req.query.sortBy] = 1;
+		}
 
+		const filter = {};
 		if (req.query.my) {
 			filter.author = {};
 			filter.author.name = req.session.user.username;
@@ -33,18 +39,26 @@ router.get('/', function(req, res, next) {
 		if (req.query.room) {
 			filter.createdInRoom = req.query.room;
 		}
-		if (req.query.authorName) {
-			filter.author = {};
-			filter.author.name = req.query.authorName;
-		}
 		if(req.query.title) {
 			filter.title = req.query.title;
 		}
-
-	  GalleryImage.find(filter, function(err, gallery) {
-      if (err) return console.error(err);
-      res.render('gallery', {gallery: gallery, user: req.session.user.username});
-	  })
+		if (req.query.authorName) {
+			filter.author = {};
+			filter.author.name = req.query.authorName;
+			User.findOne({ username: req.query.authorName }, function(err, user) {
+				if (err) return console.error(err);
+				filter.author.id = mongoose.Types.ObjectId(user._id);
+				GalleryImage.find(filter, null, sortBy, function(err, gallery) {
+					if (err) return console.error(err);
+					res.render('gallery', { gallery: gallery, user: req.session.user.username });
+				});
+			});
+		} else {
+			GalleryImage.find(filter, null, sortBy, function(err, gallery) {
+				if (err) return console.error(err);
+				res.render('gallery', { gallery: gallery, user: req.session.user.username });
+			});
+		}
 	}
 });
 

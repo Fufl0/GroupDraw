@@ -5,4 +5,6 @@ $(document).ready(function() {
         );
 
         $("#lightgallery").justifiedGallery();
+
+        $('select').material_select();
     });
