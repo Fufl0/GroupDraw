@@ -20,6 +20,7 @@
     <nav>
         <div class="nav-wrapper amber darken-2">
             <a href="/rooms" class="brand-logo center">GroupDraw</a>
+            <div class="left room-name">{rooms.name}</div>
         </div>
     </nav>
 
@@ -28,7 +29,7 @@
 
 
     <div id="tools" class="z-depth-5">
-        <h4><span style="background-color: #f75ab1;">{room.name}</span></h4>
+        <!-- <h4><span style="background-color: #f75ab1;"></span></h4> -->
         <h4>Colors</h4>
 
         <div id="palette">

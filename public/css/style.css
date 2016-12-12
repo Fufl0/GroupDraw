@@ -70,7 +70,10 @@ user-select: none;
   box-shadow: 0 1px 0 0 orange;
 }*/
 
-
+.room-name{
+  margin-left:20px;
+  font-size: 18px;
+}
 
 #tools{
   color: white;
@@ -79,10 +82,16 @@ user-select: none;
   width: 200px;
   position: absolute;
   height: calc(100% - 64px);
+  overflow-y: auto;
   top:64px;
   bottom:0;
   background-color: #777;
   float: left;
+  overflow-wrap: break-word;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 #tools > h4 {
