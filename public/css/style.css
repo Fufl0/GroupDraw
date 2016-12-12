@@ -89,10 +89,10 @@ user-select: none;
   float: left;
   overflow-wrap: break-word;
 }
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
-}
+/*::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}*/
 
 #tools > h4 {
   margin-top: 0;
@@ -133,19 +133,28 @@ user-select: none;
 .white {background-color:rgb(255, 255, 255);}
 .green-alive {background-color:rgb(50, 200, 80);}
 
-#canvas{
+#canvas-container{
   position: absolute;
   top: 64px;
-  bottom:0;
+  /*bottom:0;*/
   left: 200px;
-  /* TODO: make fullscreen*/
   height: calc(100% - 64px);
   width: calc(100% - 200px);
+  overflow: auto;
+      /*overflow-x: auto;*/
+}
+
+#canvas{
+
+  /* TODO: make fullscreen*/
+  /*height: calc(100% - 64px);*/
+  /*width: calc(100% - 200px);*/
+
 
   background-color: #fff;
-  /*border-style: solid;
+  border-style: solid;
   border-width: 2px;
-  border-color: #666;*/
+  border-color: #666;
 }
 
 #rgbPicker{
@@ -156,6 +165,37 @@ user-select: none;
   width: 40%;
   float: left;
 }
+#rgbPickerButton{
+  margin-top: 25px;
+  float: right;
+}
+
+#sizeSetter{
+  /*height: 100px;*/
+}
+
+#sizeSetterForm{
+  /*width: 100%;
+  float: left;*/
+}
+
+#sizeSetterForm .input-field{
+  /*width: 50%;
+  padding: 5px;
+
+  float: left;*/
+}
+
+#sizeSetterForm label{
+  /*margin-left: 5px;*/
+  /*width: 100%;*/
+}
+
+#sizeSetterButton{
+  margin-bottom: 10px;
+
+}
+
 #rgbPickerButton{
   margin-top: 25px;
   float: right;

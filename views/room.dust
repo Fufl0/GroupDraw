@@ -29,7 +29,17 @@
 
 
     <div id="tools" class="z-depth-5">
-        <!-- <h4><span style="background-color: #f75ab1;"></span></h4> -->
+
+        <div id="sizeSetter">
+            <form id="sizeSetterForm">
+                <div class="input-field">
+                    <input placeholder="" id="size" type="text" class="validate" value="1240x680">
+                    <label for="size">size</label>
+                </div>
+            </form>
+            <button id="sizeSetterButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">send</i></button>
+        </div>
+
         <h4>Colors</h4>
 
         <div id="palette">
@@ -96,6 +106,9 @@
                     </div>
                 </div>
             </li>
+            <li>
+                <button id="fillButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">format_color_fill</i></button>
+            </li>
         </ul>
 
         <h4 id="Brush-title">Brushes</h4>
@@ -110,8 +123,10 @@
     </div>
 
 
+<div id="canvas-container">
+  <canvas id="canvas" width="1200" height="600"></canvas>
+</div>
 
-    <canvas id="canvas" width="1200" height="600"></canvas>
 
     </div>
 
