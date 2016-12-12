@@ -4,14 +4,17 @@ form.onsubmit = function formOnSubmit(e) {
 };
 
 //POST
-var img = window.document.getElementById('imageInput').files[0];
-var username = window.document.getElementById('username');
-var mood = window.document.getElementById('mood');
-var e = window.document.getElementById("statusSelect");
-var strUser = e.options[e.selectedIndex].value;
+
 var saveButton = window.document.getElementById('saveButton');
 
 saveButton.onclick = function btnSubmitOnClick(e) {
+
+  var username = window.document.getElementById('username');
+  var mood = window.document.getElementById('mood');
+  var e = window.document.getElementById("statusSelect");
+  var strUser = e.options[e.selectedIndex].value;
+  var img = window.document.getElementById('imageInput').files[0];
+
   console.log('saveBtn clicked');
   // var formData = new FormData();
   // formData.append('image', img, img.name);
