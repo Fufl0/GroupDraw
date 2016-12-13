@@ -337,12 +337,8 @@ const app = {
         this.canvas.addEventListener('mousedown', this.mouseDownFn.bind(this));
         this.canvas.addEventListener('mousemove', this.mouseMoveFn.bind(this));
         this.canvas.addEventListener('mouseup', this.mouseUpFn.bind(this));
+        this.canvas.addEventListener('mouseout', this.mouseUpFn.bind(this));
 
-        const topBanner = document.getElementsByClassName("nav-wrapper amber darken-2")[0];
-        topBanner.addEventListener("mousemove", this.mouseUpFn.bind(this));
-
-        const leftToolbar = document.getElementById("tools");
-        leftToolbar.addEventListener("mousemove", this.mouseUpFn.bind(this));
 
         // no need to keep a reference after we add the listener
         const palette = document.getElementById('palette');

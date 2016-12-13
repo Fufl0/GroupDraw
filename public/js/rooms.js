@@ -51,4 +51,4 @@ function bindDelete() {
 window.onload = function() {
     bindSubmit();
     bindDelete();
-}
+};
