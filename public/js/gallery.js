@@ -33,7 +33,7 @@ function updateGallery() {
   window.localStorage.setItem("myImages", false);
   window.myImages = window.localStorage.getItem("myImages");
 
-  request('/gallery', {
+  request('/gallery?my=false', {
     headers: {
       'Accept': 'application/json'
     }

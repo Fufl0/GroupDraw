@@ -22,7 +22,6 @@ router.get('/', function(req, res, next) {
 		res.redirect('/welcome');
 	} else {
 		res.status(200);
-		console.log(req.headers);
 
 		if (!(Object.keys(req.query).length === 0 && req.query.constructor === Object)) {
 
@@ -33,7 +32,7 @@ router.get('/', function(req, res, next) {
 			}
 
 			const filter = {};
-			if (req.query.my) {
+			if (req.query.my === "true") {
 				filter.author = {};
 				filter.author.name = req.session.user.username;
 				filter.author.id = mongoose.Types.ObjectId(req.session.user._id);
@@ -48,8 +47,8 @@ router.get('/', function(req, res, next) {
 				filter.author = {};
 				filter.author.name = req.query.authorName;
 				User.findOne({ username: req.query.authorName }, function(err, user) {
-						if (user) {
-							if (err) return console.error(err);
+					if (user) {
+						if (err) return console.error(err);
 						filter.author.id = mongoose.Types.ObjectId(user._id);
 						GalleryImage.find(filter, null, sortBy, function(err, gallery) {
 							if (err) return console.error(err);
