@@ -14,31 +14,24 @@ const app = {
     undohistory: [],
 
     socket: io(),
-    // get id fronm url
+    // get id from url
     id: window.location.pathname.split('/')[2],
 
     // will be overwritten by brushes
     draw: function() {},
 
     clearCanvas: function() {
+        this.canvasColor = "rgb(255, 255, 255)";
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.colorWholeCanvas("rgb(255, 255, 255)");
     },
 
-    /**
-     * Takes an array of arrays of lineSegments
-     * and draws them on canvas
-     * @param history
-     */
-    replayHistory: function(history) {
+    replayHistory: function(history, c) {
+        let color = c || "rgb(255, 255, 255)";
+        this.colorWholeCanvas(color);
         history.forEach(this.drawLine.bind(this));
     },
 
-    /**
-     * Takes an array of lineSegments that form a path
-     * and draws them on canvas
-     * @param lineSegs
-     */
     drawLine: function(lineSegs) {
         if (lineSegs.length == 0) return;
         this.ctx.beginPath();
@@ -50,6 +43,7 @@ const app = {
     },
 
     clearHandler: function(e, no) {
+        this.canvasColor = "rgb(255, 255, 255)";
         this.clearCanvas();
         this.history = [];
         this.undohistory = [];
@@ -61,11 +55,12 @@ const app = {
         if (!this.history.length) return;
         this.undohistory.push(this.history.pop());
         this.clearCanvas();
-        this.replayHistory(this.history);
+        this.replayHistory(this.history, this.canvasColor);
         if (!no) {
             this.socket.emit("undo", {
                 history : this.history,
-                undohistory: this.undohistory
+                undohistory: this.undohistory,
+                canvasColor: this.canvasColor
             })
         }
     },
@@ -74,22 +69,23 @@ const app = {
         if (!this.undohistory.length) return;
         this.history.push(this.undohistory.pop());
         this.clearCanvas();
-        this.replayHistory(this.history);
+        this.replayHistory(this.history, this.canvasColor);
         if (!no) {
             this.socket.emit("redo", {
                 history : this.history,
-                undohistory: this.undohistory
+                undohistory: this.undohistory,
+                canvasColor: this.canvasColor
             })
         }
     },
 
     fillCanvas : function (e, no) {
-        // console.log("hai premuto fill");
+        this.canvasColor = this.strokeStyle;
         this.clearCanvas();
         this.history = [];
         this.undohistory = [];
         this.clearCanvas();
-        this.replayHistory(this.history);
+        // this.replayHistory(this.history);
         this.colorWholeCanvas(this.strokeStyle);
         if (!no) {
             this.socket.emit("fill", {
@@ -101,7 +97,7 @@ const app = {
 
     colorWholeCanvas : function (color) {
         if (!color) color = this.strokeStyle;
-        console.log(color);
+        // console.log(color);
         this.ctx.lineJoin = this.ctx.lineCap = 'miter';
         this.ctx.strokeStyle = color;
         this.ctx.lineWidth = 100;
@@ -129,8 +125,6 @@ const app = {
 
 
     rgbPickerHandler: function() {
-        // if (!e.target.classList.contains('p-color')) return;
-        // this.strokeStyle = e.target.dataset.color;
         // console.log("hai premuto rgbpicker");
         let rgbInsertedColor = document.getElementById('rgb').value;
         // if (rgbInsertedColor.length = 7)
@@ -144,17 +138,16 @@ const app = {
             return;
         }
 
-        // console.log("rbgcolorpicker");
+
         let red = color.substr(1, 2);
         red = parseInt(red, 16);
-        // console.log("red: " + red);
+
         let green = color.substr(3, 2);
-        // console.log("b4 green: ", green);
         green = parseInt(green, 16);
-        // console.log("green: " + green);
+
         let blue = color.substr(5, 2);
         blue = parseInt(blue, 16);
-        // console.log("blue: " + blue);
+
         return "rgb(" + red + ", " + green + ", " + blue + ")";
     },
 
@@ -166,13 +159,10 @@ const app = {
         if (red.length < 2) red = "0" + red;
 
         let green = rgbs[1].substring(1);
-        // console.log(green);
         green = parseInt(green).toString(16).slice(-2);
         if (green.length < 2) green = "0" + green;
 
-        // let blue = rgbs[2];
         let blue = rgbs[2].substring(1);
-        // console.log(blue);
         blue = parseInt(blue).toString(16).slice(-2);
         if (blue.length < 2) blue = "0" + blue;
 
@@ -225,8 +215,6 @@ const app = {
     },
 
 
-
-
     setStatus: function(status) {
         this.statusEl.innerHTML = status;
     },
@@ -241,13 +229,13 @@ const app = {
             room.socket.emit("join", room.id);
         });
         room.socket.on("clear", function() {
+            room.canvasColor = "rgb(0, 0, 0)";
             room.clearHandler(null, true);
         });
         room.socket.on("draw", function(message) {
             let beforeDrawBrush = room.currentBrushName;
             // console.log("before: ", beforeDrawBrush);
             room.history.push(message.stroke);
-
             room.ctx.beginPath();
             room.selectBrush(message.stroke[0].brushName);
             for (let p of message.stroke)
@@ -255,16 +243,15 @@ const app = {
 
             room.ctx.closePath();
             room.selectBrush(beforeDrawBrush);
-            // console.log("end: ", room.currentBrushName);
-            // console.log(room);
 
 
         });
         room.socket.on("load", function(message) {
+            let color = message.canvasColor || "rgb(255, 255, 255)";
+            room.colorWholeCanvas(color);
             room.history = message.history;
             room.undohistory = message.undohistory;
-            room.colorWholeCanvas("rgb(255, 255, 255)");
-            room.replayHistory(room.history);
+            room.replayHistory(room.history, message.canvasColor); // TODO canvascolor
 
         });
 
@@ -272,23 +259,23 @@ const app = {
             room.history = message.history;
             room.undohistory = message.undohistory;
             room.clearCanvas();
-            room.replayHistory(room.history);
+            room.replayHistory(room.history, message.canvasColor);
         });
 
         room.socket.on("redo", function(message) {
             room.history = message.history;
             room.undohistory = message.undohistory;
             room.clearCanvas();
-            room.replayHistory(room.history);
+            room.replayHistory(room.history, message.canvasColor);
         });
 
         room.socket.on("fill", function (message) {
             room.clearCanvas();
+            room.canvasColor = message.strokeStyle;
             room.history = [];
             room.undohistory = message.undohistory;
             room.clearCanvas();
-            room.replayHistory(room.history);
-            room.colorWholeCanvas(message.strokeStyle);
+            room.replayHistory(room.history, message.strokeStyle);
         })
     },
 
@@ -303,6 +290,7 @@ const app = {
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
+            canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -316,6 +304,7 @@ const app = {
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
+            canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -331,9 +320,7 @@ const app = {
             this.canvas.style.cursor = 'auto';
             this.isDrawing = false;
             this.socket.emit("draw", {
-
                 stroke: this.history[this.history.length - 1]
-
             });
         }
     },
@@ -356,8 +343,6 @@ const app = {
 
         const leftToolbar = document.getElementById("tools");
         leftToolbar.addEventListener("mousemove", this.mouseUpFn.bind(this));
-
-
 
         // no need to keep a reference after we add the listener
         const palette = document.getElementById('palette');

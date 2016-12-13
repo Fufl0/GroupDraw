@@ -13,6 +13,7 @@ module.exports = function(httpServer) {
 
     let roomHistories = {};
     let roomUndoHistories = {};
+    let canvasColor = {}
 
     io.on("connection", function(socket) {
         let id;
@@ -46,14 +47,18 @@ module.exports = function(httpServer) {
                 roomHistories[id] = [];
             if (!roomUndoHistories[id])
                 roomUndoHistories[id] = [];
+            if (!canvasColor[id])
+                canvasColor[id] = "rgb(255, 255, 255)";
             socket.emit("load", {
                 history: roomHistories[id],
-                undohistory: roomUndoHistories[id]
+                undohistory: roomUndoHistories[id],
+                canvasColor : canvasColor[id]
             });
         });
         socket.on("clear", function() {
             roomHistories[id] = [];
             roomUndoHistories[id] = [];
+            canvasColor[id] = "rgb(255, 255, 255)";
             socket.broadcast.to(id).emit("clear");
         });
         socket.on("draw", function(message) {
@@ -76,7 +81,8 @@ module.exports = function(httpServer) {
         socket.on("fill", function(message) {
             roomHistories[id] = [];
             roomUndoHistories[id] = message.undohistory;
+            canvasColor[id] = message.strokeStyle;
             socket.broadcast.to(id).emit("fill", message);
         })
     });
-}
+};
