@@ -21,6 +21,7 @@ const app = {
     draw: function() {},
 
     clearCanvas: function() {
+        this.canvasColor = "rgb(255, 255, 255)";
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.colorWholeCanvas("rgb(255, 255, 255)");
     },
@@ -30,7 +31,9 @@ const app = {
      * and draws them on canvas
      * @param history
      */
-    replayHistory: function(history) {
+    replayHistory: function(history, c) {
+        let color = c || "rgb(255, 255, 255)";
+        this.colorWholeCanvas(color);
         history.forEach(this.drawLine.bind(this));
     },
 
@@ -50,6 +53,7 @@ const app = {
     },
 
     clearHandler: function(e, no) {
+        this.canvasColor = "rgb(255, 255, 255)";
         this.clearCanvas();
         this.history = [];
         this.undohistory = [];
@@ -61,11 +65,12 @@ const app = {
         if (!this.history.length) return;
         this.undohistory.push(this.history.pop());
         this.clearCanvas();
-        this.replayHistory(this.history);
+        this.replayHistory(this.history, this.canvasColor);
         if (!no) {
             this.socket.emit("undo", {
                 history : this.history,
-                undohistory: this.undohistory
+                undohistory: this.undohistory,
+                canvasColor: this.canvasColor
             })
         }
     },
@@ -74,22 +79,23 @@ const app = {
         if (!this.undohistory.length) return;
         this.history.push(this.undohistory.pop());
         this.clearCanvas();
-        this.replayHistory(this.history);
+        this.replayHistory(this.history, this.canvasColor);
         if (!no) {
             this.socket.emit("redo", {
                 history : this.history,
-                undohistory: this.undohistory
+                undohistory: this.undohistory,
+                canvasColor: this.canvasColor
             })
         }
     },
 
     fillCanvas : function (e, no) {
-        // console.log("hai premuto fill");
+        this.canvasColor = this.strokeStyle;
         this.clearCanvas();
         this.history = [];
         this.undohistory = [];
         this.clearCanvas();
-        this.replayHistory(this.history);
+        // this.replayHistory(this.history);
         this.colorWholeCanvas(this.strokeStyle);
         if (!no) {
             this.socket.emit("fill", {
@@ -241,13 +247,13 @@ const app = {
             room.socket.emit("join", room.id);
         });
         room.socket.on("clear", function() {
+            room.canvasColor = "rgb(0, 0, 0)";
             room.clearHandler(null, true);
         });
         room.socket.on("draw", function(message) {
             let beforeDrawBrush = room.currentBrushName;
             // console.log("before: ", beforeDrawBrush);
             room.history.push(message.stroke);
-
             room.ctx.beginPath();
             room.selectBrush(message.stroke[0].brushName);
             for (let p of message.stroke)
@@ -261,10 +267,11 @@ const app = {
 
         });
         room.socket.on("load", function(message) {
+            let color = message.canvasColor || "rgb(255, 255, 255)";
+            room.colorWholeCanvas(color);
             room.history = message.history;
             room.undohistory = message.undohistory;
-            room.colorWholeCanvas("rgb(255, 255, 255)");
-            room.replayHistory(room.history);
+            room.replayHistory(room.history, message.canvasColor); // TODO canvascolor
 
         });
 
@@ -272,23 +279,23 @@ const app = {
             room.history = message.history;
             room.undohistory = message.undohistory;
             room.clearCanvas();
-            room.replayHistory(room.history);
+            room.replayHistory(room.history, message.canvasColor);
         });
 
         room.socket.on("redo", function(message) {
             room.history = message.history;
             room.undohistory = message.undohistory;
             room.clearCanvas();
-            room.replayHistory(room.history);
+            room.replayHistory(room.history, message.canvasColor);
         });
 
         room.socket.on("fill", function (message) {
             room.clearCanvas();
+            room.canvasColor = message.strokeStyle;
             room.history = [];
             room.undohistory = message.undohistory;
             room.clearCanvas();
-            room.replayHistory(room.history);
-            room.colorWholeCanvas(message.strokeStyle);
+            room.replayHistory(room.history, message.strokeStyle);
         })
     },
 
@@ -303,6 +310,7 @@ const app = {
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
+            canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -316,6 +324,7 @@ const app = {
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
+            canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -331,9 +340,7 @@ const app = {
             this.canvas.style.cursor = 'auto';
             this.isDrawing = false;
             this.socket.emit("draw", {
-
                 stroke: this.history[this.history.length - 1]
-
             });
         }
     },
