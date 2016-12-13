@@ -12,8 +12,13 @@ const User = mongoose.model('User');
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
+  if (!req.session.user) {
     res.status(200);
     res.render('welcome')
+  } else {
+    res.status(302);
+    res.redirect('/rooms');
+  }
 });
 
 //login user

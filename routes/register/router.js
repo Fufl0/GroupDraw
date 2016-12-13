@@ -12,8 +12,13 @@ const User = mongoose.model('User');
 router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get('/', function(req, res, next) {
-    res.status(200)
+  if (!req.session.user) {
+    res.status(200);
     res.render('register')
+  } else {
+    res.status(302);
+    res.redirect('/rooms');
+  }
 });
 
 //register user
