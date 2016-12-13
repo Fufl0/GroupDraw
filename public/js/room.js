@@ -14,7 +14,7 @@ const app = {
     undohistory: [],
 
     socket: io(),
-    // get id fronm url
+    // get id from url
     id: window.location.pathname.split('/')[2],
 
     // will be overwritten by brushes
@@ -26,22 +26,12 @@ const app = {
         this.colorWholeCanvas("rgb(255, 255, 255)");
     },
 
-    /**
-     * Takes an array of arrays of lineSegments
-     * and draws them on canvas
-     * @param history
-     */
     replayHistory: function(history, c) {
         let color = c || "rgb(255, 255, 255)";
         this.colorWholeCanvas(color);
         history.forEach(this.drawLine.bind(this));
     },
 
-    /**
-     * Takes an array of lineSegments that form a path
-     * and draws them on canvas
-     * @param lineSegs
-     */
     drawLine: function(lineSegs) {
         if (lineSegs.length == 0) return;
         this.ctx.beginPath();
@@ -107,7 +97,7 @@ const app = {
 
     colorWholeCanvas : function (color) {
         if (!color) color = this.strokeStyle;
-        console.log(color);
+        // console.log(color);
         this.ctx.lineJoin = this.ctx.lineCap = 'miter';
         this.ctx.strokeStyle = color;
         this.ctx.lineWidth = 100;
@@ -135,8 +125,6 @@ const app = {
 
 
     rgbPickerHandler: function() {
-        // if (!e.target.classList.contains('p-color')) return;
-        // this.strokeStyle = e.target.dataset.color;
         // console.log("hai premuto rgbpicker");
         let rgbInsertedColor = document.getElementById('rgb').value;
         // if (rgbInsertedColor.length = 7)
@@ -150,17 +138,16 @@ const app = {
             return;
         }
 
-        // console.log("rbgcolorpicker");
+
         let red = color.substr(1, 2);
         red = parseInt(red, 16);
-        // console.log("red: " + red);
+
         let green = color.substr(3, 2);
-        // console.log("b4 green: ", green);
         green = parseInt(green, 16);
-        // console.log("green: " + green);
+
         let blue = color.substr(5, 2);
         blue = parseInt(blue, 16);
-        // console.log("blue: " + blue);
+
         return "rgb(" + red + ", " + green + ", " + blue + ")";
     },
 
@@ -172,13 +159,10 @@ const app = {
         if (red.length < 2) red = "0" + red;
 
         let green = rgbs[1].substring(1);
-        // console.log(green);
         green = parseInt(green).toString(16).slice(-2);
         if (green.length < 2) green = "0" + green;
 
-        // let blue = rgbs[2];
         let blue = rgbs[2].substring(1);
-        // console.log(blue);
         blue = parseInt(blue).toString(16).slice(-2);
         if (blue.length < 2) blue = "0" + blue;
 
@@ -231,8 +215,6 @@ const app = {
     },
 
 
-
-
     setStatus: function(status) {
         this.statusEl.innerHTML = status;
     },
@@ -261,8 +243,6 @@ const app = {
 
             room.ctx.closePath();
             room.selectBrush(beforeDrawBrush);
-            // console.log("end: ", room.currentBrushName);
-            // console.log(room);
 
 
         });
@@ -363,8 +343,6 @@ const app = {
 
         const leftToolbar = document.getElementById("tools");
         leftToolbar.addEventListener("mousemove", this.mouseUpFn.bind(this));
-
-
 
         // no need to keep a reference after we add the listener
         const palette = document.getElementById('palette');

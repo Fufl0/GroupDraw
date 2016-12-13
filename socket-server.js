@@ -85,4 +85,4 @@ module.exports = function(httpServer) {
             socket.broadcast.to(id).emit("fill", message);
         })
     });
-}
+};
