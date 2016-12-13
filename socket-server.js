@@ -71,6 +71,12 @@ module.exports = function(httpServer) {
             roomHistories[id] = message.history;
             roomUndoHistories[id] = message.undohistory;
             socket.broadcast.to(id).emit("undo", message);
+        });
+
+        socket.on("fill", function(message) {
+            roomHistories[id] = [];
+            roomUndoHistories[id] = message.undohistory;
+            socket.broadcast.to(id).emit("fill", message);
         })
     });
 }
