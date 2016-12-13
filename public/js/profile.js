@@ -5,24 +5,58 @@ form.onsubmit = function formOnSubmit(e) {
 
 //POST
 
+var img = ''
+
+File.prototype.convertToBase64 = function(callback){
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    callback(e.target.result)
+  };
+  reader.onerror = function(e) {
+    callback(null);
+  };
+  reader.readAsDataURL(this);
+};
+
+$("#imageInput").on('change',function(){
+  console.log('cahnges');
+  var selectedFile = this.files[0];
+  selectedFile.convertToBase64(function(base64){
+    img = base64;
+  })
+});
+
 var saveButton = window.document.getElementById('saveButton');
 
 saveButton.onclick = function btnSubmitOnClick(e) {
 
   var username = window.document.getElementById('username');
-  var mood = window.document.getElementById('mood');
+
+  var mood = '';
+  if (window.document.getElementById('mood') !== '') {
+    mood = window.document.getElementById('mood');
+  } else {
+    mood = window.document.getElementById('mood').placeholder;
+  }
+
   var e = window.document.getElementById("statusSelect");
   var strUser = e.options[e.selectedIndex].value;
-  var img = window.document.getElementById('imageInput').files[0];
+
+  if (strUser === '') {
+    strUser = e.options[e.selectedIndex].text;
+  }
+
+  if (img === '') {
+    img = window.document.getElementById("proPic").src;
+  }
 
   console.log('saveBtn clicked');
-  // var formData = new FormData();
-  // formData.append('image', img, img.name);
+
   var user = {
     username: username.innerHTML,
     mood: mood.value,
     status: strUser,
-    //picture: img
+    picture: img
   };
   var r = new XMLHttpRequest();
   r.open('POST', '/profile');
@@ -30,8 +64,6 @@ saveButton.onclick = function btnSubmitOnClick(e) {
   r.setRequestHeader('Accept', 'application/json');
   console.log(user);
   r.send(JSON.stringify(user));
-  // r.write(formData);
-  //r.end()
 };
 
 //DELETE USER

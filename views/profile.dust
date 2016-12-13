@@ -63,7 +63,7 @@
   </div>
   </div>
 
-                      <img src="img/blank-user.jpg" width="200" height="200" />
+                      <img id='proPic' src={user.picture} width="200" height="200" />
                       <div class="row">
                           <div class="file-field input-field col s12 ">
                               <div class="btn">
@@ -79,7 +79,7 @@
 
                       <div class="row">
                           <div class="input-field col s12 ">
-                              <input placeholder='{user.mood}' id="mood" type="text" class="validate">
+                              <input value='{user.mood}' id="mood" type="text" class="validate">
                               <label>Mood:</label>
                           </div>
                       </div>

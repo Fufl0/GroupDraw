@@ -32,7 +32,7 @@ router.modifyUser = function modifyUser(req, res) {
     User.update({username: req.body.username},
                 {mood: req.body.mood,
                   status: req.body.status,
-                  //picture: req.body.img
+                  picture: req.body.picture
                 },
                 function(err, updated) {
       if (err){
