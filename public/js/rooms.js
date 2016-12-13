@@ -16,14 +16,6 @@ function doJSONRequest(method, url, data, callback) {
     req.send(JSON.stringify(data));
 }
 
-function generateSecret() {
-    if (window.localStorage.getItem("secret") === null) {
-	let secret = Math.floor(Math.random() * 1000000);
-	window.localStorage.setItem("secret", secret);
-    }
-    window.secret = window.localStorage.getItem("secret");
-}
-
 function bindSubmit() {
     let submitBtn = document.getElementById("submitBtn");
     submitBtn.onclick = function(event) {
@@ -32,7 +24,7 @@ function bindSubmit() {
 	if(roomName == ""){
 		roomName = "No Name Room";
 	}
-	doJSONRequest("POST", "/rooms", { name: roomName, secret: window.secret }, function(saved) {
+	doJSONRequest("POST", "/rooms", { name: roomName}, function(saved) {
 	    dust.render("roomitem", saved, function(err, room) {
 		document.getElementById("roomList").innerHTML += room;
 	    });
@@ -46,16 +38,17 @@ function bindDelete() {
     for (let room of roomList.children) {
 	let deleteBtn = room.children[0].children[2];
 	let id = deleteBtn.getAttribute("data-id");
+	//if (){
 	deleteBtn.onclick = function() {
 	    doJSONRequest("DELETE", "/rooms/" + id + "/" + window.secret, null, function() {
 		roomList.removeChild(room);
 	    });
 	}
-    }
+	}
+    //}
 }
 
 window.onload = function() {
-    generateSecret();
     bindSubmit();
     bindDelete();
 }

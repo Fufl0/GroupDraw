@@ -16,8 +16,7 @@ router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 
 router.get("/:id", function(req, res, next){
 	if (!req.session.user) {
-		res.status(302);
-    res.redirect('/welcome');
+		return res.status(401).send();
 	} else {
 		model.findById(req.params.id, function(err, found){
 			if(err){
@@ -27,8 +26,7 @@ router.get("/:id", function(req, res, next){
 				res.sendStatus(404);
 			}
 			else {
-				let t = {rooms: found};
-				res.render("room", t);
+				res.render("room", {rooms: found});
 			}
 		})
 	}
@@ -50,14 +48,13 @@ router.get("/", function(req, res, next){
 					room.links = [{href : "/rooms/"+element._id}]
 					array.push(room);
 				}
-				let t = {rooms: array, user: req.session.user.username};
-				res.render("rooms", t);
+				res.render("rooms", {rooms: array, user: req.session.user.username});
 			}
 		})
 	}
 });
 
-router.delete("/:id/:token", function(req, res, next){
+router.delete("/:id/:creator", function(req, res, next){
 	console.log("id here");
 	console.log(req.params.id);
 	if (!req.session.user) {
@@ -71,7 +68,9 @@ router.delete("/:id/:token", function(req, res, next){
 				res.sendStatus(404);
 			}
 			else {
-				if (!(req.params.token==found.secret)) {
+				console.log(found.creator);
+				console.log(req.session.user.username);
+				if (!(found.creator == req.session.user.username)) {
 					res.sendStatus(403);
 					return;
 				}
@@ -94,9 +93,7 @@ router.post("/", function (req, res, next){
 	} else {
 		let t = new model({
 			name: req.body.name,
-			description: req.body.description,
-			mood: req.body.mood,
-			secret: req.body.secret
+			creator: req.session.user.username
 		});
 
 		t.save(function(err, saved){

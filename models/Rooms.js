@@ -5,7 +5,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const RoomsSchema = exports.RoomsSchema = new mongoose.Schema({
     name: { type: String, default: "" },
-    secret: { type: String },
+   	creator: {type: String},
     links: { type: [{ href: String }], default: []}
     //history: {type: Array, default: []}
 });
