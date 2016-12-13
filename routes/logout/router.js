@@ -17,15 +17,22 @@ router.get('/', function(req, res, next) {
     res.status(301).send();
     res.redirect('/welcome');
   } else {
-    User.update({ username: req.session.user.username }, { status: 'offline' }, function(err, updated) {
-      if (err){
-      res.status(404).send();
-      } else {
+    if (!(req.session.user.username.toLowerCase().indexOf("guest") >= 0)) {
+      User.update({ username: req.session.user.username }, { status: 'offline' }, function(err, updated) {
+        if (err){
+        res.status(404).send();
+        } else {
+        req.session.destroy();
+        res.status(302);
+        res.redirect('/welcome');
+        }
+      });
+    } else {
+      User.find({ username: req.session.user.username }).remove().exec();
       req.session.destroy();
       res.status(302);
       res.redirect('/welcome');
-      }
-    });
+    }
   }
 });
 
