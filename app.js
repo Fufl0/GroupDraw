@@ -53,6 +53,8 @@ app.post('/profile', routers.profile.modifyUser);
 app.delete('/profile', routers.profile.deleteUser);
 //Gallery view
 app.use('/gallery', routers.gallery);
+//Logout
+app.use('/logout', routers.logout);
 
 
 module.exports = app;

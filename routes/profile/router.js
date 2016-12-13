@@ -51,6 +51,7 @@ router.deleteUser = function modifyUser(req, res) {
   } else {
     req.session.destroy();
     User.find({ username: req.body.username }).remove().exec();
+    res.sendStatus(200);
   }
 };
 

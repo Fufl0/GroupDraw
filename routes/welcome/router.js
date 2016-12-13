@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 //login user
 router.loginUser = function loginUser(req, res) {
-  User.findOne({username: req.body.username, password: req.body.password}, (err, user) => {
+  User.findOneAndUpdate({username: req.body.username, password: req.body.password}, {status: 'online'}, (err, user) => {
     if (err) {
       res.status(500).end();
     } else if (!user) {
