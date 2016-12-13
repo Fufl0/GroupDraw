@@ -19,45 +19,53 @@ router.all('/', middleware.supportedMethods('GET, POST, DELETE, OPTIONS'));
 router.get('/', function(req, res, next) {
 	if (!req.session.user) {
 		res.status(302);
-    res.redirect('/welcome');
+		res.redirect('/welcome');
 	} else {
 		res.status(200);
+		console.log(req.headers);
 
-		const sortBy = {};
-		if (req.query.sortBy) {
-			sortBy.sort = {};
-			sortBy.sort[req.query.sortBy] = 1;
-		}
+		if (!(Object.keys(req.query).length === 0 && req.query.constructor === Object)) {
 
-		const filter = {};
-		if (req.query.my) {
-			filter.author = {};
-			filter.author.name = req.session.user.username;
-			filter.author.id = mongoose.Types.ObjectId(req.session.user._id);
-		}
+			const sortBy = {};
+			if (req.query.sortBy) {
+				sortBy.sort = {};
+				sortBy.sort[req.query.sortBy] = 1;
+			}
 
-		if (req.query.room) {
-			filter.createdInRoom = req.query.room;
-		}
-		if(req.query.title) {
-			filter.title = req.query.title;
-		}
-		if (req.query.authorName) {
-			filter.author = {};
-			filter.author.name = req.query.authorName;
-			User.findOne({ username: req.query.authorName }, function(err, user) {
-				if (err) return console.error(err);
-				filter.author.id = mongoose.Types.ObjectId(user._id);
+			const filter = {};
+			if (req.query.my) {
+				filter.author = {};
+				filter.author.name = req.session.user.username;
+				filter.author.id = mongoose.Types.ObjectId(req.session.user._id);
+			}
+			if (req.query.room) {
+				filter.createdInRoom = req.query.room;
+			}
+			if(req.query.title) {
+				filter.title = req.query.title;
+			}
+			if (req.query.authorName) {
+				filter.author = {};
+				filter.author.name = req.query.authorName;
+				User.findOne({ username: req.query.authorName }, function(err, user) {
+					if (err) return console.error(err);
+					filter.author.id = mongoose.Types.ObjectId(user._id);
+					GalleryImage.find(filter, null, sortBy, function(err, gallery) {
+						if (err) return console.error(err);
+						res.json(gallery);
+					});
+				});
+			} else {
 				GalleryImage.find(filter, null, sortBy, function(err, gallery) {
 					if (err) return console.error(err);
-					res.render('gallery', { gallery: gallery, user: req.session.user.username });
+					res.json(gallery);
 				});
-			});
+			}
 		} else {
-			GalleryImage.find(filter, null, sortBy, function(err, gallery) {
+			GalleryImage.find(function(err, gallery) {
 				if (err) return console.error(err);
 				res.render('gallery', { gallery: gallery, user: req.session.user.username });
-			});
+			})
 		}
 	}
 });

@@ -1,10 +1,12 @@
+const Buffer = require('buffer').Buffer;
+
 /**
- * from https://gist.github.com/monsur/706839
- * XmlHttpRequest's getAllResponseHeaders() method returns a string of response
- * headers according to the format described here:
- * http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders-method
- * This method parses that string into a user-friendly key/value pair object.
- */
+* from https://gist.github.com/monsur/706839
+* XmlHttpRequest's getAllResponseHeaders() method returns a string of response
+* headers according to the format described here:
+* http://www.w3.org/TR/XMLHttpRequest/#the-getallresponseheaders-method
+* This method parses that string into a user-friendly key/value pair object.
+*/
 function parseResponseHeaders(headerStr) {
   var headers = {};
   if (!headerStr) {
@@ -35,10 +37,28 @@ function updateGallery() {
     headers: {
       'Accept': 'application/json'
     }
-  }, function(err, res){
+  }, function(err, res) {
     if(err) throw err;
 
-    dust.render('galleryitem', { gallery: res.body }, function(err, out){
+    var galleryImagesArray = res.body;
+
+    var galleryImagesToRender = [];
+
+    for (let i = 0; i < galleryImagesArray.length; i++) {
+      let newGalleryImage = {};
+
+      newGalleryImage.img = {};
+      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
+      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
+      newGalleryImage.title = galleryImagesArray[i].title;
+      newGalleryImage.author = galleryImagesArray[i].author;
+      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
+      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
+
+      galleryImagesToRender.push(newGalleryImage);
+    }
+
+    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
       if(err) throw err;
       document.getElementById('lightgallery').innerHTML = out;
     });
@@ -52,13 +72,31 @@ function getMyImages() {
 
   request('/gallery?my=true', {
     headers: {
-      'Accept': 'application/json'
+      'Accept': 'application/json charset=utf-8'
     }
   }, function(err, res){
     if(err) throw err;
     console.log("hi");
 
-    dust.render('galleryitems', { gallery: res.body }, function(err, out){
+    var galleryImagesArray = res.body;
+
+    var galleryImagesToRender = [];
+
+    for (let i = 0; i < galleryImagesArray.length; i++) {
+      let newGalleryImage = {};
+
+      newGalleryImage.img = {};
+      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
+      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
+      newGalleryImage.title = galleryImagesArray[i].title;
+      newGalleryImage.author = galleryImagesArray[i].author;
+      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
+      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
+
+      galleryImagesToRender.push(newGalleryImage);
+    }
+
+    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out){
       if(err) throw err;
       document.getElementById('lightgallery').innerHTML = out;
     });
@@ -93,10 +131,29 @@ function filterGallery() {
     headers: {
       'Accept': 'application/json'
     }
-  }, function(err, res){
+  }, function(err, res) {
     if(err) throw err;
+    console.log("hi");
 
-    dust.render('galleryitems', { gallery: res.body }, function(err, out){
+    var galleryImagesArray = res.body;
+
+    var galleryImagesToRender = [];
+
+    for (let i = 0; i < galleryImagesArray.length; i++) {
+      let newGalleryImage = {};
+
+      newGalleryImage.img = {};
+      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
+      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
+      newGalleryImage.title = galleryImagesArray[i].title;
+      newGalleryImage.author = galleryImagesArray[i].author;
+      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
+      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
+
+      galleryImagesToRender.push(newGalleryImage);
+    }
+
+    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
       if(err) throw err;
       document.getElementById('lightgallery').innerHTML = out;
     });
@@ -152,8 +209,27 @@ function sortGallery() {
     }
   }, function(err, res) {
     if(err) throw err;
+    console.log("hi");
 
-    dust.render('galleryitems', { gallery: res.body }, function(err, out){
+    var galleryImagesArray = res.body;
+
+    var galleryImagesToRender = [];
+
+    for (let i = 0; i < galleryImagesArray.length; i++) {
+      let newGalleryImage = {};
+
+      newGalleryImage.img = {};
+      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
+      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
+      newGalleryImage.title = galleryImagesArray[i].title;
+      newGalleryImage.author = galleryImagesArray[i].author;
+      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
+      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
+
+      galleryImagesToRender.push(newGalleryImage);
+    }
+
+    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
       if(err) throw err;
       document.getElementById('lightgallery').innerHTML = out;
     });
