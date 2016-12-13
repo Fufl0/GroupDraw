@@ -2284,7 +2284,10 @@ function request(url, opts, cb){
 window.onload = function() {
   document.getElementById("my-images").addEventListener('click', getMyImages);
   document.getElementById("all-images").addEventListener('click', updateGallery);
-  document.getElementById("gallerySearchForm").onsubmit = filterGallery;
+  document.getElementById("gallerySearchForm").onsubmit = function(e) {
+    e.preventDefault();
+    filterGallery();
+  };
   document.getElementById("sort-by").onchange = sortGallery;
 
   window.localStorage.setItem("sortCriteria", 'dateCreated');

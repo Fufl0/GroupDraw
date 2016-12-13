@@ -57,9 +57,9 @@ function parseResponseHeaders(headerStr) {
 }
 
 function bindSubmit() {
-  let submitBtn = document.getElementById("submitBtn");
+  let submitBtn = document.getElementById("titleForm");
 
-  submitBtn.onclick = function(event) {
+  submitBtn.onsubmit = function(event) {
 
     event.preventDefault();
 
@@ -73,7 +73,7 @@ function bindSubmit() {
       title = "(untitled)";
     }
 
-    const body = {  img: { data, contentType },
+    const body = { img: { data, contentType },
                     title: title,
                     roomId: window.location.href.split("/")[4]
                   };
@@ -90,6 +90,8 @@ function bindSubmit() {
     });
 
     document.getElementById("titleInput").value = "";
+    document.getElementById("titleInput").blur();
+    document.getElementById("submitBtn").click();
 
   };
 }

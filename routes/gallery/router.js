@@ -48,12 +48,14 @@ router.get('/', function(req, res, next) {
 				filter.author = {};
 				filter.author.name = req.query.authorName;
 				User.findOne({ username: req.query.authorName }, function(err, user) {
-					if (err) return console.error(err);
-					filter.author.id = mongoose.Types.ObjectId(user._id);
-					GalleryImage.find(filter, null, sortBy, function(err, gallery) {
-						if (err) return console.error(err);
-						res.json(gallery);
-					});
+						if (user) {
+							if (err) return console.error(err);
+						filter.author.id = mongoose.Types.ObjectId(user._id);
+						GalleryImage.find(filter, null, sortBy, function(err, gallery) {
+							if (err) return console.error(err);
+							res.json(gallery);
+						});
+					}
 				});
 			} else {
 				GalleryImage.find(filter, null, sortBy, function(err, gallery) {
