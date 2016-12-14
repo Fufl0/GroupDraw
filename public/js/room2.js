@@ -1,3 +1,11 @@
+window.onload=function(){
+  console.log(document.getElementById("photoButton").className);
+  if (window.document.getElementById('guestCheck').innerHTML === ""){
+    document.getElementById("photoButton").className += ' disabled';
+    console.log(document.getElementById("photoButton").className);
+  }
+}
+
 function request(url, opts, cb){
   if(typeof opts == 'function'){
     cb = opts;
