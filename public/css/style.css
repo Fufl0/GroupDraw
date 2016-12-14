@@ -361,6 +361,11 @@ label[data-error]:after {
   margin-top: 10px;
 }
 
-#deleteButton{
+#deleteModal{
   margin-top: 40px;
 }
+
+/*.deleteModalButtons{
+  color: white;
+  margin-left: 10px;
+}*/

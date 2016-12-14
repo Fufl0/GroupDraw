@@ -34,7 +34,7 @@
               <form id="registerForm">
                   <div class="row">
                       <div class="input-field col s12">
-                          <input placeholder="" id="username" type="text" class="validate">
+                          <input placeholder="" id="username" type="text" class="validate" autofocus>
                           <label id="usernameLabel" for="username" data-error="">Username</label>
                       </div>
 
