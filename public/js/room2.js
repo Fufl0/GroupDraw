@@ -65,9 +65,8 @@ function parseResponseHeaders(headerStr) {
 }
 
 function bindSubmit() {
-  let submitBtn = document.getElementById("titleForm");
 
-  submitBtn.onsubmit = function(event) {
+  function submitNewImage(event) {
 
     event.preventDefault();
 
@@ -99,10 +98,23 @@ function bindSubmit() {
 
     document.getElementById("titleInput").value = "";
     document.getElementById("titleInput").blur();
-    document.getElementById("submitBtn").click();
+    $('#modal1').modal('close');
 
   };
+
+  let titleForm = document.getElementById("titleForm");
+  let submitBtn = document.getElementById("submitBtn");
+
+  titleForm.onsubmit = submitNewImage;
+  submitBtn.onclick = submitNewImage;
+
 }
+
+
+ document.getElementById("photoButton").onclick = function(){
+    document.getElementById("titleInput").focus();
+    $('#modal1').modal('open');
+ };
 
 
  document.getElementById("photoButton").onclick = function(){
