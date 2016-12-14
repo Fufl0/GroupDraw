@@ -17,8 +17,8 @@ function doJSONRequest(method, url, data, callback) {
 }
 
 function bindSubmit() {
-    let submitBtn = document.getElementById("submitBtn");
-    submitBtn.onclick = function(event) {
+    let submitBtn = document.getElementById("roomForm");
+    submitBtn.onsubmit = function(event) {
 	event.preventDefault();
 	let roomName = document.getElementById("roomNameInput").value;
 	if(roomName == ""){
@@ -30,6 +30,7 @@ function bindSubmit() {
 	    });
 	    bindDelete();
 	});
+  document.getElementById("submitBtn").click();
     };
 }
 
