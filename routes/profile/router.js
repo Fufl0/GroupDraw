@@ -17,8 +17,13 @@ router.get('/', function(req, res, next) {
     res.status(302);
     res.redirect('/welcome');
   } else {
-    res.status(200)
-    res.render('profile',{user: req.session.user});
+    if (req.session.user.password === "") {
+      //res.status(401);
+      //res.redirect(req.get('referer'));
+    } else {
+      res.status(200)
+      res.render('profile',{user: req.session.user});
+    }
   }
 });
 
