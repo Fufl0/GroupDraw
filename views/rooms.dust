@@ -39,7 +39,7 @@
 
       </ul>
       <ul class="right hide-on-med-and-down">
-        <li><a href="profile">{user}</a></li>
+        <li><a id="profileName" href="profile">{user}</a></li>
         <li><a href="logout"><i class="material-icons">exit_to_app</i></a></li>
       </ul>
     </div>
@@ -50,7 +50,7 @@
   <div class="container">
 
 
-    <div class="fixed-action-btn vertical">
+    <div id="verticalButton" class="fixed-action-btn vertical">
     <a id="newRoomButton" class="btn-floating btn-large red" href="#modal1">
       <i class="large material-icons">add</i>
     </a>

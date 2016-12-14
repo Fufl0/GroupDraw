@@ -65,5 +65,8 @@ window.onload = function() {
         if(profile.innerHTML.toLowerCase().indexOf("guest") >= 0){
               let d = document.getElementById("newRoomButton");
               d.className += " disabled";
+
+              let p = document.getElementById("newPrivateRoomButton");
+              p.className += " disabled";
         }
 };
