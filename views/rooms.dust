@@ -49,10 +49,6 @@
 
   <div class="container">
 
-    <!-- fixed create room bottom button -->
-    <div class="fixed-action-btn">
-      <a id="newRoomButton" class="btn-floating btn-large waves-effect waves-light red" href="#modal1"><i class="material-icons">add</i></a>
-    </div>
 
     <div class="fixed-action-btn vertical">
     <a id="newRoomButton" class="btn-floating btn-large red" href="#modal1">
