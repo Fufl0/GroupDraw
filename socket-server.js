@@ -51,7 +51,7 @@ module.exports = function(httpServer) {
             if (!canvasColor[id])
                 canvasColor[id] = "rgb(255, 255, 255)";
             if (!roomSizes[id])
-                roomSizes[id] = "1240x68";
+                roomSizes[id] = "1240x680";
 
             socket.emit("load", {
                 history: roomHistories[id],
