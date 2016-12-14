@@ -101,16 +101,16 @@
 
     <script src="/js/bundle-gallery.js"></script>
 
-    <script src="/js/lightgallery/lightgallery.min.js"></script>
-    <script src="/js/lightgallery/lg-fullscreen.min.js"></script>
-    <script src="/js/lightgallery/lg-thumbnail.min.js"></script>
-    <script src="/js/lightgallery/lg-video.min.js"></script>
-    <script src="/js/lightgallery/lg-autoplay.min.js"></script>
-    <script src="/js/lightgallery/lg-zoom.min.js"></script>
+    <script class="scriptToReload" src="/js/lightgallery/lightgallery.min.js"></script>
+    <script class="scriptToReload" src="/js/lightgallery/lg-fullscreen.min.js"></script>
+    <script class="scriptToReload" src="/js/lightgallery/lg-thumbnail.min.js"></script>
+    <script class="scriptToReload" src="/js/lightgallery/lg-video.min.js"></script>
+    <script class="scriptToReload" src="/js/lightgallery/lg-autoplay.min.js"></script>
+    <script class="scriptToReload" src="/js/lightgallery/lg-zoom.min.js"></script>
 
-    <script src="/js/jquery.justifiedGallery.min.js"></script>
+    <script class="scriptToReload" src="/js/jquery.justifiedGallery.min.js"></script>
 
-    <script src="/js/gallery-init.js"></script>
+    <script class="scriptToReload" src="/js/gallery-init.js"></script>
 
 
 

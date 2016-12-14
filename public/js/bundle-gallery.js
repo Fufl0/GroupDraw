@@ -2031,7 +2031,7 @@ function parseResponseHeaders(headerStr) {
 }
 
 
-function updateGallery() {
+function loadGallery() {
 
   window.localStorage.setItem("myImages", false);
   window.myImages = window.localStorage.getItem("myImages");
@@ -2040,32 +2040,7 @@ function updateGallery() {
     headers: {
       'Accept': 'application/json'
     }
-  }, function(err, res) {
-    if(err) throw err;
-
-    var galleryImagesArray = res.body;
-
-    var galleryImagesToRender = [];
-
-    for (let i = 0; i < galleryImagesArray.length; i++) {
-      let newGalleryImage = {};
-
-      newGalleryImage.img = {};
-      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
-      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
-      newGalleryImage.title = galleryImagesArray[i].title;
-      newGalleryImage.author = galleryImagesArray[i].author;
-      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
-      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
-
-      galleryImagesToRender.push(newGalleryImage);
-    }
-
-    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
-      if(err) throw err;
-      document.getElementById('lightgallery').innerHTML = out;
-    });
-  });
+  }, renderResponse);
 }
 
 function getMyImages() {
@@ -2077,33 +2052,7 @@ function getMyImages() {
     headers: {
       'Accept': 'application/json charset=utf-8'
     }
-  }, function(err, res){
-    if(err) throw err;
-    console.log("hi");
-
-    var galleryImagesArray = res.body;
-
-    var galleryImagesToRender = [];
-
-    for (let i = 0; i < galleryImagesArray.length; i++) {
-      let newGalleryImage = {};
-
-      newGalleryImage.img = {};
-      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
-      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
-      newGalleryImage.title = galleryImagesArray[i].title;
-      newGalleryImage.author = galleryImagesArray[i].author;
-      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
-      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
-
-      galleryImagesToRender.push(newGalleryImage);
-    }
-
-    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out){
-      if(err) throw err;
-      document.getElementById('lightgallery').innerHTML = out;
-    });
-  });
+  }, renderResponse);
 }
 
 function filterGallery() {
@@ -2128,43 +2077,16 @@ function filterGallery() {
   if (window.myImages) {
     myImages += 'my=true&'
   }
-  console.log(myImages);
-  console.log(query);
+
   request('/gallery?' + myImages + query, {
     headers: {
       'Accept': 'application/json'
     }
-  }, function(err, res) {
-    if(err) throw err;
-    console.log("hi");
-
-    var galleryImagesArray = res.body;
-
-    var galleryImagesToRender = [];
-
-    for (let i = 0; i < galleryImagesArray.length; i++) {
-      let newGalleryImage = {};
-
-      newGalleryImage.img = {};
-      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
-      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
-      newGalleryImage.title = galleryImagesArray[i].title;
-      newGalleryImage.author = galleryImagesArray[i].author;
-      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
-      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
-
-      galleryImagesToRender.push(newGalleryImage);
-    }
-
-    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
-      if(err) throw err;
-      document.getElementById('lightgallery').innerHTML = out;
-    });
-  });
+  }, renderResponse);
 }
 
 function sortGallery() {
-  // TODO
+
   var value = document.getElementById('sort-by').value;
 
   var sortCriteria = 'dateCreated'
@@ -2210,33 +2132,7 @@ function sortGallery() {
     headers: {
       'Accept': 'application/json'
     }
-  }, function(err, res) {
-    if(err) throw err;
-    console.log("hi");
-
-    var galleryImagesArray = res.body;
-
-    var galleryImagesToRender = [];
-
-    for (let i = 0; i < galleryImagesArray.length; i++) {
-      let newGalleryImage = {};
-
-      newGalleryImage.img = {};
-      newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
-      newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
-      newGalleryImage.title = galleryImagesArray[i].title;
-      newGalleryImage.author = galleryImagesArray[i].author;
-      newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
-      newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
-
-      galleryImagesToRender.push(newGalleryImage);
-    }
-
-    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
-      if(err) throw err;
-      document.getElementById('lightgallery').innerHTML = out;
-    });
-  });
+  }, renderResponse);
 }
 
 
@@ -2277,13 +2173,68 @@ function request(url, opts, cb){
   xhr.send(options.body);
 }
 
+function renderResponse(err, res) {
+  if(err) throw err;
+
+  var galleryImagesArray = res.body;
+
+  var galleryImagesToRender = [];
+
+  for (let i = 0; i < galleryImagesArray.length; i++) {
+    let newGalleryImage = {};
+
+    newGalleryImage.img = {};
+    newGalleryImage.img.data = Buffer.from(galleryImagesArray[i].img.data.data); // TODO
+    newGalleryImage.img.contentType = galleryImagesArray[i].img.contentType;
+    newGalleryImage.title = galleryImagesArray[i].title;
+    newGalleryImage.author = galleryImagesArray[i].author;
+    newGalleryImage.dateCreated = galleryImagesArray[i].dateCreated;
+    newGalleryImage.createdInRoom = galleryImagesArray[i].createdInRoom;
+
+    galleryImagesToRender.push(newGalleryImage);
+  }
+
+  dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
+    if(err) throw err;
+    document.getElementById('lightgallery').innerHTML = out;
+    reloadScripts();
+  });
+}
+
+
+function reloadScript(scriptSrc) {
+  var head = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+  script.className = "reloadedScripts";
+  script.type = 'text/javascript';
+  script.src = scriptSrc.src;
+  head.appendChild(script);
+}
+
+function reloadScripts() {
+
+  var reloadedScripts = document.getElementsByClassName("reloadedScripts");
+  if (reloadedScripts.length !== 0) {
+    var head = document.getElementsByTagName('head')[0];
+    for (let i = 0; i < reloadedScripts.length; i++) {
+      head.removeChild(reloadedScripts[i]);
+    }
+  }
+
+  var scriptList = document.getElementsByClassName("scriptToReload");
+
+  for (let i = 0; i < scriptList.length; i++) {
+    reloadScript(scriptList[i]);
+  }
+}
+
 
 
 
 
 window.onload = function() {
   document.getElementById("my-images").addEventListener('click', getMyImages);
-  document.getElementById("all-images").addEventListener('click', updateGallery);
+  document.getElementById("all-images").addEventListener('click', loadGallery);
   document.getElementById("gallerySearchForm").onsubmit = function(e) {
     e.preventDefault();
     filterGallery();
