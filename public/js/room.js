@@ -46,13 +46,13 @@ const app = {
         if (s) {
             this.canvasSize = s;
         }
-        else if (document.getElementById('size').value.split("x").length = 0) {
+        else if (document.getElementById('size').value.split("x").length !== 0) {
             let h = document.getElementById('size').value.split("x")[0];
             let w = document.getElementById('size').value.split("x")[1];
-            if ((parseInt(h, 5) == "NaN") || (parseInt(h, 5) < 0) || (parseInt(w, 5) == "NaN") || (parseInt(w, 5) < 0)){
+            if ((parseInt(h) == "NaN") || (parseInt(h) < 0) || (parseInt(w) == "NaN") || (parseInt(w) < 0)){
                 return;
             }
-            this.canvasSize = parseInt(h, 5) + "x" + parseInt(w, 5);
+            this.canvasSize = parseInt(h) + "x" + parseInt(w);
         }
         else this.canvasSize =  "1024x680";
         this.canvas.setAttribute("width", this.canvasSize.split("x")[0]);
