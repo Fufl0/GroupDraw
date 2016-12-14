@@ -104,6 +104,7 @@
         }
     };
 
+
     const starBrush = {
         name : 'Star',
 

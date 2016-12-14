@@ -42,6 +42,21 @@ const app = {
         this.ctx.closePath();
     },
 
+    setCanvasSize : function (e, no, s) {
+        this.canvasSize = s || document.getElementById('size').value || "1024x680";
+        this.canvas.setAttribute("width", this.canvasSize.split("x")[0]);
+        this.canvas.setAttribute("height", this.canvasSize.split("x")[1]);
+        // console.log(this.canvas.getAttribute("width"));
+        // console.log(this.canvas.getAttribute("height"));
+        this.canvas.setAttribute("width", this.canvasSize.split("x")[0]);
+        this.canvas.setAttribute("height", this.canvasSize.split("x")[1]);
+        if (!no) {
+            this.socket.emit("size", {
+                size : this.canvasSize
+            });
+        }
+    },
+
     clearHandler: function(e, no) {
         this.canvasColor = "rgb(255, 255, 255)";
         this.clearCanvas();
@@ -244,14 +259,15 @@ const app = {
             room.ctx.closePath();
             room.selectBrush(beforeDrawBrush);
 
-
         });
+
         room.socket.on("load", function(message) {
             let color = message.canvasColor || "rgb(255, 255, 255)";
             room.colorWholeCanvas(color);
             room.history = message.history;
             room.undohistory = message.undohistory;
-            room.replayHistory(room.history, message.canvasColor); // TODO canvascolor
+            room.replayHistory(room.history, message.canvasColor);
+            room.setCanvasSize(null, true, message.size);
 
         });
 
@@ -276,7 +292,16 @@ const app = {
             room.undohistory = message.undohistory;
             room.clearCanvas();
             room.replayHistory(room.history, message.strokeStyle);
-        })
+        });
+
+        room.socket.on("size", function (message) {
+            // room.canvas.setAttribute("width", message.size.split("x")[0]);
+            // room.canvas.setAttribute("height", message.size.split("x")[1]);
+            // document.getElementById('size').value = message.size;
+            // TODO socket size
+            room.setCanvasSize(null, true, message.size);
+
+        });
     },
 
     mouseDownFn : function (e) {
@@ -331,6 +356,7 @@ const app = {
         // this.brushSize = document.getElementsByClassName("value")[0].innerHTML; // textContent
         this.brushSize = document.getElementById("sizeSlider").value;
         this.changeBrushSize();
+        this.setCanvasSize(null, true);
 
 
         // add drawing listeners
@@ -340,11 +366,12 @@ const app = {
         this.canvas.addEventListener('mouseout', this.mouseUpFn.bind(this));
 
 
-        // no need to keep a reference after we add the listener
+        const sizeSetterButton = document.getElementById('sizeSetterButton');
+        sizeSetterButton.addEventListener('click', this.setCanvasSize.bind(this));
+
         const palette = document.getElementById('palette');
         palette.addEventListener('click', this.paletteHandler.bind(this));
 
-        // document.getElementById('rgb').value = "not valid";
         const rgbTextField = document.getElementById("rgb");
         rgbTextField.addEventListener("click", function() {
             // console.log("hai clickato");
