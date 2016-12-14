@@ -2,102 +2,125 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>GroupDraw - Rooms</title>
+  <meta charset="utf-8">
+  <title>GroupDraw - Rooms</title>
 
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper amber darken-2">
-            <a href="#" class="brand-logo center">GroupDraw</a>
-        </div>
-    </nav>
-    <nav>
-        <div class="nav-wrapper amber darken-2">
-            <ul id="nav-mobile" class="left">
-                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul class="left hide-on-med-and-down">
-                    <li class="active"><a href="rooms">Rooms</a></li>
-                    <li><a href="gallery">Gallery</a></li>
-                    <li><a href="users">Users</a></li>
-                </ul>
-                <ul class="side-nav" id="mobile-nav">
-                    <li class="active"><a href="rooms">Rooms</a></li>
-                    <li><a href="gallery">Gallery</a></li>
-                    <li ><a href="contacts">Users</a></li>
-                </ul>
+  <nav>
+    <div class="nav-wrapper amber darken-2">
+      <a href="#" class="brand-logo center">GroupDraw</a>
+    </div>
+  </nav>
+  <nav>
+    <div class="nav-wrapper amber darken-2">
+      <ul id="nav-mobile" class="left">
+        <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="left hide-on-med-and-down">
+          <li class="active"><a href="rooms">Rooms</a></li>
+          <li><a href="gallery">Gallery</a></li>
+          <li><a href="users">Users</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-nav">
+          <li class="active"><a href="rooms">Rooms</a></li>
+          <li><a href="gallery">Gallery</a></li>
+          <li ><a href="contacts">Users</a></li>
+        </ul>
 
-            </ul>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="profile">{user}</a></li>
-                <li><a href="logout"><i class="material-icons">exit_to_app</i></a></li>
-            </ul>
-        </div>
-    </nav>
-
-
-
-    <div class="container">
-
-        <!-- fixed create room bottom button -->
-        <div class="fixed-action-btn">
-            <a id="newRoomButton" class="btn-floating btn-large waves-effect waves-light red" href="#modal1"><i class="material-icons">add</i></a>
-        </div>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="profile">{user}</a></li>
+        <li><a href="logout"><i class="material-icons">exit_to_app</i></a></li>
+      </ul>
+    </div>
+  </nav>
 
 
 
-        <!-- Modal Structure -->
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <h4>Create a room</h4>
-                <form class="" id="roomForm" action="/rooms">
-                    <input type="text" id="roomNameInput" name="roomName" placeholder="Room name" autofocus>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button id="submitBtn" class="btn btn-flat waves-effect waves-light modal-action modal-close" type="submit" value="Create" name="action">
-                  Create<i class="material-icons right">send</i>
-                </button>
-            </div>
-        </div>
+  <div class="container">
+
+    <!-- fixed create room bottom button -->
+    <div class="fixed-action-btn">
+      <a id="newRoomButton" class="btn-floating btn-large waves-effect waves-light red" href="#modal1"><i class="material-icons">add</i></a>
+    </div>
+
+    <div class="fixed-action-btn vertical">
+    <a id="newRoomButton" class="btn-floating btn-large red" href="#modal1">
+      <i class="large material-icons">add</i>
+    </a>
+    <ul>
+      <li><a id="newPrivateRoomButton" class="btn-floating blue" href="#modal2"><i class="material-icons">lock</i></a></li>
+    </ul>
+  </div>
 
 
 
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Create a room</h4>
+        <form class="" id="roomForm" action="/rooms">
+          <input type="text" id="roomNameInput" name="roomName" placeholder="Room name" autofocus>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="submitBtn" class="btn btn-flat waves-effect waves-light modal-action modal-close" type="submit" value="Create" name="action">
+          Create<i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
 
-        <div style="display: flex;">
-            <div style="flex:1;">
-                <ul id="roomList">
-                    {>roomitems/}
-                </ul>
-            </div>
-        </div>
-
-
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4>Create a private room</h4>
+        <form class="" id="roomForm" action="/rooms">
+          <input type="text" id="roomNameInput" name="roomName" placeholder="Room name" autofocus>
+          <input type="text" id="passwordInput" name="password" placeholder="Password">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="submitBtnPrivate" class="btn btn-flat waves-effect waves-light modal-action modal-close" type="submit" value="Create" name="action">
+          Create<i class="material-icons right">send</i>
+        </button>
+      </div>
     </div>
 
 
 
 
-    <script src="/js/dust-core.min.js"></script>
-    <script src="/views/roomitems.js"></script>
-    <script src="/views/roomitem.js"></script>
+    <div style="display: flex;">
+      <div style="flex:1;">
+        <ul id="roomList">
+          {>roomitems/}
+        </ul>
+      </div>
+    </div>
 
-    <script src="/js/rooms.js"></script>
 
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="/js/materialize.min.js"></script>
-    <script type="text/javascript" src="/js/rooms-init.js"></script>
+  </div>
+
+
+
+
+  <script src="/js/dust-core.min.js"></script>
+  <script src="/views/roomitems.js"></script>
+  <script src="/views/roomitem.js"></script>
+
+  <script src="/js/rooms.js"></script>
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+  <script type="text/javascript" src="/js/rooms-init.js"></script>
 
 </body>
 
