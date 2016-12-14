@@ -43,13 +43,22 @@ const app = {
     },
 
     setCanvasSize : function (e, no, s) {
-        this.canvasSize = s || document.getElementById('size').value || "1024x680";
+        if (s) {
+            this.canvasSize = s;
+        }
+        else if (document.getElementById('size').value.split("x").length = 0) {
+            let h = document.getElementById('size').value.split("x")[0];
+            let w = document.getElementById('size').value.split("x")[1];
+            if ((parseInt(h, 5) == "NaN") || (parseInt(h, 5) < 0) || (parseInt(w, 5) == "NaN") || (parseInt(w, 5) < 0)){
+                return;
+            }
+            this.canvasSize = parseInt(h, 5) + "x" + parseInt(w, 5);
+        }
+        else this.canvasSize =  "1024x680";
         this.canvas.setAttribute("width", this.canvasSize.split("x")[0]);
         this.canvas.setAttribute("height", this.canvasSize.split("x")[1]);
-        // console.log(this.canvas.getAttribute("width"));
-        // console.log(this.canvas.getAttribute("height"));
-        this.canvas.setAttribute("width", this.canvasSize.split("x")[0]);
-        this.canvas.setAttribute("height", this.canvasSize.split("x")[1]);
+        document.getElementById('size').value = this.canvasSize;
+        console.log(document.getElementById('size').value);
         if (!no) {
             this.socket.emit("size", {
                 size : this.canvasSize
