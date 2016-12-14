@@ -42,7 +42,7 @@ const app = {
         this.ctx.closePath();
     },
 
-    setCanvasSize : function (e, no, s) {
+    setCanvasSize : function (e, no, s, c) {
         if (s) {
             this.canvasSize = s;
         }
@@ -55,15 +55,27 @@ const app = {
             this.canvasSize = parseInt(h) + "x" + parseInt(w);
         }
         else this.canvasSize =  "1024x680";
+
+        // console.log(c);
+        // console.log(this.canvasColor);
+
+        this.canvasColor = c ||this.canvasColor;
+
         this.canvas.setAttribute("width", this.canvasSize.split("x")[0]);
         this.canvas.setAttribute("height", this.canvasSize.split("x")[1]);
         document.getElementById('size').value = this.canvasSize;
-        console.log(document.getElementById('size').value);
+        // console.log(document.getElementById('size').value);
+        this.clearCanvas();
+        this.replayHistory(this.history, c);
+
         if (!no) {
+            console.log(c);
             this.socket.emit("size", {
-                size : this.canvasSize
+                size : this.canvasSize,
+                canvasColor : this.canvasColor
             });
         }
+
     },
 
     clearHandler: function(e, no) {
@@ -103,25 +115,25 @@ const app = {
         }
     },
 
-    fillCanvas : function (e, no) {
-        this.canvasColor = this.strokeStyle;
+    fillCanvas : function (e, no, color) {
+        this.canvasColor = color || this.strokeStyle;
         this.clearCanvas();
         this.history = [];
         this.undohistory = [];
         this.clearCanvas();
-        // this.replayHistory(this.history);
+        this.replayHistory(this.history);
         this.colorWholeCanvas(this.strokeStyle);
         if (!no) {
             this.socket.emit("fill", {
                 strokeStyle : this.strokeStyle,
-                undohistory : this.undohistory
+                undohistory : this.undohistory,
+                canvasColor : this.canvasColor
             })
         }
     },
 
     colorWholeCanvas : function (color) {
-        if (!color) color = this.strokeStyle;
-        // console.log(color);
+        // if (!color) color = this.canvasColor;
         this.ctx.lineJoin = this.ctx.lineCap = 'miter';
         this.ctx.strokeStyle = color;
         this.ctx.lineWidth = 100;
@@ -275,8 +287,8 @@ const app = {
             room.colorWholeCanvas(color);
             room.history = message.history;
             room.undohistory = message.undohistory;
+            room.setCanvasSize(null, true, message.size, message.canvasColor);
             room.replayHistory(room.history, message.canvasColor);
-            room.setCanvasSize(null, true, message.size);
 
         });
 
@@ -307,8 +319,8 @@ const app = {
             // room.canvas.setAttribute("width", message.size.split("x")[0]);
             // room.canvas.setAttribute("height", message.size.split("x")[1]);
             // document.getElementById('size').value = message.size;
-            // TODO socket size
-            room.setCanvasSize(null, true, message.size);
+            console.log(message);
+            room.setCanvasSize(null, true, message.size, message.canvasColor);
 
         });
     },
@@ -365,7 +377,7 @@ const app = {
         // this.brushSize = document.getElementsByClassName("value")[0].innerHTML; // textContent
         this.brushSize = document.getElementById("sizeSlider").value;
         this.changeBrushSize();
-        this.setCanvasSize(null, true);
+        this.setCanvasSize(null, true, undefined, this.canvasColor);
 
 
         // add drawing listeners
