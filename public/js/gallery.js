@@ -71,7 +71,7 @@ function filterGallery() {
     query += 'title=' + searchField;
   }
 
-  if (window.myImages) {
+  if (window.myImages == "true") {
     myImages += 'my=true&'
   }
 
@@ -120,8 +120,7 @@ function sortGallery() {
   if (filter == "Title") {
     query += 'title=' + searchField + '&';
   }
-
-  if (window.myImages) {
+  if (window.myImages == "true") {
     myImages += 'my=true&'
   }
 

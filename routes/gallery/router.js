@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 			if (req.query.room) {
 				filter.createdInRoom = req.query.room;
 			}
-			if(req.query.title) {
+			if (req.query.title) {
 				filter.title = req.query.title;
 			}
 			if (req.query.authorName) {
