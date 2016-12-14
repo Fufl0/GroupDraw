@@ -41,13 +41,13 @@ function bindSubmit() {
   roomForm.onsubmit = submitNewRoom;
   let submitBtn = document.getElementById("submitBtn");
   submitBtn.onclick = submitNewRoom;
-  
+
 }
 
 function bindDelete() {
     let roomList = document.getElementById("roomList");
     for (let room of roomList.children) {
-	let deleteBtn = room.children[0].children[2];
+	let deleteBtn = room.children[0].children[4];
 	let id = deleteBtn.getAttribute("data-id");
 	deleteBtn.onclick = function() {
 	    doJSONRequest("DELETE", "/rooms/" + id + "/" + window.secret, null, function() {
