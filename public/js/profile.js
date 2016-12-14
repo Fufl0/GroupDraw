@@ -74,7 +74,6 @@ deleteButton.onclick = function btnSubmitOnClick(e) {
 
   var username = window.document.getElementById('username');
   console.log('deleteBtn clicked');
-  alert('Deleting Accout');
 
   var user = {
     username: username.innerHTML
