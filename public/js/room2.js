@@ -115,10 +115,6 @@ function bindSubmit() {
     document.getElementById("titleInput").focus();
     $('#modal1').modal('open');
  };
-
-
- document.getElementById("photoButton").onclick = function(){
-    document.getElementById("titleInput").focus();
- };
+ 
 
  bindSubmit();
