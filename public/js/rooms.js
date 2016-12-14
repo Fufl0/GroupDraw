@@ -49,17 +49,21 @@ function bindDelete() {
     for (let room of roomList.children) {
 	let deleteBtn = room.children[0].children[2];
 	let id = deleteBtn.getAttribute("data-id");
-	//if (){
 	deleteBtn.onclick = function() {
 	    doJSONRequest("DELETE", "/rooms/" + id + "/" + window.secret, null, function() {
 		roomList.removeChild(room);
 	    });
 	}
 	}
-    //}
 }
 
 window.onload = function() {
     bindSubmit();
     bindDelete();
+
+    let profile = document.getElementById("profileName");
+        if(profile.innerHTML.toLowerCase().indexOf("guest") >= 0){
+              let d = document.getElementById("newRoomButton");
+              d.className += " disabled";
+        }
 };
