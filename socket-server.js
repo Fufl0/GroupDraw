@@ -20,22 +20,10 @@ module.exports = function(httpServer) {
         let id;
 
         //USER
-        // socket.on('online', function(id) {
-    		// 	User.update({_id: req.session.user._id}, {status: 'online'}, function(err, n) {
-    		// 		console.log(req.session.user.username + ' is online.');
-    		// 		io.emit('online', _id);
-    		// 	});
-    		// });
-        //
-        // socket.on('disconnect', function() {
-    		// 	//if client was online
-    		// 	if (_id) {
-    		// 		CUser.update({_id: req.session.user._id}, {status : 'offline'}, function(err, n) {
-    		// 			console.log(req.session.user.username + ' is offline');
-    		// 			if (_id) io.emit('offline', _id);
-    		// 		});
-    		// 	}
-    		// });
+        socket.on('reload', function(){
+          console.log('reload');
+          setTimeout(function() {io.emit('reload')}, 500);
+        });
 
 
         // ROOM

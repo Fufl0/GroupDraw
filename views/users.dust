@@ -57,6 +57,10 @@
 
 
     <script src="/js/dust-core.min.js"></script>
+    <script src="/js/socket.io.js"></script>
+    <script src="/js/users.js"></script>
+    <script src="/views/useritems.js"></script>
+    <script src="/views/useritem.js"></script>
 
 
     <!--Import jQuery before materialize.js-->

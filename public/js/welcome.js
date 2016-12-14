@@ -36,6 +36,10 @@ loginButton.onclick = function btnSubmitOnClick(e) {
         $("#username").prop("aria-invalid", "true");
       }
     };
+
+    const socket = io();
+    socket.emit('reload');
+
     r.send(JSON.stringify(user));
   }
 };
