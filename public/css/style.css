@@ -43,6 +43,10 @@ select {
   }
 }
 
+.room-item-div{
+  height: 160px;
+}
+
 .topright {
     position: absolute;
     top: 5px;
@@ -54,6 +58,7 @@ select {
     bottom: 5px;
     right: 5px;
 }
+
 
 
 .delete{
@@ -369,3 +374,8 @@ label[data-error]:after {
   color: white;
   margin-left: 10px;
 }*/
+
+.roomPassword{
+  width: 70%;
+  float:left;
+}

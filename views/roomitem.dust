@@ -1,7 +1,10 @@
 <li class="room-item">
-      <div class="card-panel white" style="position: relative;">
+      <div class=" room-item-div card-panel white" style="position: relative;">
         <h5 class="room-title">{name}</h5>
-        <!-- <p>{creator}</p> -->
+        <p style="font-size: 14px; color:#aaa">Created by: {creator}</p>
+        <form class="roomPassword " action="/rooms">
+          <input type="text" name="password" placeholder="Password">
+        </form>
         <a class="btn light-blue waves-effect waves-light bottomright room-link" href="{links[0].href}">Join</a>
         <i class="topright material-icons delete" data-id="{_id}" class="delete">clear</i>
       </div>
