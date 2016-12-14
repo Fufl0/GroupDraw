@@ -80,6 +80,7 @@ module.exports = function(httpServer) {
 
         socket.on("size", function (message) {
             roomSizes[id] = message.size;
+            canvasColor[id] = message.canvasColor;
             socket.broadcast.to(id).emit('size', message);
         })
     });
