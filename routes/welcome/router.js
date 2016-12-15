@@ -30,6 +30,7 @@ router.loginUser = function loginUser(req, res) {
       res.status(404).end();
     } else {
       req.session.user = user;
+      req.session.user.status = 'online';
       res.status(200).send();
     }
   });

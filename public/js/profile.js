@@ -64,6 +64,8 @@ saveButton.onclick = function btnSubmitOnClick(e) {
   r.setRequestHeader('Accept', 'application/json');
   console.log(user);
   r.send(JSON.stringify(user));
+
+  alert('Your account has been updated.');
 };
 
 //DELETE USER
