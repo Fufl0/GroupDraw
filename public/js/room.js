@@ -14,21 +14,20 @@ const app = {
     undohistory: [],
 
     socket: io(),
-    // get id from url
+
     id: window.location.pathname.split('/')[2],
 
     // will be overwritten by brushes
     draw: function() {},
 
+
     clearCanvas: function(clearButton) {
-        // if (clearButton) this.canvasColor = "rgb(255, 255, 255)";
+        if (clearButton) this.canvasColor = "rgb(255, 255, 255)";
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.colorWholeCanvas();
     },
 
     replayHistory: function(history) {
-        // this.canvasColor = this.canvasColor ||"rgb(255, 255, 255)";
-        // this.colorWholeCanvas();
         history.forEach(this.drawLine.bind(this));
     },
 
@@ -36,9 +35,11 @@ const app = {
         if (lineSegs.length == 0) return;
         this.ctx.beginPath();
         this.selectBrush(lineSegs[0].brushName);
+
         lineSegs.forEach(seg => {
             this.draw(seg.strokeStyle, seg.x, seg.y, seg.brushSize);
         });
+
         this.ctx.closePath();
     },
 
@@ -67,7 +68,6 @@ const app = {
         if (!no) {
             this.socket.emit("size", {
                 size : this.canvasSize,
-                // canvasColor : this.canvasColor
             });
         }
 
@@ -88,11 +88,7 @@ const app = {
         this.clearCanvas();
         this.replayHistory(this.history);
         if (!no) {
-            this.socket.emit("undo", {
-                history : this.history,
-                undohistory: this.undohistory,
-                canvasColor: this.canvasColor
-            })
+            this.socket.emit("undo")
         }
     },
 
@@ -102,32 +98,22 @@ const app = {
         this.clearCanvas();
         this.replayHistory(this.history);
         if (!no) {
-            this.socket.emit("redo", {
-                history : this.history,
-                undohistory: this.undohistory,
-                canvasColor: this.canvasColor
-            })
+            this.socket.emit("redo");
         }
     },
 
+
     changeCanvasColor : function () {
-        // console.log(this.canvasColor);
         this.canvasColor = this.strokeStyle;
-        // console.log(this.canvasColor);
         this.fillCanvas();
     },
 
 
     fillCanvas : function (e, no) {
-        console.log("fillCanvas before", this.canvasColor);
         this.colorWholeCanvas();
-        // console.log(this.canvasColor);
         this.replayHistory(this.history);
-        console.log("fillCanvas after",this.canvasColor);
         if (!no) {
             this.socket.emit("fill", {
-                // strokeStyle : this.strokeStyle,
-                // undohistory : this.undohistory,
                 canvasColor : this.canvasColor
             })
         }
@@ -135,7 +121,7 @@ const app = {
 
 
     colorWholeCanvas : function () {
-        console.log("colorWholeCanvas function: ", this.canvasColor);
+        // console.log("colorWholeCanvas function: ", this.canvasColor);
         this.ctx.lineJoin = this.ctx.lineCap = 'miter';
         this.ctx.strokeStyle = this.canvasColor;
         this.ctx.lineWidth = 100;
@@ -150,20 +136,17 @@ const app = {
     paletteHandler: function(e) {
         if (!e.target.classList.contains('p-color')) return;
         this.strokeStyle = e.target.dataset.color;
-        // console.log(e.target.dataset.color);
         let rgbcolor = e.target.dataset.color.substr(4, (e.target.dataset.color.length - 5));
         document.getElementById("rgb").value = this.colorRgbToHex(rgbcolor);
     },
 
     changeBrushSize: function () {
-        // this.brushSize = document.getElementsByClassName("value")[0].innerHTML;
         this.brushSize = document.getElementById("sizeSlider").value;
         document.getElementById('Size-title').innerHTML = 'Size : ' + this.brushSize;
     },
 
 
     rgbPickerHandler: function() {
-        // console.log("hai premuto rgbpicker");
         let rgbInsertedColor = document.getElementById('rgb').value;
         // if (rgbInsertedColor.length = 7)
             this.strokeStyle = this.colorHexToRgb(rgbInsertedColor);
@@ -188,6 +171,7 @@ const app = {
 
         return "rgb(" + red + ", " + green + ", " + blue + ")";
     },
+
 
     colorRgbToHex: function(color) {
         let rgbs = color.split(",");
@@ -252,13 +236,6 @@ const app = {
         this.selectBrush(e.currentTarget.id);
     },
 
-
-    setStatus: function(status) {
-        this.statusEl.innerHTML = status;
-    },
-
-
-
     setupSocket: function() {
 
         let room = this;
@@ -272,7 +249,6 @@ const app = {
         });
         room.socket.on("draw", function(message) {
             let beforeDrawBrush = room.currentBrushName;
-            // console.log("before: ", beforeDrawBrush);
             room.history.push(message.stroke);
             room.ctx.beginPath();
             room.selectBrush(message.stroke[0].brushName);
@@ -286,54 +262,37 @@ const app = {
 
         room.socket.on("load", function(message) {
             room.canvasColor = message.canvasColor;
-            console.log("from socket", room.canvasColor);
             room.history = message.history;
             room.undohistory = message.undohistory;
             room.setCanvasSize(null, true, message.size);
 
-            // room.colorWholeCanvas();
-            // room.colorWholeCanvas();
-            // room.replayHistory(room.history);
 
         });
 
-        room.socket.on("undo", function(message) {
-            room.history = message.history;
-            room.undohistory = message.undohistory;
-            room.canvasColor = message.canvasColor;
+        room.socket.on("undo", function() {
+            room.undohistory.push(room.history.pop());
             room.clearCanvas();
             room.colorWholeCanvas();
             room.replayHistory(room.history);
         });
 
-        room.socket.on("redo", function(message) {
-            room.history = message.history;
-            room.undohistory = message.undohistory;
-            room.canvasColor = message.canvasColor;
-            room.clearCanvas();
-            room.colorWholeCanvas();
-            room.replayHistory(room.history);
+        room.socket.on("redo", function() {
+            console.log("sono in redo dalla socket");
+            room.redoHandler(null, true);
         });
 
         room.socket.on("fill", function (message) {
-            // room.clearCanvas();
             room.canvasColor = message.canvasColor;
-            // room.history = [];
-            // room.undohistory = message.undohistory;
-            // room.clearCanvas();
-            // room.replayHistory(room.history);
+            room.clearCanvas();
             room.fillCanvas(null, true);
         });
 
         room.socket.on("size", function (message) {
-            // room.canvas.setAttribute("width", message.size.split("x")[0]);
-            // room.canvas.setAttribute("height", message.size.split("x")[1]);
-            // document.getElementById('size').value = message.size;
-            // room.canvasColor = message.canvasColor;
             room.setCanvasSize(null, true, message.size);
 
         });
     },
+
 
     mouseDownFn : function (e) {
         this.history.push([]);
@@ -342,11 +301,9 @@ const app = {
         this.ctx.beginPath();
         this.ctx.moveTo(e.offsetX, e.offsetY);
 
-        // first dot
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
-            // canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -356,11 +313,11 @@ const app = {
         this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
     },
 
+
     mouseMoveFn : function (e) {
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
-            // canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -369,6 +326,7 @@ const app = {
         });
         this.draw(this.strokeStyle, e.offsetX, e.offsetY, this.brushSize);
     },
+
 
     mouseUpFn : function (e) {
         if (this.isDrawing) {
