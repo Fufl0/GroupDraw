@@ -62,25 +62,26 @@ module.exports = function(httpServer) {
         socket.on("undo", function(message) {
             roomHistories[id] = message.history;
             roomUndoHistories[id] = message.undohistory;
+            canvasColor[id] = message.canvasColor;
             socket.broadcast.to(id).emit("undo", message);
         });
 
         socket.on("redo", function(message) {
             roomHistories[id] = message.history;
             roomUndoHistories[id] = message.undohistory;
+            canvasColor[id] = message.canvasColor;
             socket.broadcast.to(id).emit("undo", message);
         });
 
         socket.on("fill", function(message) {
-            roomHistories[id] = [];
-            roomUndoHistories[id] = message.undohistory;
-            canvasColor[id] = message.strokeStyle;
+            // roomHistories[id] = [];
+            // roomUndoHistories[id] = message.undohistory;
+            canvasColor[id] = message.canvasColor;
             socket.broadcast.to(id).emit("fill", message);
         });
 
         socket.on("size", function (message) {
             roomSizes[id] = message.size;
-            canvasColor[id] = message.canvasColor;
             socket.broadcast.to(id).emit('size', message);
         })
     });

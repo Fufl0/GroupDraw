@@ -20,15 +20,15 @@ const app = {
     // will be overwritten by brushes
     draw: function() {},
 
-    clearCanvas: function() {
-        this.canvasColor = "rgb(255, 255, 255)";
+    clearCanvas: function(clearButton) {
+        // if (clearButton) this.canvasColor = "rgb(255, 255, 255)";
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.colorWholeCanvas("rgb(255, 255, 255)");
+        this.colorWholeCanvas();
     },
 
-    replayHistory: function(history, c) {
-        let color = c || "rgb(255, 255, 255)";
-        this.colorWholeCanvas(color);
+    replayHistory: function(history) {
+        // this.canvasColor = this.canvasColor ||"rgb(255, 255, 255)";
+        // this.colorWholeCanvas();
         history.forEach(this.drawLine.bind(this));
     },
 
@@ -42,7 +42,7 @@ const app = {
         this.ctx.closePath();
     },
 
-    setCanvasSize : function (e, no, s, c) {
+    setCanvasSize : function (e, no, s) {
         if (s) {
             this.canvasSize = s;
         }
@@ -56,23 +56,18 @@ const app = {
         }
         else this.canvasSize =  "1024x680";
 
-        // console.log(c);
-        // console.log(this.canvasColor);
-
-        this.canvasColor = c ||this.canvasColor;
 
         this.canvas.setAttribute("width", this.canvasSize.split("x")[0]);
         this.canvas.setAttribute("height", this.canvasSize.split("x")[1]);
         document.getElementById('size').value = this.canvasSize;
-        // console.log(document.getElementById('size').value);
         this.clearCanvas();
-        this.replayHistory(this.history, c);
+        this.colorWholeCanvas();
+        this.replayHistory(this.history);
 
         if (!no) {
-            console.log(c);
             this.socket.emit("size", {
                 size : this.canvasSize,
-                canvasColor : this.canvasColor
+                // canvasColor : this.canvasColor
             });
         }
 
@@ -80,7 +75,7 @@ const app = {
 
     clearHandler: function(e, no) {
         this.canvasColor = "rgb(255, 255, 255)";
-        this.clearCanvas();
+        this.clearCanvas(true);
         this.history = [];
         this.undohistory = [];
         if (!no)
@@ -91,7 +86,7 @@ const app = {
         if (!this.history.length) return;
         this.undohistory.push(this.history.pop());
         this.clearCanvas();
-        this.replayHistory(this.history, this.canvasColor);
+        this.replayHistory(this.history);
         if (!no) {
             this.socket.emit("undo", {
                 history : this.history,
@@ -105,7 +100,7 @@ const app = {
         if (!this.undohistory.length) return;
         this.history.push(this.undohistory.pop());
         this.clearCanvas();
-        this.replayHistory(this.history, this.canvasColor);
+        this.replayHistory(this.history);
         if (!no) {
             this.socket.emit("redo", {
                 history : this.history,
@@ -115,29 +110,36 @@ const app = {
         }
     },
 
-    fillCanvas : function (e, no, color) {
-        this.canvasColor = color || this.strokeStyle;
-        this.clearCanvas();
-        this.history = [];
-        this.undohistory = [];
-        this.clearCanvas();
+    changeCanvasColor : function () {
+        // console.log(this.canvasColor);
+        this.canvasColor = this.strokeStyle;
+        // console.log(this.canvasColor);
+        this.fillCanvas();
+    },
+
+
+    fillCanvas : function (e, no) {
+        console.log("fillCanvas before", this.canvasColor);
+        this.colorWholeCanvas();
+        // console.log(this.canvasColor);
         this.replayHistory(this.history);
-        this.colorWholeCanvas(this.strokeStyle);
+        console.log("fillCanvas after",this.canvasColor);
         if (!no) {
             this.socket.emit("fill", {
-                strokeStyle : this.strokeStyle,
-                undohistory : this.undohistory,
+                // strokeStyle : this.strokeStyle,
+                // undohistory : this.undohistory,
                 canvasColor : this.canvasColor
             })
         }
     },
 
-    colorWholeCanvas : function (color) {
-        // if (!color) color = this.canvasColor;
+
+    colorWholeCanvas : function () {
+        console.log("colorWholeCanvas function: ", this.canvasColor);
         this.ctx.lineJoin = this.ctx.lineCap = 'miter';
-        this.ctx.strokeStyle = color;
+        this.ctx.strokeStyle = this.canvasColor;
         this.ctx.lineWidth = 100;
-        this.ctx.fillStyle = color;
+        this.ctx.fillStyle = this.canvasColor;
         this.ctx.rect(0, 0, this.canvas.getAttribute("width"), this.canvas.getAttribute("height"));
         this.ctx.fill();
         this.ctx.stroke();
@@ -283,44 +285,52 @@ const app = {
         });
 
         room.socket.on("load", function(message) {
-            let color = message.canvasColor || "rgb(255, 255, 255)";
-            room.colorWholeCanvas(color);
+            room.canvasColor = message.canvasColor;
+            console.log("from socket", room.canvasColor);
             room.history = message.history;
             room.undohistory = message.undohistory;
-            room.setCanvasSize(null, true, message.size, message.canvasColor);
-            room.replayHistory(room.history, message.canvasColor);
+            room.setCanvasSize(null, true, message.size);
+
+            // room.colorWholeCanvas();
+            // room.colorWholeCanvas();
+            // room.replayHistory(room.history);
 
         });
 
         room.socket.on("undo", function(message) {
             room.history = message.history;
             room.undohistory = message.undohistory;
+            room.canvasColor = message.canvasColor;
             room.clearCanvas();
-            room.replayHistory(room.history, message.canvasColor);
+            room.colorWholeCanvas();
+            room.replayHistory(room.history);
         });
 
         room.socket.on("redo", function(message) {
             room.history = message.history;
             room.undohistory = message.undohistory;
+            room.canvasColor = message.canvasColor;
             room.clearCanvas();
-            room.replayHistory(room.history, message.canvasColor);
+            room.colorWholeCanvas();
+            room.replayHistory(room.history);
         });
 
         room.socket.on("fill", function (message) {
-            room.clearCanvas();
-            room.canvasColor = message.strokeStyle;
-            room.history = [];
-            room.undohistory = message.undohistory;
-            room.clearCanvas();
-            room.replayHistory(room.history, message.strokeStyle);
+            // room.clearCanvas();
+            room.canvasColor = message.canvasColor;
+            // room.history = [];
+            // room.undohistory = message.undohistory;
+            // room.clearCanvas();
+            // room.replayHistory(room.history);
+            room.fillCanvas(null, true);
         });
 
         room.socket.on("size", function (message) {
             // room.canvas.setAttribute("width", message.size.split("x")[0]);
             // room.canvas.setAttribute("height", message.size.split("x")[1]);
             // document.getElementById('size').value = message.size;
-            console.log(message);
-            room.setCanvasSize(null, true, message.size, message.canvasColor);
+            // room.canvasColor = message.canvasColor;
+            room.setCanvasSize(null, true, message.size);
 
         });
     },
@@ -336,7 +346,7 @@ const app = {
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
-            canvasColor : this.canvasColor || "rgb(255, 255, 255)",
+            // canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -350,7 +360,7 @@ const app = {
         if (!this.isDrawing) return;
         const hisIdx = this.history.length - 1;
         this.history[hisIdx].push({
-            canvasColor : this.canvasColor || "rgb(255, 255, 255)",
+            // canvasColor : this.canvasColor || "rgb(255, 255, 255)",
             brushName: this.currentBrushName,
             x: e.offsetX ,
             y: e.offsetY ,
@@ -374,10 +384,9 @@ const app = {
     init: function() {
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
-        // this.brushSize = document.getElementsByClassName("value")[0].innerHTML; // textContent
         this.brushSize = document.getElementById("sizeSlider").value;
-        this.changeBrushSize();
-        this.setCanvasSize(null, true, undefined, this.canvasColor);
+        // this.changeBrushSize();
+        // this.setCanvasSize(null, true, undefined, this.canvasColor);
 
 
         // add drawing listeners
@@ -419,8 +428,7 @@ const app = {
         clearButton.addEventListener('click', this.clearHandler.bind(this));
 
         const fillButton = document.getElementById('fillButton');
-        fillButton.addEventListener('mouseup', this.fillCanvas.bind(this));
-
+        fillButton.addEventListener('mouseup', this.changeCanvasColor.bind(this));
 
         this.setupBrushes();
         this.selectBrush('Pen');
