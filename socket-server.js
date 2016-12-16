@@ -20,9 +20,15 @@ module.exports = function(httpServer) {
         let id;
 
         //USER
+
         socket.on('reload', function(){
           console.log('reload');
           setTimeout(function() {io.emit('reload')}, 500);
+        });
+
+        socket.on('disconnect', function () {
+          console.log('DISCONNESSO!!! ');
+          io.sockets.emit();
         });
 
 
@@ -79,4 +85,5 @@ module.exports = function(httpServer) {
             socket.broadcast.to(id).emit('size', message);
         })
     });
+
 };
