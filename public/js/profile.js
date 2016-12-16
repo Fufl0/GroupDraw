@@ -65,7 +65,8 @@ saveButton.onclick = function btnSubmitOnClick(e) {
   console.log(user);
   r.send(JSON.stringify(user));
 
-  alert('Your account has been updated.');
+  // alert('Your account has been updated.');
+  Materialize.toast('Your account has been updated.', 4000) // 4000 is the duration of the toast
 };
 
 //DELETE USER
