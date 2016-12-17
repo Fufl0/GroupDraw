@@ -11,6 +11,8 @@ module.exports = function(httpServer) {
         socket.join(id);
     }
 
+    let users = {};
+
     let roomHistories = {};
     let roomUndoHistories = {};
     let canvasColor = {};
@@ -21,15 +23,26 @@ module.exports = function(httpServer) {
 
         //USER
 
-        socket.on('reload', function(){
-          console.log('reload');
-          setTimeout(function() {io.emit('reload')}, 500);
-        });
+        // socket.join('/rooms');
 
-        socket.on('disconnect', function () {
-          console.log('DISCONNESSO!!! ');
-          io.sockets.emit();
-        });
+        // socket.on("join", function(userId) {
+        //   id = userId;
+        //
+        //   console.log('A user logged in.');
+        //   login(socket, '/rooms');
+        // });
+
+        // socket.on('reload', function(){
+        //   console.log('reload');
+        //   setTimeout(function() {io.emit('reload')}, 500);
+        // });
+
+        // socket.leave('/rooms');
+
+        // socket.on('disconnect', function () {
+        //   console.log('A user disconnected.');
+        //   //io.sockets.emit();
+        // });
 
 
         // ROOM
