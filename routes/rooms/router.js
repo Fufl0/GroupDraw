@@ -55,18 +55,6 @@ router.get("/", function(req, res, next){
 	}
 });
 
-router.put('/', function(req, res) {
-  Rooms.findOne({name: req.body.username, password: req.body.password}, (err, room) => {
-    if (err) {
-      res.status(500).end();
-    } else if (!room) {
-      res.status(404).end();
-    } else {
-      res.status(200).send();
-    }
-  });
-});
-
 router.delete("/:id/:creator", function(req, res, next){
 	console.log("id here");
 	console.log(req.params.id);
@@ -98,7 +86,21 @@ router.delete("/:id/:creator", function(req, res, next){
 			}
 		})
 	}
-})
+});
+
+router.post('/:id', function(req, res, next) {
+  model.findOne({name: req.body.name, password: req.body.password}, (err, room) => {
+    if (err) {
+      res.status(500).end();
+    } else if (!room) {
+      res.status(201);
+			res.json({true: false});
+    } else {
+      res.status(201);
+			res.json({true: true});
+    }
+  });
+});
 
 router.post("/", function (req, res, next){
 	if (!req.session.user) {

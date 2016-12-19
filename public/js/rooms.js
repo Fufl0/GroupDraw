@@ -93,35 +93,34 @@ function bindDelete() {
 function bindPrivateCheck() {
   let roomList = document.getElementById("roomList");
   for (let room of roomList.children) {
-	   let joinBtn = room.children[0].children[3];
-	   joinBtn.onclick = function() {
-        event.preventDefault();
-        let roomLink = joinBtn.getAttribute("href");
-        joinBtn.setAttribute("href", '');
-        let roomName = room.children[0].children[0].innerHTML;
-        let enteredPassword = room.children[0].children[2].children[0].value;
-        var room = {
-          name: roomName,
-          password: enteredPassword
-        };
-        r.open('PUT', '/rooms');
-        r.setRequestHeader('Content-Type', 'application/json');
-        r.setRequestHeader('Accept', 'application/json');
-        r.onreadystatechange = function onReadyStateChange() {
-          if (r.readyState !== 4) return;
-          if (r.readyState === 4 && r.status === 200) {
-            joinBtn.setAttribute("href", roomLink);
-            window.location = roomLink;
-          }
-          if (r.readyState === 4 && r.status === 404) {
-            room.children[0].children[2].children[0].setAttribute("data-error", "Wrong password");
-            room.children[0].children[2].children[0].addClass(" invalid");
-            joinBtn.setAttribute("href", roomLink);
-          }
-        };
-        r.send(JSON.stringify(room));
-	   }
-	 }
+    let joinBtn = room.children[0].children[3];
+    joinBtn.onclick = function(event) {
+      event.preventDefault();
+      var roomLink = joinBtn.getAttribute("href");
+      joinBtn.setAttribute("href", '');
+      let roomName = room.children[0].children[0].innerHTML;
+      let enteredPassword = room.children[0].children[2].children[0].value;
+      var roomToSend = {
+        name: roomName,
+        password: enteredPassword
+      };
+
+      doJSONRequest('POST', roomLink, roomToSend, function(res) {
+        console.log(roomLink);
+        console.log(roomToSend);
+        console.log(res);
+        if (res.true === true) {
+          joinBtn.setAttribute("href", roomLink);
+          console.log(roomLink);
+          window.location = roomLink;
+        } else {
+          room.children[0].children[2].children[0].setAttribute("data-error", "Wrong password");
+          room.children[0].children[2].children[0].className += " invalid";
+          joinBtn.setAttribute("href", roomLink);
+        }
+      });
+    }
+  }
 }
 
 function setupSocket() {
@@ -162,6 +161,7 @@ window.onload = function() {
     bindSubmit();
     bindDelete();
     setupSocket();
+    bindPrivateCheck();
 
     let profile = document.getElementById("profileName");
         if(profile.innerHTML.toLowerCase().indexOf("guest") >= 0){
