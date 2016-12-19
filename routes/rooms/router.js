@@ -110,6 +110,7 @@ router.post("/", function (req, res, next){
 			let t = new model({
 				name: req.body.name,
 				password: req.body.password,
+				isPrivate: req.body.isPrivate,
 				creator: req.session.user.username
 			});
 			t.save(function(err, saved){

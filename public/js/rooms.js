@@ -55,7 +55,7 @@ function bindSubmit() {
     }
     document.getElementById("privateRoomNameInput").value = '';
     document.getElementById("roomPasswordInput").value = '';
-    doJSONRequest("POST", "/rooms", { name: roomName, password: roomPassword }, function(saved) {
+    doJSONRequest("POST", "/rooms", { name: roomName, password: roomPassword, isPrivate: true }, function(saved) {
       dust.render("roomitem", saved, function(err, room) {
         document.getElementById("roomList").innerHTML += room;
       });
