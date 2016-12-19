@@ -104,8 +104,8 @@ function bindPrivateCheck() {
         r.onreadystatechange = function onReadyStateChange() {
           if (r.readyState !== 4) return;
           if (r.readyState === 4 && r.status === 200) {
-            window.location = roomLink;
             joinBtn.setAttribute("href", roomLink);
+            window.location = roomLink;
           }
           if (r.readyState === 4 && r.status === 404) {
             room.children[0].children[2].children[0].setAttribute("data-error", "Wrong password");
@@ -113,38 +113,10 @@ function bindPrivateCheck() {
             joinBtn.setAttribute("href", roomLink);
           }
         };
-        r.send(JSON.stringify(user));
+        r.send(JSON.stringify(room));
 	   }
 	 }
 }
-
-// document.getElementById("roomList").children[3].children[0].children[3].onclick = function() {
-//    event.preventDefault();
-//    let roomLink = joinBtn.getAttribute("href");
-//    document.getElementById("roomList").children[3].children[0].children[3].setAttribute("href", '');
-//    let roomName = document.getElementById("roomList").children[3].children[0].children[0].innerHTML;
-//    let enteredPassword = document.getElementById("roomList").children[3].children[0].children[2].children[0].value;
-//    var room = {
-//      name: roomName,
-//      password: enteredPassword
-//    };
-//    r.open('PUT', '/rooms');
-//    r.setRequestHeader('Content-Type', 'application/json');
-//    r.setRequestHeader('Accept', 'application/json');
-//    r.onreadystatechange = function onReadyStateChange() {
-//      if (r.readyState !== 4) return;
-//      if (r.readyState === 4 && r.status === 200) {
-//        window.location = roomLink;
-//        document.getElementById("roomList").children[3].children[0].children[3].setAttribute("href", roomLink);
-//      }
-//      if (r.readyState === 4 && r.status === 404) {
-//        room.children[0].children[2].children[0].setAttribute("data-error", "Wrong password");
-//        room.children[0].children[2].children[0].addClass(" invalid");
-//        document.getElementById("roomList").children[3].children[0].children[3].setAttribute("href", roomLink);
-//      }
-//    };
-//    r.send(JSON.stringify(user));
-// }
 
 window.onload = function() {
     bindSubmit();
