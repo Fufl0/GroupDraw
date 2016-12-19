@@ -13,7 +13,7 @@ loginButton.onclick = function btnSubmitOnClick(e) {
   console.log('loginButton clicked');
   var user = {
     username: username.value,
-    password: password.value,
+    password: password.value
   };
   var r = new XMLHttpRequest();
   if (username.value.toLowerCase().indexOf("guest") >= 0) {

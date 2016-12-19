@@ -1,4 +1,4 @@
-/** @module users/router */
+/** @module rooms/router */
 'use strict';
 
 
@@ -55,6 +55,18 @@ router.get("/", function(req, res, next){
 	}
 });
 
+router.put('/', function(req, res) {
+  Rooms.findOne({name: req.body.username, password: req.body.password}, (err, room) => {
+    if (err) {
+      res.status(500).end();
+    } else if (!room) {
+      res.status(404).end();
+    } else {
+      res.status(200).send();
+    }
+  });
+});
+
 router.delete("/:id/:creator", function(req, res, next){
 	console.log("id here");
 	console.log(req.params.id);
@@ -92,17 +104,30 @@ router.post("/", function (req, res, next){
 	if (!req.session.user) {
 		return res.status(401).send();
 	} else {
-		let t = new model({
-			name: req.body.name,
-			creator: req.session.user.username
-		});
-
-		t.save(function(err, saved){
-			if(err){
-				return;
-			}
-			res.status(201).json(saved);
-		})
+		if (req.body.password != ''){
+			let t = new model({
+				name: req.body.name,
+				password: req.body.password,
+				creator: req.session.user.username
+			});
+			t.save(function(err, saved){
+				if(err){
+					return;
+				}
+				res.status(201).json(saved);
+			})
+		} else {
+			let t = new model({
+				name: req.body.name,
+				creator: req.session.user.username
+			});
+			t.save(function(err, saved){
+				if(err){
+					return;
+				}
+				res.status(201).json(saved);
+			})
+		}
 	}
 });
 

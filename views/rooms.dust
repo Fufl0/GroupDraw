@@ -51,11 +51,11 @@
 
 
     <div id="verticalButton" class="fixed-action-btn vertical">
-    <a id="newRoomButton" class="btn-floating btn-large red" href="#modal1">
+    <a id="newRoomButton" class="btn-floating btn-large red">
       <i class="large material-icons">add</i>
     </a>
     <ul>
-      <li><a id="newPrivateRoomButton" class="btn-floating blue" href="#modal2"><i class="material-icons">lock</i></a></li>
+      <li><a id="newPrivateRoomButton" class="btn-floating blue" ><i class="material-icons">lock</i></a></li>
     </ul>
   </div>
 
@@ -78,9 +78,9 @@
     <div id="modal2" class="modal">
       <div class="modal-content">
         <h4>Create a private room</h4>
-        <form class="" id="roomForm" action="/rooms">
-          <input type="text" id="roomNameInput" name="roomName" placeholder="Room name" autofocus>
-          <input type="text" id="passwordInput" name="password" placeholder="Password">
+        <form class="" id="privareRoomForm" action="/rooms">
+          <input type="text" id="privateRoomNameInput" name="roomName" placeholder="Room name" autofocus>
+          <input type="text" id="roomPasswordInput" name="password" placeholder="Password">
         </form>
       </div>
       <div class="modal-footer">
