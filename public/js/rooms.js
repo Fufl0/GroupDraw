@@ -40,7 +40,7 @@ function bindSubmit() {
         document.getElementById("roomList").innerHTML += room;
       });
       bindDelete();
-      socket.emit("room");
+      // socket.emit("room");
     });
 
     $('#modal1').modal('close');
@@ -61,7 +61,7 @@ function bindSubmit() {
       });
       bindDelete();
       bindPrivateCheck();
-      socket.emit("room");
+      // socket.emit("room");
     });
     $('#modal2').modal('close');
   }
@@ -86,7 +86,7 @@ function bindDelete() {
 	      doJSONRequest("DELETE", "/rooms/" + id + "/" + window.secret, null, function() {
 		      roomList.removeChild(room);
 	      });
-           socket.emit("room");
+           // socket.emit("room");
 	   }
 	 }
 }
@@ -120,9 +120,9 @@ function bindPrivateCheck() {
   }
 }
 
-function setupSocket() {
-    socket.on("room", function () {
-        location.reload();
+// function setupSocket() {
+//     socket.on("room", function () {
+//         location.reload();
     })
 }
 
@@ -157,7 +157,7 @@ function setupSocket() {
 window.onload = function() {
     bindSubmit();
     bindDelete();
-    setupSocket();
+    // setupSocket();
     bindPrivateCheck();
 
     let profile = document.getElementById("profileName");
