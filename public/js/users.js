@@ -13,7 +13,7 @@ window.onload = function() {
       x[i].style = "color:green;"
     }
     if(x[i].innerHTML.includes("away")){
-      x[i].style = "color:yellow;"
+      x[i].style = "color:#ffe035;"
     }
     if(x[i].innerHTML.includes("busy")){
       x[i].style = "color:red;"
