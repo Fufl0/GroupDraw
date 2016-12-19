@@ -31,7 +31,7 @@ function bindSubmit() {
   function submitNewRoom(event) {
     event.preventDefault();
     let roomName = document.getElementById("roomNameInput").value;
-    if(roomName == ""){
+    if(roomName === ""){
       roomName = document.getElementById("profileName").innerHTML + "'s Public Room";
     }
     document.getElementById("roomNameInput").value = '';
@@ -50,7 +50,7 @@ function bindSubmit() {
     event.preventDefault();
     let roomName = document.getElementById("privateRoomNameInput").value;
     let roomPassword = document.getElementById("roomPasswordInput").value;
-    if(roomName == ""){
+    if(roomName === ""){
       roomName = document.getElementById("profileName").innerHTML + "'s Private Room";
     }
     document.getElementById("privateRoomNameInput").value = '';
@@ -60,7 +60,8 @@ function bindSubmit() {
         document.getElementById("roomList").innerHTML += room;
       });
       bindDelete();
-        socket.emit("room");
+      bindPrivateCheck();
+      socket.emit("room");
     });
     $('#modal2').modal('close');
   }
@@ -69,7 +70,7 @@ function bindSubmit() {
   roomForm.onsubmit = submitNewRoom;
   let submitBtn = document.getElementById("submitBtn");
   submitBtn.onclick = submitNewRoom;
-  let privateRoomForm = document.getElementById('privareRoomForm');
+  let privateRoomForm = document.getElementById('privateRoomForm');
   privateRoomForm.onsubmit = submitNewPrivateRoom;
   let submitBtnPrivate = document.getElementById('submitBtnPrivate');
   submitBtnPrivate.onclick = submitNewPrivateRoom;
@@ -106,12 +107,8 @@ function bindPrivateCheck() {
       };
 
       doJSONRequest('POST', roomLink, roomToSend, function(res) {
-        console.log(roomLink);
-        console.log(roomToSend);
-        console.log(res);
         if (res.true === true) {
           joinBtn.setAttribute("href", roomLink);
-          console.log(roomLink);
           window.location = roomLink;
         } else {
           room.children[0].children[2].children[0].setAttribute("data-error", "Wrong password");

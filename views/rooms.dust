@@ -78,7 +78,7 @@
     <div id="modal2" class="modal">
       <div class="modal-content">
         <h4>Create a private room</h4>
-        <form class="" id="privareRoomForm" action="/rooms">
+        <form class="" id="privateRoomForm" action="/rooms">
           <input type="text" id="privateRoomNameInput" name="roomName" placeholder="Room name" autofocus>
           <input type="text" id="roomPasswordInput" name="password" placeholder="Password">
         </form>
