@@ -22,10 +22,9 @@ module.exports = function(httpServer) {
         let id;
 
         // ROOMS
-        socket.on("room", function() {
-            socket.broadcast.emit("room");
-            //io.sockets.emit("create", ...);
-        });
+        // socket.on("room", function() {
+        //     socket.broadcast.emit("room");
+        // });
 
         //USER
 
