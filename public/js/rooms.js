@@ -124,7 +124,6 @@ function bindPrivateCheck() {
 	 }
 }
 
-<<<<<<< HEAD
 function setupSocket() {
     socket.on("room", function () {
         location.reload();
@@ -159,8 +158,6 @@ function setupSocket() {
 //    r.send(JSON.stringify(user));
 // }
 
-=======
->>>>>>> origin/master
 window.onload = function() {
     bindSubmit();
     bindDelete();
