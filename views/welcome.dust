@@ -47,13 +47,13 @@
 
         <div class="row">
             <div class="col s6 offset-s3">
-                <a href="register"><h5 class="center" style="color:white;"> Register</h5></a>
+                <a href="register"><h5 class="center welcome-links" style="color:white;"> Register</h5></a>
             </div>
         </div>
         <div class="row">
             <div class="col s6 offset-s3">
                 <a id="guest" href="#">
-                    <p class="center" style="color:white;">enter as guest</p>
+                    <p class="center welcome-links" style="color:white;">enter as guest</p>
                 </a>
 
             </div>

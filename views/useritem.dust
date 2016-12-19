@@ -2,7 +2,7 @@
     <img src="{picture}" alt="" class="circle">
     <div class="userContent">
       <h4 class="title">{username}</h4>
-      <p>{mood}</p> <br>
+      <p>{mood}</p>
       <p class="statusLabel">{status}</p>
     </div>
 </li>

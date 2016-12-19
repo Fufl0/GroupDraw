@@ -5,6 +5,14 @@
 /*img{
   white-space:pre
 }*/
+.statusLabel{
+	position: relative;
+	bot: 20px;
+}
+
+.welcome-links{
+	text-shadow: 0.7px 0.7px 1px rgba(0,0,0, 0.7);
+}
 
 .littleCircle {
 	width: 20px;
