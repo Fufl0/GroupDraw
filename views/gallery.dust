@@ -44,7 +44,7 @@
             </ul>
             <ul class="right hide-on-med-and-down">
                 <li><a href="profile">{user}</a></li>
-                <li><a href="logout"><i class="material-icons">exit_to_app</i></a></li>
+                <li><a href=""><i class="material-icons">exit_to_app</i></a></li>
             </ul>
         </div>
     </nav>
@@ -96,7 +96,7 @@
 
 
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script class="scriptToReload" type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
 
     <script src="/js/bundle-gallery.js"></script>

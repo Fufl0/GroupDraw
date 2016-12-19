@@ -72,7 +72,7 @@ function filterGallery() {
   }
 
   if (window.myImages == "true") {
-    myImages += 'my=true&'
+    myImages += 'my=true&';
   }
 
   request('/gallery?' + myImages + query, {
@@ -86,8 +86,8 @@ function sortGallery() {
 
   var value = document.getElementById('sort-by').value;
 
-  var sortCriteria = 'dateCreated'
-  var sortBy = 'sortBy='
+  var sortCriteria = 'dateCreated';
+  var sortBy = 'sortBy=';
 
   if (value == 'Room') {
     sortCriteria = 'createdInRoom';
@@ -121,7 +121,7 @@ function sortGallery() {
     query += 'title=' + searchField + '&';
   }
   if (window.myImages == "true") {
-    myImages += 'my=true&'
+    myImages += 'my=true&';
   }
 
   request('/gallery?' + myImages + query + sortBy, {
@@ -143,14 +143,14 @@ function request(url, opts, cb){
     body: null
   };
 
-  const options = Object.assign({}, defaultOptions, opts)
+  const options = Object.assign({}, defaultOptions, opts);
   var xhr = new XMLHttpRequest();
   xhr.open(options.method, url);
 
   // set headers
   Object.keys(options.headers).forEach( k => {
     xhr.setRequestHeader(k, options.headers[k]);
-  })
+  });
 
   xhr.responseType = 'json';
 
@@ -163,7 +163,7 @@ function request(url, opts, cb){
   };
 
   xhr.onerror = function() {
-    cb(err)
+    cb(err);
   };
 
   xhr.send(options.body);
@@ -190,11 +190,13 @@ function renderResponse(err, res) {
     galleryImagesToRender.push(newGalleryImage);
   }
 
-  dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
-    if(err) throw err;
-    document.getElementById('lightgallery').innerHTML = out;
-    reloadScripts();
-  });
+  setTimeout(function() {
+    dust.render('galleryitems', { gallery: galleryImagesToRender }, function(err, out) {
+      if(err) throw err;
+      document.getElementById('lightgallery').innerHTML = out;
+      reloadScripts();
+    });
+  } , 2000);
 }
 
 
