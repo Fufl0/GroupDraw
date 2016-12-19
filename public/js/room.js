@@ -137,7 +137,7 @@ const app = {
         if (!e.target.classList.contains('p-color')) return;
         this.strokeStyle = e.target.dataset.color;
         let rgbcolor = e.target.dataset.color.substr(4, (e.target.dataset.color.length - 5));
-        document.getElementById("rgb").value = this.colorRgbToHex(rgbcolor);
+        document.getElementById("color").value = this.colorRgbToHex(rgbcolor);
     },
 
     changeBrushSize: function () {
@@ -147,7 +147,7 @@ const app = {
 
 
     rgbPickerHandler: function() {
-        let rgbInsertedColor = document.getElementById('rgb').value;
+        let rgbInsertedColor = document.getElementById('color').value;
         // if (rgbInsertedColor.length = 7)
             this.strokeStyle = this.colorHexToRgb(rgbInsertedColor);
     },
@@ -155,7 +155,7 @@ const app = {
     colorHexToRgb: function(color) {
         if (color.length != 7) {
             console.log("Invalid color");
-            document.getElementById('rgb').value = "not valid";
+            document.getElementById('color').value = "not valid";
             return;
         }
 
@@ -360,7 +360,7 @@ const app = {
         const palette = document.getElementById('palette');
         palette.addEventListener('click', this.paletteHandler.bind(this));
 
-        const rgbTextField = document.getElementById("rgb");
+        const rgbTextField = document.getElementById("color");
         rgbTextField.addEventListener("click", function() {
             // console.log("hai clickato");
             if (!((rgbTextField.value.length == 7) && (rgbTextField.value[0] == "#")))

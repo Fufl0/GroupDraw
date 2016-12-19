@@ -13,6 +13,8 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="/css/farbtastic.css" type="text/css" />
+
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -63,11 +65,19 @@
             <div class="p-color tan" data-color="rgb(233, 222, 187)"></div>
         </div>
 
+
+        <!-- <form><input type="text" id="color" name="color" value="#123456" /></form> -->
+
+        <div id="colorpicker"></div>
+
+
+
+
         <div id="rgbPicker">
             <form id="rgbPickerForm">
                 <div class="input-field">
-                    <input placeholder="" id="rgb" type="text" class="validate">
-                    <label for="rgb">Rgb</label>
+                    <input placeholder="" id="color" name="color" type="text" value="#123456" class="validate">
+                    <label for="color">Hex</label>
                 </div>
             </form>
             <button id="rgbPickerButton" class="btn waves-effect waves-light light-blue" type="submit" name="action"><i class="material-icons">send</i></button>
@@ -127,6 +137,7 @@
   <canvas id="canvas" width="1200" height="600"></canvas>
 </div>
 
+
 <div id="guestCheck" style="display: none;">{password}</div>
 
 
@@ -135,6 +146,9 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="/js/materialize.js"></script>
     <script src="/js/room-init.js"></script>
+
+    <script type="text/javascript" src="/js/farbtastic.js"></script>
+
 
     <script src="/js/socket.io.js"></script>
     <script src="/js/brushes.js"></script>

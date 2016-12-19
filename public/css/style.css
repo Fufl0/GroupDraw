@@ -5,6 +5,18 @@
 /*img{
   white-space:pre
 }*/
+#colorpicker{
+	margin-top: -10px;
+	margin-left: -18px;
+}
+
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  bottom: 5%;
+  left:2%;
+}
+
 .statusLabel{
 	position: relative;
 	bot: 20px;

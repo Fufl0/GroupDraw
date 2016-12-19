@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+  $('#colorpicker').farbtastic('#color');
+
   var w = window,
       d = document,
       e = d.documentElement,
