@@ -110,8 +110,8 @@ function bindPrivateCheck() {
         r.onreadystatechange = function onReadyStateChange() {
           if (r.readyState !== 4) return;
           if (r.readyState === 4 && r.status === 200) {
-            window.location = roomLink;
             joinBtn.setAttribute("href", roomLink);
+            window.location = roomLink;
           }
           if (r.readyState === 4 && r.status === 404) {
             room.children[0].children[2].children[0].setAttribute("data-error", "Wrong password");
@@ -119,11 +119,12 @@ function bindPrivateCheck() {
             joinBtn.setAttribute("href", roomLink);
           }
         };
-        r.send(JSON.stringify(user));
+        r.send(JSON.stringify(room));
 	   }
 	 }
 }
 
+<<<<<<< HEAD
 function setupSocket() {
     socket.on("room", function () {
         location.reload();
@@ -158,6 +159,8 @@ function setupSocket() {
 //    r.send(JSON.stringify(user));
 // }
 
+=======
+>>>>>>> origin/master
 window.onload = function() {
     bindSubmit();
     bindDelete();
