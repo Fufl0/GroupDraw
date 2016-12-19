@@ -123,8 +123,8 @@ function bindPrivateCheck() {
 // function setupSocket() {
 //     socket.on("room", function () {
 //         location.reload();
-    })
-}
+//     })
+// }
 
 // document.getElementById("roomList").children[3].children[0].children[3].onclick = function() {
 //    event.preventDefault();
