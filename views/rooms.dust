@@ -106,12 +106,13 @@
 
 
 
-
+<script src="/socket.io/socket.io.js"></script>
   <script src="/js/dust-core.min.js"></script>
   <script src="/views/roomitems.js"></script>
   <script src="/views/roomitem.js"></script>
 
   <script src="/js/rooms.js"></script>
+   <script src="/js/socket.io.js"></script>
 
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

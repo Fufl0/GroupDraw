@@ -1,3 +1,5 @@
+socket = io();
+
 function doJSONRequest(method, url, data, callback) {
   let req = new XMLHttpRequest();
   req.open(method, url, true);
@@ -24,7 +26,7 @@ function bindSubmit() {
 
   document.getElementById('newPrivateRoomButton').onclick = function() {
     $('#modal2').modal('open');
-  }
+  };
 
   function submitNewRoom(event) {
     event.preventDefault();
@@ -38,7 +40,9 @@ function bindSubmit() {
         document.getElementById("roomList").innerHTML += room;
       });
       bindDelete();
+      socket.emit("room");
     });
+
     $('#modal1').modal('close');
   };
 
@@ -56,6 +60,7 @@ function bindSubmit() {
         document.getElementById("roomList").innerHTML += room;
       });
       bindDelete();
+        socket.emit("room");
     });
     $('#modal2').modal('close');
   }
@@ -80,6 +85,7 @@ function bindDelete() {
 	      doJSONRequest("DELETE", "/rooms/" + id + "/" + window.secret, null, function() {
 		      roomList.removeChild(room);
 	      });
+           socket.emit("room");
 	   }
 	 }
 }
@@ -118,6 +124,12 @@ function bindPrivateCheck() {
 	 }
 }
 
+function setupSocket() {
+    socket.on("room", function () {
+        location.reload();
+    })
+}
+
 // document.getElementById("roomList").children[3].children[0].children[3].onclick = function() {
 //    event.preventDefault();
 //    let roomLink = joinBtn.getAttribute("href");
@@ -149,6 +161,7 @@ function bindPrivateCheck() {
 window.onload = function() {
     bindSubmit();
     bindDelete();
+    setupSocket();
 
     let profile = document.getElementById("profileName");
         if(profile.innerHTML.toLowerCase().indexOf("guest") >= 0){

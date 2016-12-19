@@ -21,6 +21,12 @@ module.exports = function(httpServer) {
     io.on("connection", function(socket) {
         let id;
 
+        // ROOMS
+        socket.on("room", function() {
+            socket.broadcast.emit("room");
+            //io.sockets.emit("create", ...);
+        });
+
         //USER
 
         // socket.join('/rooms');
