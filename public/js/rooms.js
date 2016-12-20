@@ -55,7 +55,7 @@ function bindSubmit() {
     }
     document.getElementById("privateRoomNameInput").value = '';
     document.getElementById("roomPasswordInput").value = '';
-    doJSONRequest("POST", "/rooms", { name: roomName, password: roomPassword }, function(saved) {
+    doJSONRequest("POST", "/rooms", { name: roomName, password: roomPassword, isPrivate: true }, function(saved) {
       dust.render("roomitem", saved, function(err, room) {
         document.getElementById("roomList").innerHTML += room;
       });
@@ -99,7 +99,7 @@ function bindPrivateCheck() {
       event.preventDefault();
       var roomLink = joinBtn.getAttribute("href");
       joinBtn.setAttribute("href", '');
-      let roomName = room.children[0].children[0].innerHTML;
+      let roomName = document.getElementById("roomTitle").innerHTML;
       let enteredPassword = room.children[0].children[2].children[0].value;
       var roomToSend = {
         name: roomName,

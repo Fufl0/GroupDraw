@@ -21,6 +21,7 @@ const RoomsSchema = exports.RoomsSchema = new mongoose.Schema({
     name: { type: String, default: '' },
    	creator: { type: String },
     password: { type: String, default: '' },
+    isPrivate: { type: Boolean, default: false },
     links: { type: [{ href: String }], default: [] }
 });
 

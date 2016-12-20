@@ -1,11 +1,11 @@
 <li class="room-item">
-      <div class=" room-item-div card-panel white" style="position: relative;">
-        <h5 class="room-title">{name}</h5>
-        <p style="font-size: 14px; color:#aaa">Created by: {creator}</p>
-        <form class="roomPassword " action="/rooms">
-          <input type="text" name="password" placeholder="Password">
-        </form>
-        <a class="btn light-blue waves-effect waves-light bottomright room-link" href="{links[0].href}">Join</a>
-        <i class="topright material-icons delete" data-id="{_id}" class="delete">clear</i>
-      </div>
+  <div class=" room-item-div card-panel white" style="position: relative;">
+    <h5 class="room-title">{?isPrivate} <i class="material-icons" style="position:relative;top:3px;">lock</i>{/isPrivate} <div id="roomTitle" style="display: inline;">{name}</div></h5>
+    <p style="font-size: 14px; color:#aaa">Created by: {creator} </p>
+    <form class="roomPassword " action="/rooms">
+    {?isPrivate}<input type="password" name="password">{:else}<input class="hide" type="password" name="password">{/isPrivate}
+    </form>
+    <a class="btn light-blue waves-effect waves-light bottomright room-link" href="{links[0].href}">Join</a>
+    <i class="topright material-icons delete" data-id="{_id}" class="delete">clear</i>
+  </div>
 </li>
