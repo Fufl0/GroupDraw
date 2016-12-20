@@ -99,13 +99,13 @@ function bindPrivateCheck() {
       event.preventDefault();
       var roomLink = joinBtn.getAttribute("href");
       joinBtn.setAttribute("href", '');
-      let roomName = document.getElementById("roomTitle").innerHTML;
+      let roomName = room.children[0].children[0].children[1].innerHTML;
       let enteredPassword = room.children[0].children[2].children[0].value;
       var roomToSend = {
         name: roomName,
         password: enteredPassword
       };
-
+      console.log(roomToSend);
       doJSONRequest('POST', roomLink, roomToSend, function(res) {
         if (res.true === true) {
           joinBtn.setAttribute("href", roomLink);

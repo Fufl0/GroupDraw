@@ -1,6 +1,6 @@
 <li class="room-item">
   <div class=" room-item-div card-panel white" style="position: relative;">
-    <h5 class="room-title">{?isPrivate} <i class="material-icons" style="position:relative;top:3px;">lock</i>{/isPrivate} <div id="roomTitle" style="display: inline;">{name}</div></h5>
+    <h5 class="room-title"><i class="material-icons" style="position:relative;top:3px;">{?isPrivate}lock{/isPrivate}</i> <div style="display: inline;">{name}</div></h5>
     <p style="font-size: 14px; color:#aaa">Created by: {creator} </p>
     <form class="roomPassword " action="/rooms">
     {?isPrivate}<input type="password" name="password">{:else}<input class="hide" type="password" name="password">{/isPrivate}
